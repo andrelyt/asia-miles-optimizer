@@ -1,0 +1,1442 @@
+{
+  "baseline_source_sha256": "6820386f2ed610c2aa4fd93dca4788ccdee08c7f55b23f59b0cba3cf90580c18",
+  "classification_convention": "Compare normalized distribution shares by relative percent change; percentage point changes also retained. Highest sensitivity wins if clauses overlap. Major distributions: trip count mix, destination trip occurrence share, holiday-family pair share. Top5 overlap=intersection/5; Jaccard=intersection/union. Not planner policy.",
+  "execution_head": "5f9659a99f2e5ee38a4d06afa351d1d3844b93fc",
+  "full_tests": {
+    "errors": 0,
+    "exit_code": 0,
+    "failed": 0,
+    "passed": 258,
+    "total": 258
+  },
+  "issue_url": "https://github.com/andrelyt/asia-miles-optimizer/issues/7",
+  "label": [
+    "CONDITIONAL VALIDATION METRICS",
+    "NOT AWARD AVAILABILITY",
+    "NOT BOOKABLE",
+    "NO LIVE SEAT CHECK"
+  ],
+  "python": "3.9.6 (default, May 22 2026, 11:13:45) \n[Clang 21.0.0 (clang-2100.1.1.101)]",
+  "runs": {
+    "S0": {
+      "allocation_states_visited": 0,
+      "candidate_caps": {
+        "after_global_cap": 100,
+        "after_window_cap": 240,
+        "before_window_cap": 408
+      },
+      "candidate_destination_distribution": {
+        "AKL": 23,
+        "CTS": 32,
+        "SYD": 24,
+        "ZRH": 21
+      },
+      "candidate_global_cap_truncated": true,
+      "candidate_window_cap_truncated": true,
+      "command": [
+        "python3",
+        "-B",
+        "planner.py",
+        "--input",
+        "/tmp/amo-2027-phase2a-hqcnsy0e/validation/S0_input.json",
+        "--output",
+        "/tmp/amo-2027-phase2a-hqcnsy0e/S0_result.json"
+      ],
+      "comparison_to_S0": {
+        "classification": "STABLE",
+        "major_distribution_changes": {
+          "destination_trip_occurrences": {
+            "AKL": {
+              "percentage_point_change": 0.0,
+              "relative_share_change_percent": 0.0,
+              "run_share": 0.2332,
+              "s0_share": 0.2332
+            },
+            "CTS": {
+              "percentage_point_change": 0.0,
+              "relative_share_change_percent": 0.0,
+              "run_share": 0.322,
+              "s0_share": 0.322
+            },
+            "SYD": {
+              "percentage_point_change": 0.0,
+              "relative_share_change_percent": 0.0,
+              "run_share": 0.244,
+              "s0_share": 0.244
+            },
+            "ZRH": {
+              "percentage_point_change": 0.0,
+              "relative_share_change_percent": 0.0,
+              "run_share": 0.2008,
+              "s0_share": 0.2008
+            }
+          },
+          "holiday_pair_distribution": {
+            "labor_day + national_day": {
+              "percentage_point_change": 0.0,
+              "relative_share_change_percent": 0.0,
+              "run_share": 1.0,
+              "s0_share": 1.0
+            }
+          },
+          "trip_count_distribution": {
+            "1": {
+              "percentage_point_change": 0.0,
+              "relative_share_change_percent": 0.0,
+              "run_share": 0.07692307692307693,
+              "s0_share": 0.07692307692307693
+            },
+            "2": {
+              "percentage_point_change": 0.0,
+              "relative_share_change_percent": 0.0,
+              "run_share": 0.9230769230769231,
+              "s0_share": 0.9230769230769231
+            }
+          }
+        },
+        "max_absolute_percentage_point_change": 0.0,
+        "max_relative_share_change_percent": 0.0,
+        "top5": {
+          "Balanced": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          },
+          "Comfort First": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          },
+          "Leave Efficient": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          },
+          "Miles Saver": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          }
+        }
+      },
+      "conditional_pareto_count": 1300,
+      "config": {
+        "leave_budgets_by_year": {},
+        "max_allocation_states": 20000,
+        "max_candidates_per_window": 10,
+        "max_candidates_total": 100,
+        "max_per_view": 5,
+        "max_states": 5000,
+        "max_windows": 30
+      },
+      "confirmed_budget_feasible_count": 0,
+      "destination_portfolio_participation": {
+        "AKL": 517,
+        "CTS": 682,
+        "SYD": 540,
+        "ZRH": 454
+      },
+      "destination_trip_occurrences": {
+        "AKL": 583,
+        "CTS": 805,
+        "SYD": 610,
+        "ZRH": 502
+      },
+      "exit_code": 0,
+      "holiday_destination_pair_distribution": {
+        "labor_day:AKL + national_day:AKL": 66,
+        "labor_day:AKL + national_day:CTS": 73,
+        "labor_day:AKL + national_day:SYD": 75,
+        "labor_day:AKL + national_day:ZRH": 57,
+        "labor_day:CTS + national_day:AKL": 107,
+        "labor_day:CTS + national_day:CTS": 123,
+        "labor_day:CTS + national_day:SYD": 122,
+        "labor_day:CTS + national_day:ZRH": 96,
+        "labor_day:SYD + national_day:AKL": 62,
+        "labor_day:SYD + national_day:CTS": 69,
+        "labor_day:SYD + national_day:SYD": 70,
+        "labor_day:SYD + national_day:ZRH": 56,
+        "labor_day:ZRH + national_day:AKL": 54,
+        "labor_day:ZRH + national_day:CTS": 60,
+        "labor_day:ZRH + national_day:SYD": 62,
+        "labor_day:ZRH + national_day:ZRH": 48
+      },
+      "holiday_pair_distribution": {
+        "labor_day + national_day": 1200
+      },
+      "input_path": "/tmp/amo-2027-phase2a-hqcnsy0e/validation/S0_input.json",
+      "input_sha256": "6820386f2ed610c2aa4fd93dca4788ccdee08c7f55b23f59b0cba3cf90580c18",
+      "output_bytes": 5749083,
+      "output_path": "/tmp/amo-2027-phase2a-hqcnsy0e/S0_result.json",
+      "output_sha256": "6e64cfe49a850125cb4c1bd15d009fc6e93a46a2fd2e45f92322b24d142bdfce",
+      "per_window_counts": {
+        "window_07585bf3488a180fbdea0f5e": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_10856f690b1e4d20a0144a09": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_2573ae3cbb3450378deaa081": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_269e2010451149b105f17b66": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_27cf3879cea04f459330a5a9": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_307e775c00875bcdad34edbb": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_30c226d4b3f862c435df351d": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_4c25bd166386ea7d17d1cd72": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_515ac928a7a50ff1e710027e": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_5fe307a3e59f06c594f23d87": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_6d12c749fa71ebe5f722a580": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_705051653986e2ab4cefb41e": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_86fd253ac6f7f0f7f724d601": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_8d9888ed1d218d034a6e05d6": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_93de36af95b1fd375d72d10c": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_9852aa1c99ea82c60d1c4977": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_9f902a5d2991462cbfd2d913": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_ad49e1ad530d1e5b60eb91ac": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_b249e9ada014139bd24311f3": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_b4751150bd8eaacaec5f7e91": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_b59c2141fc00cc01a4d8e760": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_bd1dea94d70ce06d4e706025": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_c71c29f6bba69062c8f4b8d2": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_db76a341444399146036e378": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        }
+      },
+      "portfolio_count": 1300,
+      "pr3_status_counts": {
+        "RULE_VERSION_REVIEW_REQUIRED": 100
+      },
+      "rejections": {
+        "ANNUAL_LEAVE_BUDGET_EXCEEDED": 1027,
+        "PARETO_DOMINATED": 0,
+        "SAME_HOLIDAY_ALTERNATIVE": 2673
+      },
+      "runtime_seconds": 0.9899489169999999,
+      "safety_checks": {
+        "calendar_not_upgraded": "PASS",
+        "no_account_pooling": "PASS",
+        "no_global_optimum_claim": "PASS",
+        "no_invented_quote": "PASS",
+        "no_unsupported_booking_claims": "PASS",
+        "no_unsupported_confirmed_budget": "PASS",
+        "route_not_upgraded": "PASS",
+        "seats_not_claimed_available": "PASS",
+        "ticketability_not_claimed_bookable": "PASS",
+        "unknown_award_price_not_zero": "PASS"
+      },
+      "search_truncated": true,
+      "state_cap_reached": true,
+      "states_visited": 5000,
+      "stderr": "",
+      "stdout": "",
+      "trip_count_distribution": {
+        "1": 100,
+        "2": 1200
+      },
+      "views": {
+        "Balanced": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_0033b3f051912cb2c2ff683e",
+            "portfolio_01ff3b4e0551b75c3c9a6136",
+            "portfolio_00a9b21be46f62bbc49de05e"
+          ],
+          "ordering": "Nondominated diversity; no weighted score"
+        },
+        "Comfort First": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_04894c2041993737d7366a3c",
+            "portfolio_10519c9e7f163efb6fe50efb",
+            "portfolio_0e7e67606ceb77bf6809b92c",
+            "portfolio_40c605a388e5a5d1dd917153",
+            "portfolio_018fb75bb008f20c9c0737a3"
+          ],
+          "ordering": "Mean longhaul ordinal cabin rank, then trips"
+        },
+        "Leave Efficient": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_3f61c6d18f0d9844ffc84f7f",
+            "portfolio_025bf6d946f14640fcbe3748",
+            "portfolio_88769958b13c31d8e5d89be2",
+            "portfolio_0b5c4165744dd1388e13e8f3",
+            "portfolio_f3e4cfa33c3cddd2e1fd43ab"
+          ],
+          "ordering": "Zero leave first, then calendar days per group leave day"
+        },
+        "Miles Saver": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_0033b3f051912cb2c2ff683e",
+            "portfolio_01ff3b4e0551b75c3c9a6136",
+            "portfolio_00a9b21be46f62bbc49de05e"
+          ],
+          "ordering": "Mileage only within price classes; never total-cost ranking"
+        }
+      }
+    },
+    "S1": {
+      "allocation_states_visited": 0,
+      "candidate_caps": {
+        "after_global_cap": 100,
+        "after_window_cap": 240,
+        "before_window_cap": 408
+      },
+      "candidate_destination_distribution": {
+        "AKL": 23,
+        "CTS": 32,
+        "SYD": 24,
+        "ZRH": 21
+      },
+      "candidate_global_cap_truncated": true,
+      "candidate_window_cap_truncated": true,
+      "command": [
+        "python3",
+        "-B",
+        "planner.py",
+        "--input",
+        "/tmp/amo-2027-phase2a-hqcnsy0e/validation/S1_input.json",
+        "--output",
+        "/tmp/amo-2027-phase2a-hqcnsy0e/S1_result.json"
+      ],
+      "comparison_to_S0": {
+        "classification": "STABLE",
+        "major_distribution_changes": {
+          "destination_trip_occurrences": {
+            "AKL": {
+              "percentage_point_change": 0.1720634920634928,
+              "relative_share_change_percent": 0.7378365868931939,
+              "run_share": 0.23492063492063492,
+              "s0_share": 0.2332
+            },
+            "CTS": {
+              "percentage_point_change": -0.017460317460316066,
+              "relative_share_change_percent": -0.05422458838607474,
+              "run_share": 0.32182539682539685,
+              "s0_share": 0.322
+            },
+            "SYD": {
+              "percentage_point_change": -0.19365079365079307,
+              "relative_share_change_percent": -0.7936507936507913,
+              "run_share": 0.24206349206349206,
+              "s0_share": 0.244
+            },
+            "ZRH": {
+              "percentage_point_change": 0.03904761904761911,
+              "relative_share_change_percent": 0.1944602542212107,
+              "run_share": 0.2011904761904762,
+              "s0_share": 0.2008
+            }
+          },
+          "holiday_pair_distribution": {
+            "labor_day + national_day": {
+              "percentage_point_change": 0.0,
+              "relative_share_change_percent": 0.0,
+              "run_share": 1.0,
+              "s0_share": 1.0
+            }
+          },
+          "trip_count_distribution": {
+            "1": {
+              "percentage_point_change": -0.05871990604815053,
+              "relative_share_change_percent": -0.7633587786259568,
+              "run_share": 0.07633587786259542,
+              "s0_share": 0.07692307692307693
+            },
+            "2": {
+              "percentage_point_change": 0.05871990604814359,
+              "relative_share_change_percent": 0.06361323155215555,
+              "run_share": 0.9236641221374046,
+              "s0_share": 0.9230769230769231
+            }
+          }
+        },
+        "max_absolute_percentage_point_change": 0.19365079365079307,
+        "max_relative_share_change_percent": 0.7936507936507913,
+        "top5": {
+          "Balanced": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          },
+          "Comfort First": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          },
+          "Leave Efficient": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          },
+          "Miles Saver": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          }
+        }
+      },
+      "conditional_pareto_count": 1310,
+      "config": {
+        "leave_budgets_by_year": {},
+        "max_allocation_states": 20000,
+        "max_candidates_per_window": 10,
+        "max_candidates_total": 100,
+        "max_per_view": 5,
+        "max_states": 10000,
+        "max_windows": 30
+      },
+      "confirmed_budget_feasible_count": 0,
+      "destination_portfolio_participation": {
+        "AKL": 524,
+        "CTS": 687,
+        "SYD": 540,
+        "ZRH": 459
+      },
+      "destination_trip_occurrences": {
+        "AKL": 592,
+        "CTS": 811,
+        "SYD": 610,
+        "ZRH": 507
+      },
+      "exit_code": 0,
+      "holiday_destination_pair_distribution": {
+        "labor_day:AKL + national_day:AKL": 68,
+        "labor_day:AKL + national_day:CTS": 74,
+        "labor_day:AKL + national_day:SYD": 75,
+        "labor_day:AKL + national_day:ZRH": 60,
+        "labor_day:CTS + national_day:AKL": 108,
+        "labor_day:CTS + national_day:CTS": 124,
+        "labor_day:CTS + national_day:SYD": 122,
+        "labor_day:CTS + national_day:ZRH": 98,
+        "labor_day:SYD + national_day:AKL": 62,
+        "labor_day:SYD + national_day:CTS": 69,
+        "labor_day:SYD + national_day:SYD": 70,
+        "labor_day:SYD + national_day:ZRH": 56,
+        "labor_day:ZRH + national_day:AKL": 54,
+        "labor_day:ZRH + national_day:CTS": 60,
+        "labor_day:ZRH + national_day:SYD": 62,
+        "labor_day:ZRH + national_day:ZRH": 48
+      },
+      "holiday_pair_distribution": {
+        "labor_day + national_day": 1210
+      },
+      "input_path": "/tmp/amo-2027-phase2a-hqcnsy0e/validation/S1_input.json",
+      "input_sha256": "0458f4b77e31c56ca51d9e4c51760bb2b6114761e3f906e7b3388d3606cfa98f",
+      "output_bytes": 5782259,
+      "output_path": "/tmp/amo-2027-phase2a-hqcnsy0e/S1_result.json",
+      "output_sha256": "e03a11cea9dc95bcbc618618fa189cb95d6cd5a93691ba892d5b98c628a936ec",
+      "per_window_counts": {
+        "window_07585bf3488a180fbdea0f5e": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_10856f690b1e4d20a0144a09": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_2573ae3cbb3450378deaa081": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_269e2010451149b105f17b66": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_27cf3879cea04f459330a5a9": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_307e775c00875bcdad34edbb": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_30c226d4b3f862c435df351d": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_4c25bd166386ea7d17d1cd72": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_515ac928a7a50ff1e710027e": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_5fe307a3e59f06c594f23d87": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_6d12c749fa71ebe5f722a580": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_705051653986e2ab4cefb41e": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_86fd253ac6f7f0f7f724d601": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_8d9888ed1d218d034a6e05d6": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_93de36af95b1fd375d72d10c": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_9852aa1c99ea82c60d1c4977": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_9f902a5d2991462cbfd2d913": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_ad49e1ad530d1e5b60eb91ac": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_b249e9ada014139bd24311f3": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_b4751150bd8eaacaec5f7e91": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_b59c2141fc00cc01a4d8e760": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_bd1dea94d70ce06d4e706025": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_c71c29f6bba69062c8f4b8d2": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_db76a341444399146036e378": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        }
+      },
+      "portfolio_count": 1310,
+      "pr3_status_counts": {
+        "RULE_VERSION_REVIEW_REQUIRED": 100
+      },
+      "rejections": {
+        "ANNUAL_LEAVE_BUDGET_EXCEEDED": 1034,
+        "PARETO_DOMINATED": 0,
+        "SAME_HOLIDAY_ALTERNATIVE": 2706
+      },
+      "runtime_seconds": 0.9373102499999999,
+      "safety_checks": {
+        "calendar_not_upgraded": "PASS",
+        "no_account_pooling": "PASS",
+        "no_global_optimum_claim": "PASS",
+        "no_invented_quote": "PASS",
+        "no_unsupported_booking_claims": "PASS",
+        "no_unsupported_confirmed_budget": "PASS",
+        "route_not_upgraded": "PASS",
+        "seats_not_claimed_available": "PASS",
+        "ticketability_not_claimed_bookable": "PASS",
+        "unknown_award_price_not_zero": "PASS"
+      },
+      "search_truncated": true,
+      "state_cap_reached": false,
+      "states_visited": 5050,
+      "stderr": "",
+      "stdout": "",
+      "trip_count_distribution": {
+        "1": 100,
+        "2": 1210
+      },
+      "views": {
+        "Balanced": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_0033b3f051912cb2c2ff683e",
+            "portfolio_01ff3b4e0551b75c3c9a6136",
+            "portfolio_00a9b21be46f62bbc49de05e"
+          ],
+          "ordering": "Nondominated diversity; no weighted score"
+        },
+        "Comfort First": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_04894c2041993737d7366a3c",
+            "portfolio_10519c9e7f163efb6fe50efb",
+            "portfolio_0e7e67606ceb77bf6809b92c",
+            "portfolio_40c605a388e5a5d1dd917153",
+            "portfolio_018fb75bb008f20c9c0737a3"
+          ],
+          "ordering": "Mean longhaul ordinal cabin rank, then trips"
+        },
+        "Leave Efficient": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_3f61c6d18f0d9844ffc84f7f",
+            "portfolio_025bf6d946f14640fcbe3748",
+            "portfolio_88769958b13c31d8e5d89be2",
+            "portfolio_0b5c4165744dd1388e13e8f3",
+            "portfolio_f3e4cfa33c3cddd2e1fd43ab"
+          ],
+          "ordering": "Zero leave first, then calendar days per group leave day"
+        },
+        "Miles Saver": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_0033b3f051912cb2c2ff683e",
+            "portfolio_01ff3b4e0551b75c3c9a6136",
+            "portfolio_00a9b21be46f62bbc49de05e"
+          ],
+          "ordering": "Mileage only within price classes; never total-cost ranking"
+        }
+      }
+    },
+    "S2": {
+      "allocation_states_visited": 0,
+      "candidate_caps": {
+        "after_global_cap": 100,
+        "after_window_cap": 240,
+        "before_window_cap": 408
+      },
+      "candidate_destination_distribution": {
+        "AKL": 23,
+        "CTS": 32,
+        "SYD": 24,
+        "ZRH": 21
+      },
+      "candidate_global_cap_truncated": true,
+      "candidate_window_cap_truncated": true,
+      "command": [
+        "python3",
+        "-B",
+        "planner.py",
+        "--input",
+        "/tmp/amo-2027-phase2a-hqcnsy0e/validation/S2_input.json",
+        "--output",
+        "/tmp/amo-2027-phase2a-hqcnsy0e/S2_result.json"
+      ],
+      "comparison_to_S0": {
+        "classification": "STABLE",
+        "major_distribution_changes": {
+          "destination_trip_occurrences": {
+            "AKL": {
+              "percentage_point_change": 0.1720634920634928,
+              "relative_share_change_percent": 0.7378365868931939,
+              "run_share": 0.23492063492063492,
+              "s0_share": 0.2332
+            },
+            "CTS": {
+              "percentage_point_change": -0.017460317460316066,
+              "relative_share_change_percent": -0.05422458838607474,
+              "run_share": 0.32182539682539685,
+              "s0_share": 0.322
+            },
+            "SYD": {
+              "percentage_point_change": -0.19365079365079307,
+              "relative_share_change_percent": -0.7936507936507913,
+              "run_share": 0.24206349206349206,
+              "s0_share": 0.244
+            },
+            "ZRH": {
+              "percentage_point_change": 0.03904761904761911,
+              "relative_share_change_percent": 0.1944602542212107,
+              "run_share": 0.2011904761904762,
+              "s0_share": 0.2008
+            }
+          },
+          "holiday_pair_distribution": {
+            "labor_day + national_day": {
+              "percentage_point_change": 0.0,
+              "relative_share_change_percent": 0.0,
+              "run_share": 1.0,
+              "s0_share": 1.0
+            }
+          },
+          "trip_count_distribution": {
+            "1": {
+              "percentage_point_change": -0.05871990604815053,
+              "relative_share_change_percent": -0.7633587786259568,
+              "run_share": 0.07633587786259542,
+              "s0_share": 0.07692307692307693
+            },
+            "2": {
+              "percentage_point_change": 0.05871990604814359,
+              "relative_share_change_percent": 0.06361323155215555,
+              "run_share": 0.9236641221374046,
+              "s0_share": 0.9230769230769231
+            }
+          }
+        },
+        "max_absolute_percentage_point_change": 0.19365079365079307,
+        "max_relative_share_change_percent": 0.7936507936507913,
+        "top5": {
+          "Balanced": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          },
+          "Comfort First": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          },
+          "Leave Efficient": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          },
+          "Miles Saver": {
+            "intersection": 5,
+            "jaccard": 1.0,
+            "overlap_fraction": 1.0,
+            "same_order": true
+          }
+        }
+      },
+      "conditional_pareto_count": 1310,
+      "config": {
+        "leave_budgets_by_year": {},
+        "max_allocation_states": 20000,
+        "max_candidates_per_window": 10,
+        "max_candidates_total": 100,
+        "max_per_view": 5,
+        "max_states": 20000,
+        "max_windows": 30
+      },
+      "confirmed_budget_feasible_count": 0,
+      "destination_portfolio_participation": {
+        "AKL": 524,
+        "CTS": 687,
+        "SYD": 540,
+        "ZRH": 459
+      },
+      "destination_trip_occurrences": {
+        "AKL": 592,
+        "CTS": 811,
+        "SYD": 610,
+        "ZRH": 507
+      },
+      "exit_code": 0,
+      "holiday_destination_pair_distribution": {
+        "labor_day:AKL + national_day:AKL": 68,
+        "labor_day:AKL + national_day:CTS": 74,
+        "labor_day:AKL + national_day:SYD": 75,
+        "labor_day:AKL + national_day:ZRH": 60,
+        "labor_day:CTS + national_day:AKL": 108,
+        "labor_day:CTS + national_day:CTS": 124,
+        "labor_day:CTS + national_day:SYD": 122,
+        "labor_day:CTS + national_day:ZRH": 98,
+        "labor_day:SYD + national_day:AKL": 62,
+        "labor_day:SYD + national_day:CTS": 69,
+        "labor_day:SYD + national_day:SYD": 70,
+        "labor_day:SYD + national_day:ZRH": 56,
+        "labor_day:ZRH + national_day:AKL": 54,
+        "labor_day:ZRH + national_day:CTS": 60,
+        "labor_day:ZRH + national_day:SYD": 62,
+        "labor_day:ZRH + national_day:ZRH": 48
+      },
+      "holiday_pair_distribution": {
+        "labor_day + national_day": 1210
+      },
+      "input_path": "/tmp/amo-2027-phase2a-hqcnsy0e/validation/S2_input.json",
+      "input_sha256": "63729b622937f6a760e7eb4df5b733a4da24c1fced9f76ddc68ab12cc416642f",
+      "output_bytes": 5782259,
+      "output_path": "/tmp/amo-2027-phase2a-hqcnsy0e/S2_result.json",
+      "output_sha256": "15c8b13bed79f56e143d8f21b0e247828c6f53835131f7fd7f8aeab95eea0182",
+      "per_window_counts": {
+        "window_07585bf3488a180fbdea0f5e": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_10856f690b1e4d20a0144a09": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_2573ae3cbb3450378deaa081": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_269e2010451149b105f17b66": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_27cf3879cea04f459330a5a9": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_307e775c00875bcdad34edbb": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_30c226d4b3f862c435df351d": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_4c25bd166386ea7d17d1cd72": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_515ac928a7a50ff1e710027e": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_5fe307a3e59f06c594f23d87": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_6d12c749fa71ebe5f722a580": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_705051653986e2ab4cefb41e": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_86fd253ac6f7f0f7f724d601": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_8d9888ed1d218d034a6e05d6": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_93de36af95b1fd375d72d10c": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_9852aa1c99ea82c60d1c4977": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_9f902a5d2991462cbfd2d913": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_ad49e1ad530d1e5b60eb91ac": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_b249e9ada014139bd24311f3": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_b4751150bd8eaacaec5f7e91": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_b59c2141fc00cc01a4d8e760": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_bd1dea94d70ce06d4e706025": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_c71c29f6bba69062c8f4b8d2": {
+          "after_global_cap": 5,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        },
+        "window_db76a341444399146036e378": {
+          "after_global_cap": 4,
+          "after_window_cap": 10,
+          "before_window_cap": 17
+        }
+      },
+      "portfolio_count": 1310,
+      "pr3_status_counts": {
+        "RULE_VERSION_REVIEW_REQUIRED": 100
+      },
+      "rejections": {
+        "ANNUAL_LEAVE_BUDGET_EXCEEDED": 1034,
+        "PARETO_DOMINATED": 0,
+        "SAME_HOLIDAY_ALTERNATIVE": 2706
+      },
+      "runtime_seconds": 0.9231208340000001,
+      "safety_checks": {
+        "calendar_not_upgraded": "PASS",
+        "no_account_pooling": "PASS",
+        "no_global_optimum_claim": "PASS",
+        "no_invented_quote": "PASS",
+        "no_unsupported_booking_claims": "PASS",
+        "no_unsupported_confirmed_budget": "PASS",
+        "route_not_upgraded": "PASS",
+        "seats_not_claimed_available": "PASS",
+        "ticketability_not_claimed_bookable": "PASS",
+        "unknown_award_price_not_zero": "PASS"
+      },
+      "search_truncated": true,
+      "state_cap_reached": false,
+      "states_visited": 5050,
+      "stderr": "",
+      "stdout": "",
+      "trip_count_distribution": {
+        "1": 100,
+        "2": 1210
+      },
+      "views": {
+        "Balanced": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_0033b3f051912cb2c2ff683e",
+            "portfolio_01ff3b4e0551b75c3c9a6136",
+            "portfolio_00a9b21be46f62bbc49de05e"
+          ],
+          "ordering": "Nondominated diversity; no weighted score"
+        },
+        "Comfort First": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_04894c2041993737d7366a3c",
+            "portfolio_10519c9e7f163efb6fe50efb",
+            "portfolio_0e7e67606ceb77bf6809b92c",
+            "portfolio_40c605a388e5a5d1dd917153",
+            "portfolio_018fb75bb008f20c9c0737a3"
+          ],
+          "ordering": "Mean longhaul ordinal cabin rank, then trips"
+        },
+        "Leave Efficient": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_3f61c6d18f0d9844ffc84f7f",
+            "portfolio_025bf6d946f14640fcbe3748",
+            "portfolio_88769958b13c31d8e5d89be2",
+            "portfolio_0b5c4165744dd1388e13e8f3",
+            "portfolio_f3e4cfa33c3cddd2e1fd43ab"
+          ],
+          "ordering": "Zero leave first, then calendar days per group leave day"
+        },
+        "Miles Saver": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_0033b3f051912cb2c2ff683e",
+            "portfolio_01ff3b4e0551b75c3c9a6136",
+            "portfolio_00a9b21be46f62bbc49de05e"
+          ],
+          "ordering": "Mileage only within price classes; never total-cost ranking"
+        }
+      }
+    },
+    "S3": {
+      "allocation_states_visited": 0,
+      "candidate_caps": {
+        "after_global_cap": 200,
+        "after_window_cap": 360,
+        "before_window_cap": 408
+      },
+      "candidate_destination_distribution": {
+        "AKL": 46,
+        "CTS": 63,
+        "SYD": 40,
+        "ZRH": 51
+      },
+      "candidate_global_cap_truncated": true,
+      "candidate_window_cap_truncated": true,
+      "command": [
+        "python3",
+        "-B",
+        "planner.py",
+        "--input",
+        "/tmp/amo-2027-phase2a-hqcnsy0e/validation/S3_input.json",
+        "--output",
+        "/tmp/amo-2027-phase2a-hqcnsy0e/S3_result.json"
+      ],
+      "comparison_to_S0": {
+        "classification": "HIGHLY_SENSITIVE",
+        "major_distribution_changes": {
+          "destination_trip_occurrences": {
+            "AKL": {
+              "percentage_point_change": -0.9944186046511622,
+              "relative_share_change_percent": -4.264230723203955,
+              "run_share": 0.22325581395348837,
+              "s0_share": 0.2332
+            },
+            "CTS": {
+              "percentage_point_change": -2.048331648129426,
+              "relative_share_change_percent": -6.361278410339832,
+              "run_share": 0.30151668351870575,
+              "s0_share": 0.322
+            },
+            "SYD": {
+              "percentage_point_change": -2.1350859453993927,
+              "relative_share_change_percent": -8.750352235243414,
+              "run_share": 0.22264914054600607,
+              "s0_share": 0.244
+            },
+            "ZRH": {
+              "percentage_point_change": 5.177836198179977,
+              "relative_share_change_percent": 25.786036843525782,
+              "run_share": 0.2525783619817998,
+              "s0_share": 0.2008
+            }
+          },
+          "holiday_pair_distribution": {
+            "labor_day + national_day": {
+              "percentage_point_change": 0.0,
+              "relative_share_change_percent": 0.0,
+              "run_share": 1.0,
+              "s0_share": 1.0
+            }
+          },
+          "trip_count_distribution": {
+            "1": {
+              "percentage_point_change": -3.727986582297782,
+              "relative_share_change_percent": -48.46382556987116,
+              "run_share": 0.03964321110009911,
+              "s0_share": 0.07692307692307693
+            },
+            "2": {
+              "percentage_point_change": 3.727986582297771,
+              "relative_share_change_percent": 4.038652130822585,
+              "run_share": 0.9603567888999008,
+              "s0_share": 0.9230769230769231
+            }
+          }
+        },
+        "max_absolute_percentage_point_change": 5.177836198179977,
+        "max_relative_share_change_percent": 48.46382556987116,
+        "top5": {
+          "Balanced": {
+            "intersection": 2,
+            "jaccard": 0.25,
+            "overlap_fraction": 0.4,
+            "same_order": false
+          },
+          "Comfort First": {
+            "intersection": 0,
+            "jaccard": 0.0,
+            "overlap_fraction": 0.0,
+            "same_order": false
+          },
+          "Leave Efficient": {
+            "intersection": 1,
+            "jaccard": 0.1111111111111111,
+            "overlap_fraction": 0.2,
+            "same_order": false
+          },
+          "Miles Saver": {
+            "intersection": 2,
+            "jaccard": 0.25,
+            "overlap_fraction": 0.4,
+            "same_order": false
+          }
+        }
+      },
+      "conditional_pareto_count": 5045,
+      "config": {
+        "leave_budgets_by_year": {},
+        "max_allocation_states": 20000,
+        "max_candidates_per_window": 15,
+        "max_candidates_total": 200,
+        "max_per_view": 5,
+        "max_states": 20000,
+        "max_windows": 30
+      },
+      "confirmed_budget_feasible_count": 0,
+      "destination_portfolio_participation": {
+        "AKL": 1979,
+        "CTS": 2541,
+        "SYD": 1966,
+        "ZRH": 2191
+      },
+      "destination_trip_occurrences": {
+        "AKL": 2208,
+        "CTS": 2982,
+        "SYD": 2202,
+        "ZRH": 2498
+      },
+      "exit_code": 0,
+      "holiday_destination_pair_distribution": {
+        "labor_day:AKL + national_day:AKL": 229,
+        "labor_day:AKL + national_day:CTS": 227,
+        "labor_day:AKL + national_day:SYD": 154,
+        "labor_day:AKL + national_day:ZRH": 214,
+        "labor_day:CTS + national_day:AKL": 429,
+        "labor_day:CTS + national_day:CTS": 441,
+        "labor_day:CTS + national_day:SYD": 292,
+        "labor_day:CTS + national_day:ZRH": 401,
+        "labor_day:SYD + national_day:AKL": 344,
+        "labor_day:SYD + national_day:CTS": 353,
+        "labor_day:SYD + national_day:SYD": 236,
+        "labor_day:SYD + national_day:ZRH": 322,
+        "labor_day:ZRH + national_day:AKL": 336,
+        "labor_day:ZRH + national_day:CTS": 335,
+        "labor_day:ZRH + national_day:SYD": 225,
+        "labor_day:ZRH + national_day:ZRH": 307
+      },
+      "holiday_pair_distribution": {
+        "labor_day + national_day": 4845
+      },
+      "input_path": "/tmp/amo-2027-phase2a-hqcnsy0e/validation/S3_input.json",
+      "input_sha256": "111e83d413b06e9f1520db3d5cc4ef87b04b5e523471ad425c39a100733b65ee",
+      "output_bytes": 19368389,
+      "output_path": "/tmp/amo-2027-phase2a-hqcnsy0e/S3_result.json",
+      "output_sha256": "b69f925d4c982c3238c3c92435a2f3f0a2c258167ae826ab0af905bf733d0278",
+      "per_window_counts": {
+        "window_07585bf3488a180fbdea0f5e": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_10856f690b1e4d20a0144a09": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_2573ae3cbb3450378deaa081": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_269e2010451149b105f17b66": {
+          "after_global_cap": 9,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_27cf3879cea04f459330a5a9": {
+          "after_global_cap": 9,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_307e775c00875bcdad34edbb": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_30c226d4b3f862c435df351d": {
+          "after_global_cap": 9,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_4c25bd166386ea7d17d1cd72": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_515ac928a7a50ff1e710027e": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_5fe307a3e59f06c594f23d87": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_6d12c749fa71ebe5f722a580": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_705051653986e2ab4cefb41e": {
+          "after_global_cap": 9,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_86fd253ac6f7f0f7f724d601": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_8d9888ed1d218d034a6e05d6": {
+          "after_global_cap": 9,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_93de36af95b1fd375d72d10c": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_9852aa1c99ea82c60d1c4977": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_9f902a5d2991462cbfd2d913": {
+          "after_global_cap": 9,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_ad49e1ad530d1e5b60eb91ac": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_b249e9ada014139bd24311f3": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_b4751150bd8eaacaec5f7e91": {
+          "after_global_cap": 9,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_b59c2141fc00cc01a4d8e760": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_bd1dea94d70ce06d4e706025": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_c71c29f6bba69062c8f4b8d2": {
+          "after_global_cap": 9,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        },
+        "window_db76a341444399146036e378": {
+          "after_global_cap": 8,
+          "after_window_cap": 15,
+          "before_window_cap": 17
+        }
+      },
+      "portfolio_count": 5045,
+      "pr3_status_counts": {
+        "RULE_VERSION_REVIEW_REQUIRED": 200
+      },
+      "rejections": {
+        "ANNUAL_LEAVE_BUDGET_EXCEEDED": 4031,
+        "PARETO_DOMINATED": 0,
+        "SAME_HOLIDAY_ALTERNATIVE": 10924
+      },
+      "runtime_seconds": 4.333885917,
+      "safety_checks": {
+        "calendar_not_upgraded": "PASS",
+        "no_account_pooling": "PASS",
+        "no_global_optimum_claim": "PASS",
+        "no_invented_quote": "PASS",
+        "no_unsupported_booking_claims": "PASS",
+        "no_unsupported_confirmed_budget": "PASS",
+        "route_not_upgraded": "PASS",
+        "seats_not_claimed_available": "PASS",
+        "ticketability_not_claimed_bookable": "PASS",
+        "unknown_award_price_not_zero": "PASS"
+      },
+      "search_truncated": true,
+      "state_cap_reached": true,
+      "states_visited": 20000,
+      "stderr": "",
+      "stdout": "",
+      "trip_count_distribution": {
+        "1": 200,
+        "2": 4845
+      },
+      "views": {
+        "Balanced": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_0000e75c58670a08284a8714",
+            "portfolio_002403a688e3cc003fb86e5d",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_00266a8940f0170d42338176"
+          ],
+          "ordering": "Nondominated diversity; no weighted score"
+        },
+        "Comfort First": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_00266a8940f0170d42338176",
+            "portfolio_100a918813729878cc664406",
+            "portfolio_00e1cc0813dceb6df6311e96",
+            "portfolio_17440900d81731cd0755ca4f",
+            "portfolio_002403a688e3cc003fb86e5d"
+          ],
+          "ordering": "Mean longhaul ordinal cabin rank, then trips"
+        },
+        "Leave Efficient": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_1abc419af2cf0d43e92286f1",
+            "portfolio_00a1a8d8c0ae46ce7e2746eb",
+            "portfolio_1c29817e2d76b5c73086a855",
+            "portfolio_0b5c4165744dd1388e13e8f3",
+            "portfolio_30980b01b07487572dd9e2cd"
+          ],
+          "ordering": "Zero leave first, then calendar days per group leave day"
+        },
+        "Miles Saver": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0000e75c58670a08284a8714",
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_002403a688e3cc003fb86e5d",
+            "portfolio_011300eb3a7d979a0602f7b3"
+          ],
+          "ordering": "Mileage only within price classes; never total-cost ranking"
+        }
+      }
+    }
+  }
+}
