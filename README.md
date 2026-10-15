@@ -106,8 +106,9 @@ and blocked dates, generates bounded continuous holiday windows, preserves
 OFFICIAL/ESTIMATED evidence, and prunes deterministically. See
 [PR1 interfaces, defaults and evidence/budget semantics](docs/PR1_HOLIDAY_LEAVE.md).
 Root unittest discovery runs both V1.1 and V2 tests. The committed calendars are
-synthetic TEST fixtures only. PR1 does not perform route generation. PR2 is described below; V1 adaptation,
-portfolio and planner CLI remain subsequent milestones. V1.1 pricing is unchanged.
+synthetic TEST fixtures only. PR1 does not perform route generation. PR2 discovery
+and PR3 adaptation are described below. Portfolio and planner CLI remain
+subsequent milestones. V1.1 pricing is unchanged.
 
 
 ## V2 Alpha PR2 implementation
@@ -119,7 +120,7 @@ outbound/return and separate-ticket variants where enabled. Read
 [PR2 interfaces, evidence and search semantics](docs/PR2_ROUTE_CANDIDATES.md).
 These are discovery leads, not priced or ticketable itineraries. No route edge,
 unsupported cabin, seat availability or price is invented. The V1.1 CLI stays a
-supplied-scenario comparator; PR3 will provide the adapter into its kernel.
+supplied-scenario comparator; the PR3 adapter below calls its existing kernel.
 
 PR2 review fixes separate search limits from per-direction Standard ticket limits
 in `rules_2026_10.json`. CX/partner structures remain quote-required; different
@@ -131,3 +132,29 @@ end dates are coarse generation assumptions; schedules, overnight arrivals and
 local-date/timezone feasibility remain unchecked. See the PR2 document for reason
 codes, official provenance and PR3 deferrals. FlyAsia research is
 `THIRD_PARTY_OBSERVED`, not official policy.
+
+
+## V2 Alpha PR3 implementation
+
+`discovery/award_adapter.py` maps unchanged PR2 candidates into V1.1 scenarios;
+`discovery/award_pricing.py` invokes `evaluate()` and returns explicit EVALUATED,
+NEEDS_DATA, NEEDS_AIRLINE_QUOTE, RULE_VERSION_REVIEW_REQUIRED or UNSUPPORTED outcomes.
+Read [PR3 evidence input, account and output contracts](docs/PR3_AWARD_PRICING.md).
+
+Ordinary CX Standard tickets require sourced, scoped airline mileage quotes;
+there is no distance-derived fallback. Supported two-sector CX mixed cabins call
+the existing kernel and remain RULE_ESTIMATED, with sourced distance confirmations,
+transfer duration and route type where needed. Partners remain agreement/quote
+pending; no partner formula or eligibility inference is added. Separate awards
+remain separate quotes. Missing taxes stay null; partial/estimated costs remain
+ineligible for complete-price comparison.
+
+Explicit rule-applicability review binds booking/travel dates and exact rule
+content; `as_of` alone does not validate 2027 or even establish an effective range
+for 2026. Separate payment-account snapshots support multiple passenger identities,
+cross-passenger payments and unknown balances without pooling accounts or claiming
+beneficiary eligibility. Request `miles_balance` is not silently imported as an
+account snapshot. Seats/ticketability always remain NOT_CHECKED. V1.1, rules,
+rounding and existing schemas are unchanged. FlyAsia comparisons are tagged
+THIRD_PARTY_OBSERVED, including an explicitly inferred synthetic rounding boundary.
+PR4, live searches and booking remain outside this implementation.

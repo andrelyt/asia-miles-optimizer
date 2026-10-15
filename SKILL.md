@@ -30,8 +30,8 @@ snapshots; inspect diagnostics and holiday_uncertainty. Missing adjacent calenda
 years and holiday anchors are explicit data gaps. Null destination/transit day
 estimates must stay unknown until flights are supplied. Independent budgets are
 checked per window, not as an annual portfolio. Synthetic TEST calendars must
-never be described as actual official holiday announcements. PR1 itself does not implement route discovery; PR2 is documented below. PR3–PR4
-remain unimplemented.
+never be described as actual official holiday announcements. PR1 itself does not implement route discovery; PR2 and PR3 are documented below.
+PR4 remains unimplemented.
 
 
 PR2 Route Graph / Standard Candidate Generator interfaces are documented in
@@ -44,7 +44,8 @@ unknown; route evidence never verifies award seats, carrier redemption eligibili
 or ticketability. Candidate IDs/order are deterministic, not a recommendation
 ranking. Only airport destinations are resolved in PR2; missing geographic
 resolution, multi-required destinations and repositioning must remain explicit
-limitations. PR3 adaptation/pricing and PR4 orchestration remain deferred.
+limitations. PR3 adaptation/pricing is documented below; PR4 orchestration remains
+deferred.
 
 For PR2, inspect per-strategy `ticket_structure_rejections` and each ticket's
 requirements/status. `standard_award_constraints` owns directional sector/transfer
@@ -58,5 +59,33 @@ price. `VERIFIED` means supplied snapshot provenance only, not live or independe
 route/seat/ticketability verification. Window endpoints are generation assumptions,
 with schedule, overnight arrival and timezone/local-date checks NOT_CHECKED.
 Muse/Grok FlyAsia research is THIRD_PARTY_OBSERVED; it must not override official
-policy, partner eligibility, Category 2 or V1.1 rounding/pricing. Those reviews and
-the adapter remain PR3 work.
+policy, partner eligibility, Category 2 or V1.1 rounding/pricing. The PR3 adapter
+below adds comparisons without changing those rules; unresolved official-rule
+questions remain explicit review requirements.
+
+
+PR3 is implemented in `discovery/award_adapter.py` and `discovery/award_pricing.py`;
+read `docs/PR3_AWARD_PRICING.md` before supplying evidence. Use `price_candidate`
+for the final public outcome, and `adapt_candidate` for mapping readiness only
+(READY_FOR_EVALUATION is not a completed V1 evaluation). Keep Candidate IDs intact;
+evaluation IDs track evidence/rule/account changes separately.
+
+Require an explicit sourced applicability review for booking/travel dates and the
+exact rules digest. A 2026 `as_of` is not a 2027 effective-date approval. Standard
+CX tickets require AIRLINE_QUOTED per-ticket miles with source/time/scope; never
+compute ordinary Standard from the distance chart or promote FlyAsia numbers.
+CX mixed estimates require sourced distance confirmations, transfer time and route
+type when applicable; use the unchanged V1 kernel, never modify rounding to match
+research. Partner tickets remain NEEDS_AIRLINE_QUOTE/agreement pending even if a
+quote is supplied, because this Alpha adapter does not resolve partnership rights.
+
+Supply payment accounts explicitly through `balances_by_account`; do not infer
+them from traveler identities or automatically import the legacy request balance.
+Unknown/partial-null snapshots mean NOT_CHECKED, not zero or insufficient. Keep
+payer/passenger allocations distinct; mathematical funding does not establish
+beneficiary eligibility. Read all ticket statuses and required diagnostics before
+using totals. Missing complete totals are null; known subtotals are only subtotals.
+The top-level complete_price_comparison_eligible is authoritative; nested V1 cash
+completeness does not make a mixed estimate comparable. Seats/ticketability stay
+NOT_CHECKED. Synthetic example.invalid test evidence is never real travel evidence.
+PR4 portfolio, live inventory/fare integrations and booking remain deferred.
