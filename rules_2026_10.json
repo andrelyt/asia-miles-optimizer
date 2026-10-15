@@ -1,6 +1,7 @@
 {
   "as_of": "2026-10-15",
   "currency": "HKD",
+  "version": "1.1",
   "source_quality": "secondary reconstructed chart + official published award conditions; live quotation overrides",
   "oneworld_bands": [
     {"max_distance_miles":1000,"miles":{"Y":30000,"J":60000,"F":75000}},
@@ -25,8 +26,11 @@
     "max_open_jaws": 2,
     "max_flight_miles": 50000,
     "premium_economy_offered": false,
-    "whole_ticket_highest_cabin_pricing": true
+    "whole_ticket_highest_cabin_pricing": true,
+    "allowed_carriers": ["AA", "AS", "BA", "CX", "AY", "IB", "JL", "MH", "QF", "QR", "RJ", "AT", "UL"],
+    "distance_warning_headroom_mi": 250
   },
+  "standard_mixed_constraints": {"leg_count": 2, "allowed_carriers": ["CX"], "max_transfer_hours": 24, "round_down_increment": 100},
   "sources": [
     "https://www.cathaypacific.com/content/dam/focal-point/cx/membership/programme-update/Cathay-membership-programme-terms-and-conditions-2026-EN.pdf",
     "https://www.flyasia.co/2026/asiamiles-split-planner/",
