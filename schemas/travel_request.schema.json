@@ -1,0 +1,198 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "travel_request.schema.json",
+  "title": "Asia Miles Optimizer V2 Travel Request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "planning_year",
+    "travelers",
+    "origin_airports",
+    "holiday_types",
+    "cabin_preferences"
+  ],
+  "properties": {
+    "planning_year": {
+      "type": "integer",
+      "minimum": 2026,
+      "maximum": 2100
+    },
+    "travelers": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "annual_leave_budget",
+          "miles_balance"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "annual_leave_budget": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "miles_balance": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "blocked_dates": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date"
+            },
+            "uniqueItems": true
+          },
+          "personal_days_off": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "date"
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "origin_airports": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{3}$"
+      }
+    },
+    "reposition_airports": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "pattern": "^[A-Z]{3}$"
+      }
+    },
+    "holiday_types": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "enum": [
+          "new_year",
+          "spring_festival",
+          "qingming",
+          "labor_day",
+          "dragon_boat",
+          "mid_autumn",
+          "national_day"
+        ]
+      }
+    },
+    "destinations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "value"
+        ],
+        "properties": {
+          "type": {
+            "enum": [
+              "airport",
+              "city",
+              "country",
+              "region"
+            ]
+          },
+          "value": {
+            "type": "string",
+            "minLength": 1
+          },
+          "priority": {
+            "enum": [
+              "required",
+              "preferred",
+              "optional"
+            ]
+          }
+        }
+      }
+    },
+    "leave_constraints": {
+      "type": "object",
+      "properties": {
+        "max_leave_days_per_trip": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "min_calendar_trip_days": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "max_calendar_trip_days": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "allow_bridge_leave": {
+          "type": "boolean"
+        }
+      }
+    },
+    "cabin_preferences": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "longhaul_minimum",
+        "longhaul_preferred",
+        "shorthaul_minimum",
+        "allow_mixed_cabin",
+        "allow_separate_tickets"
+      ],
+      "properties": {
+        "longhaul_minimum": {
+          "enum": [
+            "Y",
+            "W",
+            "J",
+            "F"
+          ]
+        },
+        "longhaul_preferred": {
+          "enum": [
+            "Y",
+            "W",
+            "J",
+            "F"
+          ]
+        },
+        "shorthaul_minimum": {
+          "enum": [
+            "Y",
+            "W",
+            "J",
+            "F"
+          ]
+        },
+        "allow_mixed_cabin": {
+          "type": "boolean"
+        },
+        "allow_separate_tickets": {
+          "type": "boolean"
+        },
+        "allow_asymmetric_roundtrip": {
+          "type": "boolean"
+        }
+      }
+    },
+    "max_trips": {
+      "type": "integer",
+      "minimum": 1
+    }
+  }
+}
