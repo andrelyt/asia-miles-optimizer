@@ -31,7 +31,7 @@ years and holiday anchors are explicit data gaps. Null destination/transit day
 estimates must stay unknown until flights are supplied. Independent budgets are
 checked per window, not as an annual portfolio. Synthetic TEST calendars must
 never be described as actual official holiday announcements. PR1 itself does not implement route discovery; PR2 and PR3 are documented below.
-PR4 remains unimplemented.
+PR4 D1 portfolio/CLI is documented below.
 
 
 PR2 Route Graph / Standard Candidate Generator interfaces are documented in
@@ -44,8 +44,7 @@ unknown; route evidence never verifies award seats, carrier redemption eligibili
 or ticketability. Candidate IDs/order are deterministic, not a recommendation
 ranking. Only airport destinations are resolved in PR2; missing geographic
 resolution, multi-required destinations and repositioning must remain explicit
-limitations. PR3 adaptation/pricing is documented below; PR4 orchestration remains
-deferred.
+limitations. PR3 adaptation/pricing and PR4 D1 orchestration are documented below.
 
 For PR2, inspect per-strategy `ticket_structure_rejections` and each ticket's
 requirements/status. `standard_award_constraints` owns directional sector/transfer
@@ -88,4 +87,36 @@ using totals. Missing complete totals are null; known subtotals are only subtota
 The top-level complete_price_comparison_eligible is authoritative; nested V1 cash
 completeness does not make a mixed estimate comparable. Seats/ticketability stay
 NOT_CHECKED. Synthetic example.invalid test evidence is never real travel evidence.
-PR4 portfolio, live inventory/fare integrations and booking remain deferred.
+PR4 D1 portfolio is documented below; live inventory/fare integrations and booking
+remain deferred.
+
+
+PR4 D1 interfaces and CLI are implemented; read `docs/PR4_PORTFOLIO_SPEC.md` and
+`docs/PR4_PLANNER.md`. Use `planner.py` or `optimize_portfolios()` to select multiple
+holiday trips, not to assemble D2 multi-trip tickets. Never add per-trip FEASIBLE
+flags as an annual funding proof. Recompute all ticket/passenger assignments using
+explicit balances and bounded global allocation. Preserve payer/passenger identities;
+funding eligibility remains externally supplied and never independently verified.
+Without adequate supplied eligibility, numeric funding success is only conditional.
+
+Union exact leave dates for each traveler by the date's year. Adjacent-year budgets
+must be explicit; never reuse the planning-year budget across years. Recheck calendar,
+blocked dates and per-trip constraints. Unknown dates, prices, account balances,
+partner quotes or rule applicability cannot enter budget_feasible. Read budget_blockers,
+missing_data, evidence channels and search_truncated. Budget-feasible means the supplied
+budget model only, including estimated-calendar assumptions, never bookability.
+
+Use the four transparent views without claiming a universal winner. Unknown taxes
+remain null; mixed estimates/partials cannot dominate full quoted costs. Snapshot
+VERIFIED, quoted labels and source syntax are not independent verification. Synthetic
+TEST examples/attestations must never become personal facts or live quotes. D2, live
+award/fare queries and booking remain deferred.
+
+PR4 caps candidates separately for each concrete window_id through
+max_candidates_per_window, then enforces max_candidates_total by window rotation.
+Never collapse all pre/post-holiday windows into one family-wide candidate allowance.
+Inspect both per-window cap diagnostics and search_truncated; a tight global/window
+limit can still omit opportunities. The old PR4 max_candidates_per_holiday key is
+rejected with a migration message. Multiple windows of one holiday remain alternatives,
+not multiple trips. Funding eligibility remains NOT_CHECKED independently, even when
+supplied evidence coverage is SUPPLIED_CONFIRMED; do not upgrade it to verification.

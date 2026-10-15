@@ -72,7 +72,7 @@ Python 保留舱位代码/等级、票种分派、单程/连续性验证、账�
 ## 尚未实现 / 风险边界
 
 - 实时奖励座位、真实现金价格/税费查询、API/登录账户集成、自动出票。
-- V1.1 CLI 不自动生成候选；V2 PR2 已有基于 supplied snapshot 的有界候选发现（见下文），全球穷举和全局最优/Pareto 优化仍未实现。
+- V1.1 CLI 不自动生成候选；V2 PR2 已有基于 supplied snapshot 的有界候选发现（见下文），全球穷举和全局最优保证仍未实现；PR4 仅对有界组合做保守 Pareto 筛选。
 - 真实日期、航线运营、最短换乘时间、独立票转机保护、出票有效期和城市重复规则的完整核验。
 - 停留/转机/开口数量与总飞行距离由输入方提供，程序只检查数值和上限，不根据航段/日期重新推导；复杂多航司整票需国泰复核。
 - 独立账户枚举在票/旅客数量很多时呈指数增长；当前用于小规模人工候选。
@@ -106,9 +106,8 @@ and blocked dates, generates bounded continuous holiday windows, preserves
 OFFICIAL/ESTIMATED evidence, and prunes deterministically. See
 [PR1 interfaces, defaults and evidence/budget semantics](docs/PR1_HOLIDAY_LEAVE.md).
 Root unittest discovery runs both V1.1 and V2 tests. The committed calendars are
-synthetic TEST fixtures only. PR1 does not perform route generation. PR2 discovery
-and PR3 adaptation are described below. Portfolio and planner CLI remain
-subsequent milestones. V1.1 pricing is unchanged.
+synthetic TEST fixtures only. PR1 does not perform route generation. PR2 discovery,
+PR3 adaptation and PR4 portfolio/CLI are described below. V1.1 pricing is unchanged.
 
 
 ## V2 Alpha PR2 implementation
@@ -157,4 +156,35 @@ beneficiary eligibility. Request `miles_balance` is not silently imported as an
 account snapshot. Seats/ticketability always remain NOT_CHECKED. V1.1, rules,
 rounding and existing schemas are unchanged. FlyAsia comparisons are tagged
 THIRD_PARTY_OBSERVED, including an explicitly inferred synthetic rounding boundary.
-PR4, live searches and booking remain outside this implementation.
+PR3 itself does not orchestrate annual portfolios; PR4 is described below. Live
+searches and booking remain outside this implementation.
+
+
+## V2 Alpha PR4 — annual portfolio and CLI
+
+`discovery/portfolio.py` combines independent holiday trips and applies each
+traveler's exact leave dates to explicit per-year budgets. A bounded global payer
+assignment checks every selected ticket/passenger pair against each account's
+whole-horizon balance; standalone FEASIBLE flags never prove annual feasibility.
+Unknown miles/balances, partner pricing, rule review and unresolved funding
+eligibility remain in a disjoint conditional channel. Budget feasibility does not
+confirm seats, schedules or ticketability. Four diversified Pareto views expose
+Miles Saver, Comfort First, Balanced and Leave Efficient without a weighted score.
+
+```bash
+python3 -B planner.py --input examples/planner_synthetic_test.json --output /tmp/TEST_portfolios.json
+```
+
+The committed example is entirely SYNTHETIC TEST, including fictional quotes and
+funding attestations. Runtime never creates quotes or applicability reviews.
+Missing taxes remain null and cannot enable full-cost ranking. See
+[PR4 inputs, budgets, bounds and evidence](docs/PR4_PLANNER.md) and the acceptance
+[specification](docs/PR4_PORTFOLIO_SPEC.md). The original kernel, PR1–PR3 rules,
+rounding and schemas remain unchanged; D2, live search and booking remain deferred.
+
+PR4 candidate retention is capped **per concrete holiday window_id**, using
+`max_candidates_per_window`, before the global `max_candidates_total` limit.
+Both CLI and direct optimizer preserve window alternatives; global capacity is
+shared by window rotation, with per-window counts and `search_truncated` disclosed.
+The obsolete PR4 `max_candidates_per_holiday` setting must be renamed; it is not
+silently interpreted as a family cap. Bounds do not guarantee global optimality.
