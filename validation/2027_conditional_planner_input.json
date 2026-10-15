@@ -1,0 +1,22 @@
+{
+  "data_label": "REAL_PREFERENCE_CONDITIONAL_RESEARCH_INPUT_NO_AWARD_QUOTES_NO_SEAT_DATA",
+  "request": "2027_travel_request.json",
+  "calendars": [
+    "2027_calendar_estimated_anchors_only.json"
+  ],
+  "route_graph": "2027_hkg_four_dest_route_graph_unverified.json",
+  "rules": "../rules_2026_10.json",
+  "search_config": "../config/search_config.json",
+  "portfolio_config": {
+    "max_states": 5000,
+    "max_allocation_states": 20000,
+    "max_windows": 30,
+    "max_candidates_per_window": 10,
+    "max_candidates_total": 100,
+    "max_per_view": 5,
+    "leave_budgets_by_year": {}
+  },
+  "evidence_by_candidate": {},
+  "balances_by_account": null,
+  "funding_eligibility": []
+}
