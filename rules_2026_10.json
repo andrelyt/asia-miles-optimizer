@@ -30,6 +30,23 @@
     "allowed_carriers": ["AA", "AS", "BA", "CX", "AY", "IB", "JL", "MH", "QF", "QR", "RJ", "AT", "UL"],
     "distance_warning_headroom_mi": 250
   },
+  "standard_award_constraints": {
+    "max_sectors_per_direction": 2,
+    "max_transfers_per_direction": 1,
+    "max_transfer_hours": 24,
+    "max_mixed_carriers": 2,
+    "primary_carrier": "CX",
+    "mixed_carrier_requires_primary": true,
+    "excluded_single_carriers": ["UO"],
+    "source": {
+      "evidence_type": "OFFICIAL_PUBLISHED",
+      "url": "https://www.cathaypacific.com/content/dam/focal-point/cx/membership/programme-update/Cathay-membership-programme-terms-and-conditions-2026-EN.pdf",
+      "effective_from": "2026-01-01",
+      "checked_on": "2026-10-15",
+      "structure_clauses": "Flight Awards Redemption - General Conditions 5-6 (printed page 20)",
+      "carrier_clause": "Flight Awards - Standard Awards 4 (printed page 23)"
+    }
+  },
   "standard_mixed_constraints": {"leg_count": 2, "allowed_carriers": ["CX"], "max_transfer_hours": 24, "round_down_increment": 100},
   "sources": [
     "https://www.cathaypacific.com/content/dam/focal-point/cx/membership/programme-update/Cathay-membership-programme-terms-and-conditions-2026-EN.pdf",

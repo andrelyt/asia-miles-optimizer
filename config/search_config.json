@@ -13,7 +13,8 @@
   },
   "candidate_generation": {
     "max_candidates_per_strategy": 50,
-    "preserve_strategy_diversity": true
+    "preserve_strategy_diversity": true,
+    "longhaul_distance_threshold_miles": 4000
   },
   "portfolio": {
     "max_candidates_per_holiday": 10,
@@ -21,6 +22,7 @@
   },
   "notes": [
     "These are search/performance defaults, not Asia Miles policy rules.",
-    "Changing these values must not change award pricing policy."
+    "Changing these values must not change award pricing policy.",
+    "Longhaul distance threshold is an explicit cabin-generation assumption, not an airline award distance band."
   ]
 }
