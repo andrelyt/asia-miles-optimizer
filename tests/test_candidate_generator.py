@@ -68,15 +68,23 @@ class CandidateGeneratorTests(unittest.TestCase):
         data = graph_data()
         for e in data['edges']: e['operating_carrier'] = 'ZZ'
         rows = self.generate(data=data)['candidates']
-        self.assertFalse(any('LONG_J_SHORT_Y' in c['strategies'] and c['ticketing_mode'] == 'SINGLE_AWARD' for c in rows))
+        pending = next(c for c in rows if 'LONG_J_SHORT_Y' in c['strategies'] and c['ticketing_mode'] == 'SINGLE_AWARD')
+        self.assertIsNone(pending['tickets'][0]['proposed_scheme'])
+        self.assertEqual(pending['tickets'][0]['structure_status'], 'NEEDS_PARTNER_AGREEMENT_AND_QUOTE')
         self.assertTrue(any('LONG_J_SHORT_Y' in c['strategies'] and c['ticketing_mode'] == 'SEPARATE_AWARDS' for c in rows))
         supplied = rules(); supplied['standard_mixed_constraints']['allowed_carriers'] = ['ZZ']
-        self.assertTrue(any('LONG_J_SHORT_Y' in c['strategies'] and c['ticketing_mode'] == 'SINGLE_AWARD' for c in self.generate(data=data, rule_data=supplied)['candidates']))
+        supplied['standard_award_constraints']['primary_carrier'] = 'ZZ'  # Synthetic policy fixture only.
+        priced_shape = next(c for c in self.generate(data=data, rule_data=supplied)['candidates']
+                            if 'LONG_J_SHORT_Y' in c['strategies'] and c['ticketing_mode'] == 'SINGLE_AWARD')
+        self.assertEqual(priced_shape['tickets'][0]['proposed_scheme'], 'standard_mixed')
 
     def test_different_carriers_are_not_assumed_same_ticket(self):
         data = graph_data(); data['edges'][0]['operating_carrier'] = 'ZZ'
         rows = self.generate(data=data)['candidates']; self.assertTrue(rows)
-        self.assertTrue(all(c['ticketing_mode'] == 'SEPARATE_AWARDS' for c in rows))
+        self.assertTrue(any(c['ticketing_mode'] == 'SEPARATE_AWARDS' for c in rows))
+        same = next(c for c in rows if c['ticketing_mode'] == 'SINGLE_AWARD')
+        self.assertIn('PARTNER_AGREEMENT_REQUIRED', same['tickets'][0]['requirements'])
+        self.assertEqual(same['pricing_status'], 'UNKNOWN')
 
     def test_whole_roundtrip_leg_and_connection_caps(self):
         cfg = config(); cfg['route_search']['max_flight_legs_per_trip'] = 2

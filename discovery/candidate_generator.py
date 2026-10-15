@@ -82,34 +82,81 @@ def _cabins(path, strategy, direction, preferences, threshold):
     return cabins
 
 
-def _tickets(legs, mode, mixed_constraints):
+def _standard_policy(rules):
+    """Missing/uninterpretable policy never inherits search config defaults."""
+    policy = rules.get("standard_award_constraints")
+    if not isinstance(policy, dict):
+        return None
+    for key, minimum in (("max_sectors_per_direction", 1), ("max_transfers_per_direction", 0),
+                         ("max_transfer_hours", 1), ("max_mixed_carriers", 1)):
+        value = policy.get(key)
+        if isinstance(value, bool) or not isinstance(value, int) or value < minimum:
+            return None
+    source = policy.get("source")
+    if (not isinstance(policy.get("primary_carrier"), str) or not policy["primary_carrier"] or
+            not isinstance(policy.get("mixed_carrier_requires_primary"), bool) or
+            not isinstance(policy.get("excluded_single_carriers"), list) or
+            any(not isinstance(c, str) or not c for c in policy["excluded_single_carriers"]) or
+            not isinstance(source, dict) or source.get("evidence_type") != "OFFICIAL_PUBLISHED" or
+            not isinstance(source.get("url"), str) or not source["url"].startswith("https://") or
+            any(not isinstance(source.get(k), str) or not source[k]
+                for k in ("structure_clauses", "carrier_clause"))):
+        return None
+    return policy
+
+
+def _tickets(legs, mode, mixed_constraints, policy):
     tickets = []
     for direction in ("outbound", "return"):
         indices = [i for i, leg in enumerate(legs) if leg["direction"] == direction]
         groups = [[i] for i in indices] if mode == "SEPARATE_AWARDS" else [indices]
         for group in groups:
             selected = [legs[i] for i in group]
+            carriers = {leg["operating_carrier"] for leg in selected}
             mixed = len({leg["cabin"] for leg in selected}) > 1
-            if len({leg["operating_carrier"] for leg in selected}) > 1:
-                return None
-            if mixed:
-                if not mixed_constraints:
-                    return None
-                if (len(selected) != mixed_constraints["leg_count"] or
+            partner = carriers != {policy["primary_carrier"]}
+            reason = None
+            if len(group) > policy["max_sectors_per_direction"]:
+                reason = "STANDARD_SECTOR_LIMIT_EXCEEDED"
+            elif len(group) - 1 > policy["max_transfers_per_direction"]:
+                reason = "STANDARD_TRANSFER_LIMIT_EXCEEDED"
+            elif len(carriers) == 1 and carriers.intersection(policy["excluded_single_carriers"]):
+                reason = "STANDARD_CARRIER_EXCLUDED"
+            elif len(carriers) > policy["max_mixed_carriers"]:
+                reason = "STANDARD_CARRIER_COUNT_EXCEEDED"
+            elif (len(carriers) > 1 and policy["mixed_carrier_requires_primary"] and
+                  policy["primary_carrier"] not in carriers):
+                reason = "STANDARD_MIXED_CARRIERS_REQUIRE_PRIMARY"
+            elif mixed and not partner:
+                if (not mixed_constraints or len(selected) != mixed_constraints["leg_count"] or
                         any(l["operating_carrier"] not in mixed_constraints["allowed_carriers"] for l in selected)):
-                    return None
+                    reason = "CX_MIXED_REPRESENTATION_UNSUPPORTED"
+            if reason:
+                return None, {"code": reason, "direction": direction, "ticketing_mode": mode,
+                              "sector_count": len(group), "carriers": sorted(carriers),
+                              "rule_source": copy.deepcopy(policy["source"])}
+            requirements = ["RULE_VERSION_REVIEW_REQUIRED", "CARRIER_REDEMPTION_ELIGIBILITY_REQUIRED", "AIRLINE_QUOTE_REQUIRED"]
+            if partner:
+                requirements.append("PARTNER_AGREEMENT_REQUIRED")
+            if len(group) > 1:
+                requirements += ["TRANSFER_HOURS_REQUIRED", "ONE_WAY_GEOGRAPHY_REVIEW_REQUIRED"]
+            if mixed:
+                requirements.append("ROUTE_TYPE_IF_REQUIRED")
             tickets.append({
                 "ticket_id": direction + "_" + str(len(tickets) + 1),
                 "direction": direction, "leg_indices": group,
-                "proposed_scheme": "standard_mixed" if mixed else "standard",
+                # A partner mixed-cabin quote cannot be mapped to the CX-only formula.
+                "proposed_scheme": None if partner and mixed else ("standard_mixed" if mixed else "standard"),
+                "structure_status": "NEEDS_PARTNER_AGREEMENT_AND_QUOTE" if partner else "PENDING_RULE_AND_QUOTE_REVIEW",
                 "miles_per_person": None, "transfer_hours": None,
-                "requirements": ["RULE_VERSION_REVIEW_REQUIRED", "CARRIER_REDEMPTION_ELIGIBILITY_REQUIRED", "AIRLINE_QUOTE_REQUIRED"] +
-                                (["TRANSFER_HOURS_REQUIRED", "ROUTE_TYPE_IF_REQUIRED"] if mixed else []),
+                "max_transfer_hours": policy["max_transfer_hours"],
+                "requirements": requirements,
+                "rule_source": copy.deepcopy(policy["source"]),
             })
-    return tickets
+    return tickets, None
 
 
-def _stream(graph, request, pairs, bounds, strategy, mode, mixed, threshold, window, rejected):
+def _stream(graph, request, pairs, bounds, strategy, mode, mixed, policy, threshold, window, rejected, structure_rejections):
     preferences = request["cabin_preferences"]
     for origin, destination, outbound_paths, return_paths in pairs:
         for outbound in outbound_paths:
@@ -131,9 +178,11 @@ def _stream(graph, request, pairs, bounds, strategy, mode, mixed, threshold, win
                     continue
                 if mode == "SEPARATE_AWARDS" and len(legs) == 2:
                     continue  # Identical to one award per direction, not a new variant.
-                tickets = _tickets(legs, mode, mixed)
-                if tickets is None:
-                    rejected["SAME_TICKET_STRUCTURE_UNSUPPORTED"] = rejected.get("SAME_TICKET_STRUCTURE_UNSUPPORTED", 0) + 1
+                tickets, rejection = _tickets(legs, mode, mixed, policy)
+                if rejection:
+                    code = rejection["code"]
+                    rejected[code] = rejected.get(code, 0) + 1
+                    structure_rejections[stable_id("rejection_", rejection)] = rejection
                     continue
                 long_legs = [l for l in legs if l["long_haul"]]
                 candidate = {
@@ -151,7 +200,11 @@ def _stream(graph, request, pairs, bounds, strategy, mode, mixed, threshold, win
                     "longhaul_preferred_met": all(CABIN_RANK[l["cabin"]] >= CABIN_RANK[preferences["longhaul_preferred"]] for l in long_legs) if long_legs else None,
                     "assumptions": {"longhaul_distance_threshold_miles": threshold,
                                     "route_dates": "WINDOW_ENDPOINTS_FOR_EACH_DIRECTION" if window else "NOT_CHECKED",
-                                    "leave_validation": "NOT_CHECKED_BY_PR2"},
+                                    "leave_validation": "NOT_CHECKED_BY_PR2",
+                                    "route_verification": "SUPPLIED_SNAPSHOT_EVIDENCE_ONLY",
+                                    "schedule_validation": "NOT_CHECKED",
+                                    "overnight_arrival": "NOT_CHECKED",
+                                    "timezone_local_dates": "NOT_CHECKED"},
                 }
                 candidate["candidate_id"] = stable_id("candidate_", candidate)
                 candidate["strategies"] = [strategy]
@@ -161,7 +214,7 @@ def _stream(graph, request, pairs, bounds, strategy, mode, mixed, threshold, win
 def generate_candidates(graph, request, rules, window=None, config=None):
     """Generate airport roundtrip structures only, not V1 scenarios or prices.
 
-    Caller supplies a rule snapshot explicitly for mixed-ticket representability;
+    Caller supplies a rule snapshot explicitly for ticket structure and capability;
     this does not establish its future applicability or price any award.
     """
     validate(request, "travel_request.schema.json")
@@ -179,6 +232,12 @@ def generate_candidates(graph, request, rules, window=None, config=None):
                 not isinstance(mixed.get("leg_count"), int) or mixed["leg_count"] < 1 or
                 not isinstance(mixed.get("allowed_carriers"), list) or not mixed["allowed_carriers"]):
             raise ValidationError("invalid standard_mixed_constraints capability data")
+    policy = _standard_policy(rules)
+    if policy is None:
+        return {"candidates": [], "diagnostics": [{"code": "STANDARD_AWARD_POLICY_REQUIRED"},
+                                                 {"code": "NO_FEASIBLE_STANDARD_CANDIDATES"}],
+                "metadata": {"milestone": "V2_ALPHA_PR2", "search_config": config,
+                             "pricing_performed": False, "v1_evaluated": False}}
     diagnostics = []
     destinations = _destinations(request, diagnostics)
     if request.get("reposition_airports"):
@@ -204,8 +263,9 @@ def generate_candidates(graph, request, rules, window=None, config=None):
             continue
         modes = ["SINGLE_AWARD"] + (["SEPARATE_AWARDS"] if request["cabin_preferences"]["allow_separate_tickets"] else [])
         rejected = {}
-        streams = [_stream(graph, request, pairs, bounds, strategy, mode, mixed,
-                           generation["longhaul_distance_threshold_miles"], window, rejected) for mode in modes]
+        structure_rejections = {}
+        streams = [_stream(graph, request, pairs, bounds, strategy, mode, mixed, policy,
+                           generation["longhaul_distance_threshold_miles"], window, rejected, structure_rejections) for mode in modes]
         selected = 0
         while streams and selected < generation["max_candidates_per_strategy"]:
             for stream in list(streams):
@@ -227,7 +287,8 @@ def generate_candidates(graph, request, rules, window=None, config=None):
         diagnostics.append({"code": "STRATEGY_GENERATED" if selected else "NO_STRATEGY_CANDIDATES",
                             "strategy": strategy, "selected": selected,
                             "limit_reached": selected == generation["max_candidates_per_strategy"],
-                            "rejections": dict(sorted(rejected.items()))})
+                            "rejections": dict(sorted(rejected.items())),
+                            "ticket_structure_rejections": [structure_rejections[k] for k in sorted(structure_rejections)]})
     rows = sorted(candidates.values(), key=lambda c: c["candidate_id"])
     for row in rows:
         row["strategies"] = sorted(set(row["strategies"]))

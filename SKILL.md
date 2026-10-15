@@ -45,3 +45,18 @@ or ticketability. Candidate IDs/order are deterministic, not a recommendation
 ranking. Only airport destinations are resolved in PR2; missing geographic
 resolution, multi-required destinations and repositioning must remain explicit
 limitations. PR3 adaptation/pricing and PR4 orchestration remain deferred.
+
+For PR2, inspect per-strategy `ticket_structure_rejections` and each ticket's
+requirements/status. `standard_award_constraints` owns directional sector/transfer
+and mixed-carrier limits independently of route-search config; absent/invalid
+policy fails closed. CX + partner can remain pending agreement/quote; never infer
+eligibility from that candidate. Two different non-CX carriers are excluded from a
+single Standard ticket by the sourced policy, while separate awards may remain.
+A partner mixed-cabin ticket's `proposed_scheme=null` requires PR3 review: do not
+map it into the CX-only mixed formula. No PR2 candidate has a complete comparable
+price. `VERIFIED` means supplied snapshot provenance only, not live or independent
+route/seat/ticketability verification. Window endpoints are generation assumptions,
+with schedule, overnight arrival and timezone/local-date checks NOT_CHECKED.
+Muse/Grok FlyAsia research is THIRD_PARTY_OBSERVED; it must not override official
+policy, partner eligibility, Category 2 or V1.1 rounding/pricing. Those reviews and
+the adapter remain PR3 work.

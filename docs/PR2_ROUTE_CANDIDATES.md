@@ -2,8 +2,9 @@
 
 Scope: directed route evidence, bounded path discovery and standard-award
 structures. No live sources, inventory, prices, V1 adapter, portfolio or planner
-CLI. PR1 and the V1.1 kernel remain intact; existing schemas and award rules are
-unchanged. Standard Python only.
+CLI. PR1, the V1.1 kernel and existing schemas remain intact. The review fix adds
+source-attributed Standard structural constraints to the versioned rules; existing
+prices, mixed-cabin rounding and oneworld policy are unchanged. Standard Python only.
 
 ## APIs
 
@@ -37,7 +38,10 @@ Each edge preserves carrier, alliance, distance/source, cabin set, URL,
 observation time, validity dates and declared/effective route status. Missing edge
 observation time inherits the snapshot's observation time.
 
-VERIFIED is supplied evidence, **not independent live verification by this code**.
+VERIFIED means a source-bearing assertion in the **supplied route snapshot**,
+not independent online verification or a live flight check by this code. A usable
+URL is provenance metadata, not proof that this code retrieved or corroborated it.
+It never means award availability verified or ticketability verified.
 A declared VERIFIED edge without a usable HTTP(S) source URL becomes UNVERIFIED,
 with a note. VERIFIED evidence expired by the snapshot date becomes STALE.
 UNVERIFIED or STALE inputs are never promoted. No wall-clock aging threshold is
@@ -49,7 +53,11 @@ With an explicit travel date, edges outside known valid_from/valid_until bounds
 are excluded (inclusive endpoints). Without one, date validity is NOT_CHECKED;
 STALE leads may remain discoverable. For a supplied holiday window, all outbound
 legs use the start date and all inbound legs the end date as an explicit coarse
-assumption. This is not flight schedule or minimum-connection-time validation.
+candidate-generation assumption. It does not confirm actual flight dates/times,
+schedule availability, overnight arrivals, airport-local dates/timezones or
+minimum connection times. The candidate assumptions expose route_dates plus
+schedule_validation, overnight_arrival and timezone_local_dates=NOT_CHECKED;
+route_verification=SUPPLIED_SNAPSHOT_EVIDENCE_ONLY applies even to VERIFIED routes.
 
 Aggregate status is UNVERIFIED if any leg is UNVERIFIED, otherwise STALE if any is
 STALE, otherwise VERIFIED. Even all-VERIFIED paths do not establish award seats,
@@ -101,17 +109,61 @@ defaults to false when absent. allow_separate_tickets enables split variants.
 SINGLE_AWARD means one proposed award **per direction** (normally two tickets for
 the roundtrip), not one combined roundtrip award. SEPARATE_AWARDS splits each
 leg into its own ticket. Two direct flights have identical grouping either way,
-so no phantom split variant is created. Single-ticket cross-carrier connections
-are conservatively unsupported in this milestone; the split structure can still
-be retained. This is a representation restriction, not a claim about airline rules.
+so no phantom split variant is created. Search path length and award structure
+are separate contracts: increasing route_search bounds never relaxes ticket rules.
 
-For same-ticket mixed cabins, structural leg-count/carrier capability is read
-from the caller's standard_mixed_constraints; Python does not maintain separate
-CX/two-leg policy constants. Missing capability data suppresses the same-ticket
-mixed variant, while supported split candidates remain possible. Transfer hours,
-route type where required, carrier redemption eligibility, applicable rule version
-and whole-ticket quotation remain explicit requirements. No mixed-cabin savings
-are assumed and no proportional/oneworld pricing is performed here.
+### Official structural policy (not pricing)
+
+The versioned rules' standard_award_constraints is required, including official
+provenance; missing or uninterpretable data returns STANDARD_AWARD_POLICY_REQUIRED
+and no candidates, even when split tickets are enabled. The current rule snapshot
+encodes at most two sectors / one transfer per direction, with transfer duration
+at most 24 hours. Each proposed ticket is checked independently in its direction;
+a two-plus-two roundtrip is representable, while a three-plus-one path cannot be
+labeled one Standard ticket per direction. The latter can only survive as
+SEPARATE_AWARDS when allowed by the request and whole-trip search bounds.
+
+These limits come from the official Cathay membership terms effective January 2026,
+[Flight Awards Redemption – General Conditions 5–6, printed page 20; Standard Awards 4, printed page 23](https://www.cathaypacific.com/content/dam/focal-point/cx/membership/programme-update/Cathay-membership-programme-terms-and-conditions-2026-EN.pdf).
+The per-ticket max_transfer_hours is a pending constraint, not an assertion that
+a transfer duration was supplied or passed. The route schema has no schedule.
+Multi-sector tickets retain TRANSFER_HOURS_REQUIRED and
+ONE_WAY_GEOGRAPHY_REVIEW_REQUIRED. No final one-way geography, stopover, partner
+agreement, future rule applicability or ticketability conclusion is made here.
+
+Carrier grouping uses that same official, versioned policy: mixed carriers have
+a maximum of two and must include CX; clause 4 excludes HK Express from
+single-carrier Standard awards.
+CX + partner and partner + CX remain candidates, as do same-partner structures.
+Any partner-involving ticket has structure_status=NEEDS_PARTNER_AGREEMENT_AND_QUOTE
+and requirements CARRIER_REDEMPTION_ELIGIBILITY_REQUIRED,
+PARTNER_AGREEMENT_REQUIRED and AIRLINE_QUOTE_REQUIRED. These are unresolved
+requirements, not proof that the carrier is a redemption partner. PR2 maintains
+no partner allowlist and computes no partner prices. Two different non-CX carriers
+fail the same-ticket rule with STANDARD_MIXED_CARRIERS_REQUIRE_PRIMARY, attributed
+to official Standard Awards clause 4. Their route evidence is not declared invalid;
+separate-award tickets remain possible when allowed, each pending eligibility and
+quote. No FlyAsia behavior is used to make these decisions.
+
+For CX-only mixed cabins, representability still comes from the caller's existing
+standard_mixed_constraints. Missing/unsupported capability rejects that same-ticket
+variant with CX_MIXED_REPRESENTATION_UNSUPPORTED, leaving supported splits possible.
+A partner mixed-cabin candidate instead has proposed_scheme=null: no supported
+V1 mapping/formula is asserted. A uniform-cabin quote-required partner ticket may
+propose standard (manual quote), with no miles supplied. PR3 must resolve the
+quote, agreement, rule applicability and safe kernel mapping before evaluation.
+
+Each strategy exposes counted rejections and ticket_structure_rejections, with
+code, direction, ticketing_mode, sector_count, carriers and official rule_source.
+STANDARD_SECTOR_LIMIT_EXCEEDED / STANDARD_TRANSFER_LIMIT_EXCEEDED reject ticket
+structures, not the underlying route. Candidate-cap diagnostics still limit what
+has been explored; this is not an exhaustive proof of feasibility or infeasibility.
+All candidates keep pricing_status=UNKNOWN, award_seat_status=NOT_CHECKED,
+ticketability_status=NOT_CHECKED and complete_price_comparison_eligible=false.
+
+FlyAsia Muse/Grok reports are THIRD_PARTY_OBSERVED research only. Partner pricing,
+Category 2, rounding review and any V1 adapter are deferred to PR3; the V1.1 pricing
+algorithm is unchanged by this review fix.
 
 ## Determinism, caps and output
 
@@ -127,7 +179,10 @@ all possible variants or global optimality.
 Identical physical/evidence/ticket structures merge strategy aliases. Candidate
 IDs hash normalized structure and evidence, excluding the strategy label. Input
 traveler/airport/edge/cabin ordering does not change IDs. Changed source evidence
-may change IDs. Retained candidates are sorted by ID, **not by desirability**.
+may change IDs. The review fix also changes IDs where the normalized ticket
+requirements/policy provenance or explicit assumptions changed; IDs are not
+promised across a changed output contract. Repeated identical normalized inputs
+remain stable, including pending partner structures. Retained candidates are sorted by ID, **not by desirability**.
 
 Each candidate carries separate holiday_status (null when no window),
 route_status, pricing_status=UNKNOWN, award_seat_status=NOT_CHECKED and

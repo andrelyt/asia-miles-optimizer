@@ -72,7 +72,7 @@ Python 保留舱位代码/等级、票种分派、单程/连续性验证、账�
 ## 尚未实现 / 风险边界
 
 - 实时奖励座位、真实现金价格/税费查询、API/登录账户集成、自动出票。
-- 自动候选生成、全球路线图搜索和全局最优/Pareto 优化。
+- V1.1 CLI 不自动生成候选；V2 PR2 已有基于 supplied snapshot 的有界候选发现（见下文），全球穷举和全局最优/Pareto 优化仍未实现。
 - 真实日期、航线运营、最短换乘时间、独立票转机保护、出票有效期和城市重复规则的完整核验。
 - 停留/转机/开口数量与总飞行距离由输入方提供，程序只检查数值和上限，不根据航段/日期重新推导；复杂多航司整票需国泰复核。
 - 独立账户枚举在票/旅客数量很多时呈指数增长；当前用于小规模人工候选。
@@ -120,3 +120,14 @@ outbound/return and separate-ticket variants where enabled. Read
 These are discovery leads, not priced or ticketable itineraries. No route edge,
 unsupported cabin, seat availability or price is invented. The V1.1 CLI stays a
 supplied-scenario comparator; PR3 will provide the adapter into its kernel.
+
+PR2 review fixes separate search limits from per-direction Standard ticket limits
+in `rules_2026_10.json`. CX/partner structures remain quote-required; different
+non-CX carriers cannot share a Standard ticket under the sourced current policy,
+but may be separate awards when permitted. Partner mixed-cabin structures have no
+asserted kernel mapping. All prices remain unknown and comparison-ineligible.
+`VERIFIED` refers only to source-bearing supplied snapshot evidence. Window start/
+end dates are coarse generation assumptions; schedules, overnight arrivals and
+local-date/timezone feasibility remain unchecked. See the PR2 document for reason
+codes, official provenance and PR3 deferrals. FlyAsia research is
+`THIRD_PARTY_OBSERVED`, not official policy.
