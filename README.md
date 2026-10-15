@@ -1,6 +1,6 @@
 # Asia Miles Hybrid Award Optimizer · V1.1 (2026-10-15)
 
-**目的：**对人工提供的多人、多次旅行候选路线进行确定性计价、基础校验和成本比较。标准 Python，无第三方依赖。它不会查找实时航班、奖励座位或现金票价，不会自动生成路线、确认可出票或出票。
+**V1.1 目的：**对人工提供的多人、多次旅行候选路线进行确定性计价、基础校验和成本比较。标准 Python，无第三方依赖。它不会查找实时航班、奖励座位或现金票价，不会自动生成路线、确认可出票或出票。
 
 GitHub 仓库是可执行代码、规则版本与测试的 **Source of Truth**；AndreOS 保存项目入口与检查点，不复制执行代码。
 
@@ -106,5 +106,17 @@ and blocked dates, generates bounded continuous holiday windows, preserves
 OFFICIAL/ESTIMATED evidence, and prunes deterministically. See
 [PR1 interfaces, defaults and evidence/budget semantics](docs/PR1_HOLIDAY_LEAVE.md).
 Root unittest discovery runs both V1.1 and V2 tests. The committed calendars are
-synthetic TEST fixtures only. Route generation, V1 adaptation, portfolio and
-planner CLI remain subsequent milestones; V1.1 pricing behavior is unchanged.
+synthetic TEST fixtures only. PR1 does not perform route generation. PR2 is described below; V1 adaptation,
+portfolio and planner CLI remain subsequent milestones. V1.1 pricing is unchanged.
+
+
+## V2 Alpha PR2 implementation
+
+`discovery/route_graph.py` loads evidence-bearing directed route snapshots and
+performs bounded simple-path search. `discovery/candidate_generator.py` generates
+standard-award cabin/ticketing structures from those paths, including asymmetric
+outbound/return and separate-ticket variants where enabled. Read
+[PR2 interfaces, evidence and search semantics](docs/PR2_ROUTE_CANDIDATES.md).
+These are discovery leads, not priced or ticketable itineraries. No route edge,
+unsupported cabin, seat availability or price is invented. The V1.1 CLI stays a
+supplied-scenario comparator; PR3 will provide the adapter into its kernel.

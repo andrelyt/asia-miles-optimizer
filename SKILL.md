@@ -1,10 +1,10 @@
 # Asia Miles Hybrid Award Optimizer — V1.1 Agent Playbook
 
-**Category:** deterministic comparison of supplied candidates. No live search, route generation, ticketability confirmation or booking.
+**V1.1 kernel category:** deterministic comparison of supplied candidates. No live search, route generation, ticketability confirmation or booking.
 
 1. Discover the project via AndreOS; read this file, README.md, the latest applicable `rules_*.json` and the itinerary JSON from GitHub. GitHub is code/rules Source of Truth; AndreOS stores references/checkpoints. CLI defaults to the latest zero-padded `rules_YYYY_MM.json`; use `--rules` to pin reproducible calculations.
 2. Establish destinations, date flexibility, independent usable account balances, accepted home airports and minimum long/short-haul cabins. Dates are context only in V1.1. Never treat sample balances or fares as personal facts or live observations.
-3. Supply explicitly sourced candidate tickets; the program does not generate them. Supported schemes: `standard` (input miles), `standard_mixed` (two continuous one-way CX legs with distances and transfer_hours, route_type where applicable), `oneworld_multi` (rules-driven chart/constraints). Link award legs in trips using ticket_id; outbound and return mixed awards are separate tickets. Current oneworld rules prohibit W; J/Y uses whole-ticket highest cabin pricing.
+3. Supply explicitly sourced candidate tickets; the V1.1 CLI does not generate them. Supported schemes: `standard` (input miles), `standard_mixed` (two continuous one-way CX legs with distances and transfer_hours, route_type where applicable), `oneworld_multi` (rules-driven chart/constraints). Link award legs in trips using ticket_id; outbound and return mixed awards are separate tickets. Current oneworld rules prohibit W; J/Y uses whole-ticket highest cabin pricing.
 4. Evaluate using `python3 -B optimizer.py --input <file> --rules <rules-file> --output <result.json> --csv <result.csv>`. Inspect errors and exit code; invalid results have null valued cost. Run `python3 -B -m unittest discover -p 'test_*.py' -v` when maintaining the project.
 5. Link each cash flight/ground leg through cash_item_id to a cash_items id. Shared roundtrip/combined quotes count once. All amounts are HKD per person. Use null for unknowns, quote_type="quoted" only for observed quotes, otherwise assumption; taxes require taxes_quote_type too. Explain zero taxes when already included. Program cannot verify source authenticity or that an aggregate quote truly covers every leg.
 6. Before comparing prices read cost_status, complete_price_comparison_eligible, missing_cost_components, assumed_cost_components, errors and warnings. COMPLETE_QUOTED/true means complete declared cash under the chosen miles valuation, not official final cost or ticketability. PARTIAL_LOWER_BOUND, ASSUMPTION, PARTIAL_ASSUMPTION and INVALID are not full-price comparable. With assumptions a number is not a guaranteed real-price lower bound.
@@ -15,7 +15,7 @@
 
 Rules JSON owns policy parameters. If a changed rule requests a new unsupported pricing algorithm, report the explicit error rather than inventing a price or reverting to old constants. Changing PE eligibility also needs W prices. Static charts and mixed-cabin proportional estimates never establish ticketability.
 
-V2 remains out of scope: live availability, automatic geographic graph search, external service/API integration, global optimization, reservation/issuance and UI. Do not store login credentials or real account identifiers in shared code/Knowledge files; do not mutate AndreOS Canonical Memory.
+The V1.1 CLI does not perform discovery. Live availability, external service/API integration, global exhaustive optimization, reservation/issuance and UI remain outside V2 Alpha. Do not store login credentials or real account identifiers in shared code/Knowledge files; do not mutate AndreOS Canonical Memory.
 
 
 ## V2 development handoff
@@ -30,5 +30,18 @@ snapshots; inspect diagnostics and holiday_uncertainty. Missing adjacent calenda
 years and holiday anchors are explicit data gaps. Null destination/transit day
 estimates must stay unknown until flights are supplied. Independent budgets are
 checked per window, not as an annual portfolio. Synthetic TEST calendars must
-never be described as actual official holiday announcements. PR2–PR4 remain
-unimplemented after PR1.
+never be described as actual official holiday announcements. PR1 itself does not implement route discovery; PR2 is documented below. PR3–PR4
+remain unimplemented.
+
+
+PR2 Route Graph / Standard Candidate Generator interfaces are documented in
+`docs/PR2_ROUTE_CANDIDATES.md`. Supply a route snapshot, schema-conforming request
+and an explicit rule snapshot; do not assume the newest rule filename is
+applicable to future travel. Inspect directed-path/search diagnostics, individual
+edge evidence and candidate requirements. The configurable longhaul distance
+cutoff is a generation assumption, not award policy. Candidate prices/taxes stay
+unknown; route evidence never verifies award seats, carrier redemption eligibility
+or ticketability. Candidate IDs/order are deterministic, not a recommendation
+ranking. Only airport destinations are resolved in PR2; missing geographic
+resolution, multi-required destinations and repositioning must remain explicit
+limitations. PR3 adaptation/pricing and PR4 orchestration remain deferred.

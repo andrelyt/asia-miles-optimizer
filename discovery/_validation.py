@@ -13,7 +13,7 @@ SCHEMA_DIR = Path(__file__).resolve().parents[1] / "schemas"
 KEYWORDS = {
     "$schema", "$id", "title", "description", "type", "enum", "properties",
     "required", "additionalProperties", "items", "minItems", "uniqueItems",
-    "minLength", "pattern", "minimum", "maximum", "format",
+    "minLength", "pattern", "minimum", "maximum", "exclusiveMinimum", "format",
 }
 
 
@@ -44,6 +44,8 @@ def _matches(value, kind):
     if kind == "integer":
         return (isinstance(value, int) and not isinstance(value, bool)) or (
             isinstance(value, float) and math.isfinite(value) and int(value) == value)
+    if kind == "number":
+        return isinstance(value, (int, float)) and not isinstance(value, bool)
     raise ValidationError("unsupported schema type: " + str(kind))
 
 
@@ -97,6 +99,8 @@ def _validate(value, schema, path):
             raise ValidationError(path + ": non-finite number")
         if "minimum" in schema and value < schema["minimum"]:
             raise ValidationError(path + ": below minimum")
+        if "exclusiveMinimum" in schema and value <= schema["exclusiveMinimum"]:
+            raise ValidationError(path + ": must exceed exclusiveMinimum")
         if "maximum" in schema and value > schema["maximum"]:
             raise ValidationError(path + ": above maximum")
 
