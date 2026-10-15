@@ -1,0 +1,26 @@
+{
+  "schema_version": "2.0-alpha-1",
+  "holiday_window": {
+    "days_before": 7,
+    "days_after": 7,
+    "max_generated_windows_per_holiday": 30
+  },
+  "route_search": {
+    "max_flight_legs_per_trip": 3,
+    "max_connections": 2,
+    "max_raw_paths_per_od": 200,
+    "beam_width": 40
+  },
+  "candidate_generation": {
+    "max_candidates_per_strategy": 50,
+    "preserve_strategy_diversity": true
+  },
+  "portfolio": {
+    "max_candidates_per_holiday": 10,
+    "max_portfolios_before_pruning": 5000
+  },
+  "notes": [
+    "These are search/performance defaults, not Asia Miles policy rules.",
+    "Changing these values must not change award pricing policy."
+  ]
+}
