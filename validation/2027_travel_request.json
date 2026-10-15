@@ -1,0 +1,59 @@
+{
+  "planning_year": 2027,
+  "travelers": [
+    {
+      "id": "andre",
+      "annual_leave_budget": 15,
+      "miles_balance": 0
+    },
+    {
+      "id": "dony",
+      "annual_leave_budget": 13,
+      "miles_balance": 0
+    }
+  ],
+  "origin_airports": [
+    "HKG"
+  ],
+  "holiday_types": [
+    "labor_day",
+    "national_day"
+  ],
+  "destinations": [
+    {
+      "type": "airport",
+      "value": "AKL",
+      "priority": "optional"
+    },
+    {
+      "type": "airport",
+      "value": "ZRH",
+      "priority": "optional"
+    },
+    {
+      "type": "airport",
+      "value": "CTS",
+      "priority": "optional"
+    },
+    {
+      "type": "airport",
+      "value": "SYD",
+      "priority": "optional"
+    }
+  ],
+  "leave_constraints": {
+    "max_leave_days_per_trip": 13,
+    "min_calendar_trip_days": 7,
+    "max_calendar_trip_days": 16,
+    "allow_bridge_leave": true
+  },
+  "cabin_preferences": {
+    "longhaul_minimum": "W",
+    "longhaul_preferred": "J",
+    "shorthaul_minimum": "Y",
+    "allow_mixed_cabin": true,
+    "allow_separate_tickets": true,
+    "allow_asymmetric_roundtrip": true
+  },
+  "max_trips": 2
+}
