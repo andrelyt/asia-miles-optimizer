@@ -1,0 +1,45 @@
+{
+  "as_of": "2026-10-15",
+  "currency": "HKD",
+  "source_quality": "secondary reconstructed chart + official published award conditions; live quotation overrides",
+  "oneworld_bands": [
+    {"max_distance_miles":1000,"miles":{"Y":30000,"J":60000,"F":75000}},
+    {"max_distance_miles":1500,"miles":{"Y":35000,"J":65000,"F":85000}},
+    {"max_distance_miles":2000,"miles":{"Y":40000,"J":70000,"F":95000}},
+    {"max_distance_miles":4000,"miles":{"Y":45000,"J":80000,"F":110000}},
+    {"max_distance_miles":7500,"miles":{"Y":63000,"J":100000,"F":150000}},
+    {"max_distance_miles":9000,"miles":{"Y":68000,"J":120000,"F":165000}},
+    {"max_distance_miles":10000,"miles":{"Y":77000,"J":135000,"F":175000}},
+    {"max_distance_miles":14000,"miles":{"Y":95000,"J":170000,"F":250000}},
+    {"max_distance_miles":18000,"miles":{"Y":105000,"J":210000,"F":310000}},
+    {"max_distance_miles":20000,"miles":{"Y":115000,"J":230000,"F":330000}},
+    {"max_distance_miles":25000,"miles":{"Y":126000,"J":250000,"F":350000}},
+    {"max_distance_miles":35000,"miles":{"Y":140000,"J":265000,"F":365000}},
+    {"max_distance_miles":50000,"miles":{"Y":160000,"J":280000,"F":380000}}
+  ],
+  "oneworld_constraints": {
+    "carrier_count_if_CX_included": 3,
+    "carrier_count_if_no_CX": 2,
+    "max_stopovers": 5,
+    "max_transfers": 2,
+    "max_open_jaws": 2,
+    "max_flight_miles": 50000,
+    "premium_economy_offered": false,
+    "whole_ticket_highest_cabin_pricing": true
+  },
+  "sources": [
+    "https://www.cathaypacific.com/content/dam/focal-point/cx/membership/programme-update/Cathay-membership-programme-terms-and-conditions-2026-EN.pdf",
+    "https://www.flyasia.co/2026/asiamiles-split-planner/",
+    "https://pointsplug.com/award-charts/cathay-asiamiles",
+    "https://www.flyasia.co/2026/asiamiles-cathay-chart/",
+    "https://www.flyasia.co/2026/asiamiles-mix-cabin/"
+  ],
+  "cx_standard_chart": [
+    {"label":"up_to_750","min_mi":1,"max_mi":750,"miles":{"Y":7000,"W":11000,"J":16000}},
+    {"label":"751_2750_type1","min_mi":751,"max_mi":2750,"route_type":1,"miles":{"Y":9000,"W":18000,"J":27000,"F":43000}},
+    {"label":"751_2750_type2","min_mi":751,"max_mi":2750,"route_type":2,"miles":{"Y":13000,"W":23000,"J":33000,"F":50000}},
+    {"label":"2751_5000","min_mi":2751,"max_mi":5000,"miles":{"Y":20000,"W":39000,"J":60000,"F":90000}},
+    {"label":"5001_7500","min_mi":5001,"max_mi":7500,"miles":{"Y":27000,"W":52000,"J":91000,"F":125000}},
+    {"label":"7501_plus","min_mi":7501,"max_mi":50000,"miles":{"Y":38000,"W":78000,"J":119000,"F":160000}}
+  ]
+}
