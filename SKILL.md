@@ -16,3 +16,10 @@
 Rules JSON owns policy parameters. If a changed rule requests a new unsupported pricing algorithm, report the explicit error rather than inventing a price or reverting to old constants. Changing PE eligibility also needs W prices. Static charts and mixed-cabin proportional estimates never establish ticketability.
 
 V2 remains out of scope: live availability, automatic geographic graph search, external service/API integration, global optimization, reservation/issuance and UI. Do not store login credentials or real account identifiers in shared code/Knowledge files; do not mutate AndreOS Canonical Memory.
+
+
+## V2 development handoff
+
+When asked to implement or extend V2, read `AGENTS.md`, `docs/V2_DESIGN.md`, `docs/V2_IMPLEMENTATION_PLAN.md`, the schemas and search config before coding. Treat those files as the current V2 Alpha design contract.
+
+V2 discovery must feed candidates through the V1.1 deterministic kernel rather than reimplement pricing policy. Keep holiday status, route evidence, award-seat evidence and ticketability independent. An `ESTIMATED` holiday, `UNVERIFIED` route, unchecked award seat or theoretical multi-trip structure must never be silently upgraded by recommendation prose.
