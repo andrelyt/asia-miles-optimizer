@@ -96,3 +96,15 @@ Authoritative V2 development contracts:
 Development order: Holiday/Leave Engine → Route Graph & Standard Candidate Generator → V1 Adapter → Portfolio/CLI. Live award inventory, booking and global exhaustive search remain post-Alpha.
 
 For future China holiday years, do not invent official makeup-workday arrangements before the authoritative calendar is published. Estimated calendars must remain visibly `ESTIMATED` end-to-end.
+
+## V2 Alpha PR1 implementation
+
+Holiday Calendar + Leave Engine is implemented as a separate standard-library
+module in `discovery/holiday_calendar.py` and `discovery/leave_engine.py`.
+It validates the existing calendar/request schemas, calculates independent leave
+and blocked dates, generates bounded continuous holiday windows, preserves
+OFFICIAL/ESTIMATED evidence, and prunes deterministically. See
+[PR1 interfaces, defaults and evidence/budget semantics](docs/PR1_HOLIDAY_LEAVE.md).
+Root unittest discovery runs both V1.1 and V2 tests. The committed calendars are
+synthetic TEST fixtures only. Route generation, V1 adaptation, portfolio and
+planner CLI remain subsequent milestones; V1.1 pricing behavior is unchanged.
