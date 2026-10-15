@@ -1,0 +1,760 @@
+{
+  "data_label": "SYNTHETIC_TEST_ONLY_NOT_REAL_HOLIDAYS_ROUTES_QUOTES_OR_ACCOUNTS",
+  "request": {
+    "planning_year": 2027,
+    "travelers": [
+      {
+        "id": "traveler_a",
+        "annual_leave_budget": 3,
+        "miles_balance": 0
+      },
+      {
+        "id": "traveler_b",
+        "annual_leave_budget": 3,
+        "miles_balance": 0
+      }
+    ],
+    "origin_airports": [
+      "AAA"
+    ],
+    "holiday_types": [
+      "new_year",
+      "qingming",
+      "labor_day"
+    ],
+    "cabin_preferences": {
+      "longhaul_minimum": "Y",
+      "longhaul_preferred": "J",
+      "shorthaul_minimum": "Y",
+      "allow_mixed_cabin": true,
+      "allow_separate_tickets": true,
+      "allow_asymmetric_roundtrip": true
+    },
+    "leave_constraints": {
+      "min_calendar_trip_days": 3,
+      "max_calendar_trip_days": 3,
+      "max_leave_days_per_trip": 3,
+      "allow_bridge_leave": true
+    },
+    "destinations": [
+      {
+        "type": "airport",
+        "value": "CCC",
+        "priority": "required"
+      }
+    ],
+    "max_trips": 3
+  },
+  "calendars": [
+    {
+      "calendar_id": "TEST_SYNTHETIC_NOT_REAL_2026",
+      "jurisdiction": "TEST",
+      "year": 2026,
+      "source_status": "ESTIMATED",
+      "source_url": "https://example.invalid/SYNTHETIC_TEST",
+      "days": []
+    },
+    {
+      "calendar_id": "TEST_SYNTHETIC_NOT_REAL_2027",
+      "jurisdiction": "TEST",
+      "year": 2027,
+      "source_status": "ESTIMATED",
+      "source_url": "https://example.invalid/SYNTHETIC_TEST",
+      "days": [
+        {
+          "date": "2027-01-01",
+          "day_type": "PUBLIC_HOLIDAY",
+          "holiday_name": "new_year"
+        },
+        {
+          "date": "2027-04-02",
+          "day_type": "PUBLIC_HOLIDAY",
+          "holiday_name": "qingming"
+        },
+        {
+          "date": "2027-05-07",
+          "day_type": "PUBLIC_HOLIDAY",
+          "holiday_name": "labor_day"
+        },
+        {
+          "date": "2027-01-02",
+          "day_type": "MAKEUP_WORKDAY"
+        }
+      ]
+    }
+  ],
+  "route_graph": {
+    "snapshot_id": "TEST_SYNTHETIC_ROUTES_NOT_REAL_SERVICES",
+    "observed_at": "2026-10-15T00:00:00Z",
+    "edges": [
+      {
+        "origin": "AAA",
+        "destination": "CCC",
+        "operating_carrier": "CX",
+        "distance_miles": 6000,
+        "distance_source": "SYNTHETIC_TEST_DISTANCE",
+        "cabins": [
+          "Y",
+          "W",
+          "J",
+          "F"
+        ],
+        "route_status": "VERIFIED",
+        "source_url": "https://example.invalid/synthetic-route-test",
+        "observed_at": "2026-10-01T00:00:00Z"
+      },
+      {
+        "origin": "CCC",
+        "destination": "AAA",
+        "operating_carrier": "CX",
+        "distance_miles": 6000,
+        "distance_source": "SYNTHETIC_TEST_DISTANCE",
+        "cabins": [
+          "Y",
+          "W",
+          "J",
+          "F"
+        ],
+        "route_status": "STALE",
+        "source_url": "https://example.invalid/synthetic-route-test",
+        "observed_at": "2026-10-01T00:00:00Z"
+      }
+    ]
+  },
+  "rules": "../rules_2026_10.json",
+  "search_config": {
+    "schema_version": "2.0-alpha-1",
+    "holiday_window": {
+      "days_before": 0,
+      "days_after": 2,
+      "max_generated_windows_per_holiday": 3
+    },
+    "route_search": {
+      "max_flight_legs_per_trip": 3,
+      "max_connections": 2,
+      "max_raw_paths_per_od": 200,
+      "beam_width": 40
+    },
+    "candidate_generation": {
+      "max_candidates_per_strategy": 50,
+      "preserve_strategy_diversity": true,
+      "longhaul_distance_threshold_miles": 4000
+    },
+    "portfolio": {
+      "max_candidates_per_holiday": 10,
+      "max_portfolios_before_pruning": 5000
+    },
+    "notes": [
+      "These are search/performance defaults, not Asia Miles policy rules.",
+      "Changing these values must not change award pricing policy.",
+      "Longhaul distance threshold is an explicit cabin-generation assumption, not an airline award distance band."
+    ]
+  },
+  "portfolio_config": {
+    "max_states": 2000,
+    "max_allocation_states": 50000,
+    "max_candidates_per_holiday": 4,
+    "max_per_view": 3
+  },
+  "evidence_by_candidate": {
+    "candidate_c7c14a766e49966ada96822f": {
+      "rule_review": {
+        "evidence_level": "SUPPLIED_CONFIRMED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_c7c14a766e49966ada96822f",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-05-07",
+        "travel_end_date": "2027-05-09",
+        "decision": "APPLICABLE"
+      },
+      "quotes": {
+        "outbound_1": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_c7c14a766e49966ada96822f",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-05-07",
+          "travel_end_date": "2027-05-09",
+          "miles_per_person": 1000
+        },
+        "return_2": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_c7c14a766e49966ada96822f",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-05-07",
+          "travel_end_date": "2027-05-09",
+          "miles_per_person": 1000
+        }
+      },
+      "ticket_data": {},
+      "tax_quote": {
+        "evidence_level": "AIRLINE_QUOTED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_c7c14a766e49966ada96822f",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-05-07",
+        "travel_end_date": "2027-05-09",
+        "hkd_per_person": 100
+      }
+    },
+    "candidate_b9eb414517350b4ec1585e98": {
+      "rule_review": {
+        "evidence_level": "SUPPLIED_CONFIRMED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_b9eb414517350b4ec1585e98",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-05-07",
+        "travel_end_date": "2027-05-09",
+        "decision": "APPLICABLE"
+      },
+      "quotes": {
+        "outbound_1": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_b9eb414517350b4ec1585e98",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-05-07",
+          "travel_end_date": "2027-05-09",
+          "miles_per_person": 2000
+        },
+        "return_2": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_b9eb414517350b4ec1585e98",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-05-07",
+          "travel_end_date": "2027-05-09",
+          "miles_per_person": 2000
+        }
+      },
+      "ticket_data": {},
+      "tax_quote": {
+        "evidence_level": "AIRLINE_QUOTED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_b9eb414517350b4ec1585e98",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-05-07",
+        "travel_end_date": "2027-05-09",
+        "hkd_per_person": 100
+      }
+    },
+    "candidate_7fc6855920e5bde539ea75c2": {
+      "rule_review": {
+        "evidence_level": "SUPPLIED_CONFIRMED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_7fc6855920e5bde539ea75c2",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-05-07",
+        "travel_end_date": "2027-05-09",
+        "decision": "APPLICABLE"
+      },
+      "quotes": {
+        "outbound_1": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_7fc6855920e5bde539ea75c2",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-05-07",
+          "travel_end_date": "2027-05-09",
+          "miles_per_person": 3000
+        },
+        "return_2": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_7fc6855920e5bde539ea75c2",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-05-07",
+          "travel_end_date": "2027-05-09",
+          "miles_per_person": 3000
+        }
+      },
+      "ticket_data": {},
+      "tax_quote": {
+        "evidence_level": "AIRLINE_QUOTED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_7fc6855920e5bde539ea75c2",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-05-07",
+        "travel_end_date": "2027-05-09",
+        "hkd_per_person": 100
+      }
+    },
+    "candidate_ca367ffbc4dbaa70775cdceb": {
+      "rule_review": {
+        "evidence_level": "SUPPLIED_CONFIRMED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_ca367ffbc4dbaa70775cdceb",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-01-01",
+        "travel_end_date": "2027-01-03",
+        "decision": "APPLICABLE"
+      },
+      "quotes": {
+        "outbound_1": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_ca367ffbc4dbaa70775cdceb",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-01-01",
+          "travel_end_date": "2027-01-03",
+          "miles_per_person": 1000
+        },
+        "return_2": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_ca367ffbc4dbaa70775cdceb",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-01-01",
+          "travel_end_date": "2027-01-03",
+          "miles_per_person": 1000
+        }
+      },
+      "ticket_data": {},
+      "tax_quote": {
+        "evidence_level": "AIRLINE_QUOTED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_ca367ffbc4dbaa70775cdceb",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-01-01",
+        "travel_end_date": "2027-01-03",
+        "hkd_per_person": 100
+      }
+    },
+    "candidate_b7681b1c71e69287a0202c99": {
+      "rule_review": {
+        "evidence_level": "SUPPLIED_CONFIRMED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_b7681b1c71e69287a0202c99",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-01-01",
+        "travel_end_date": "2027-01-03",
+        "decision": "APPLICABLE"
+      },
+      "quotes": {
+        "outbound_1": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_b7681b1c71e69287a0202c99",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-01-01",
+          "travel_end_date": "2027-01-03",
+          "miles_per_person": 2000
+        },
+        "return_2": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_b7681b1c71e69287a0202c99",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-01-01",
+          "travel_end_date": "2027-01-03",
+          "miles_per_person": 2000
+        }
+      },
+      "ticket_data": {},
+      "tax_quote": {
+        "evidence_level": "AIRLINE_QUOTED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_b7681b1c71e69287a0202c99",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-01-01",
+        "travel_end_date": "2027-01-03",
+        "hkd_per_person": 100
+      }
+    },
+    "candidate_1ded0d999e001f5744c5c6ae": {
+      "rule_review": {
+        "evidence_level": "SUPPLIED_CONFIRMED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_1ded0d999e001f5744c5c6ae",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-01-01",
+        "travel_end_date": "2027-01-03",
+        "decision": "APPLICABLE"
+      },
+      "quotes": {
+        "outbound_1": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_1ded0d999e001f5744c5c6ae",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-01-01",
+          "travel_end_date": "2027-01-03",
+          "miles_per_person": 3000
+        },
+        "return_2": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_1ded0d999e001f5744c5c6ae",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-01-01",
+          "travel_end_date": "2027-01-03",
+          "miles_per_person": 3000
+        }
+      },
+      "ticket_data": {},
+      "tax_quote": {
+        "evidence_level": "AIRLINE_QUOTED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_1ded0d999e001f5744c5c6ae",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-01-01",
+        "travel_end_date": "2027-01-03",
+        "hkd_per_person": 100
+      }
+    },
+    "candidate_6077f2054d5e73b57578b085": {
+      "rule_review": {
+        "evidence_level": "SUPPLIED_CONFIRMED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_6077f2054d5e73b57578b085",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-04-02",
+        "travel_end_date": "2027-04-04",
+        "decision": "APPLICABLE"
+      },
+      "quotes": {
+        "outbound_1": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_6077f2054d5e73b57578b085",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-04-02",
+          "travel_end_date": "2027-04-04",
+          "miles_per_person": 1000
+        },
+        "return_2": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_6077f2054d5e73b57578b085",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-04-02",
+          "travel_end_date": "2027-04-04",
+          "miles_per_person": 1000
+        }
+      },
+      "ticket_data": {},
+      "tax_quote": {
+        "evidence_level": "AIRLINE_QUOTED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_6077f2054d5e73b57578b085",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-04-02",
+        "travel_end_date": "2027-04-04",
+        "hkd_per_person": 100
+      }
+    },
+    "candidate_985cf5cc2059ba27fbfdc9d2": {
+      "rule_review": {
+        "evidence_level": "SUPPLIED_CONFIRMED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_985cf5cc2059ba27fbfdc9d2",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-04-02",
+        "travel_end_date": "2027-04-04",
+        "decision": "APPLICABLE"
+      },
+      "quotes": {
+        "outbound_1": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_985cf5cc2059ba27fbfdc9d2",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-04-02",
+          "travel_end_date": "2027-04-04",
+          "miles_per_person": 2000
+        },
+        "return_2": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_985cf5cc2059ba27fbfdc9d2",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-04-02",
+          "travel_end_date": "2027-04-04",
+          "miles_per_person": 2000
+        }
+      },
+      "ticket_data": {},
+      "tax_quote": {
+        "evidence_level": "AIRLINE_QUOTED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_985cf5cc2059ba27fbfdc9d2",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-04-02",
+        "travel_end_date": "2027-04-04",
+        "hkd_per_person": 100
+      }
+    },
+    "candidate_8c3993bd835dd808d963d602": {
+      "rule_review": {
+        "evidence_level": "SUPPLIED_CONFIRMED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_8c3993bd835dd808d963d602",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-04-02",
+        "travel_end_date": "2027-04-04",
+        "decision": "APPLICABLE"
+      },
+      "quotes": {
+        "outbound_1": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_8c3993bd835dd808d963d602",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-04-02",
+          "travel_end_date": "2027-04-04",
+          "miles_per_person": 3000
+        },
+        "return_2": {
+          "evidence_level": "AIRLINE_QUOTED",
+          "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+          "observed_at": "2026-10-15T00:00:00Z",
+          "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+          "candidate_id": "candidate_8c3993bd835dd808d963d602",
+          "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+          "rules_as_of": "2026-10-15",
+          "rules_version": "1.1",
+          "booking_date": "2026-10-15",
+          "travel_start_date": "2027-04-02",
+          "travel_end_date": "2027-04-04",
+          "miles_per_person": 3000
+        }
+      },
+      "ticket_data": {},
+      "tax_quote": {
+        "evidence_level": "AIRLINE_QUOTED",
+        "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+        "observed_at": "2026-10-15T00:00:00Z",
+        "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+        "candidate_id": "candidate_8c3993bd835dd808d963d602",
+        "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+        "rules_as_of": "2026-10-15",
+        "rules_version": "1.1",
+        "booking_date": "2026-10-15",
+        "travel_start_date": "2027-04-02",
+        "travel_end_date": "2027-04-04",
+        "hkd_per_person": 100
+      }
+    }
+  },
+  "balances_by_account": {
+    "TEST_PAYER_A": 12000,
+    "TEST_PAYER_B": 12000
+  },
+  "funding_eligibility": [
+    {
+      "evidence_level": "SUPPLIED_CONFIRMED",
+      "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+      "observed_at": "2026-10-15T00:00:00Z",
+      "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+      "account_id": "TEST_PAYER_A",
+      "traveler_id": "traveler_a",
+      "decision": "ELIGIBLE",
+      "valid_from": "2026-01-01",
+      "valid_until": "2028-12-31"
+    },
+    {
+      "evidence_level": "SUPPLIED_CONFIRMED",
+      "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+      "observed_at": "2026-10-15T00:00:00Z",
+      "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+      "account_id": "TEST_PAYER_A",
+      "traveler_id": "traveler_b",
+      "decision": "ELIGIBLE",
+      "valid_from": "2026-01-01",
+      "valid_until": "2028-12-31"
+    },
+    {
+      "evidence_level": "SUPPLIED_CONFIRMED",
+      "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+      "observed_at": "2026-10-15T00:00:00Z",
+      "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+      "account_id": "TEST_PAYER_B",
+      "traveler_id": "traveler_a",
+      "decision": "ELIGIBLE",
+      "valid_from": "2026-01-01",
+      "valid_until": "2028-12-31"
+    },
+    {
+      "evidence_level": "SUPPLIED_CONFIRMED",
+      "source_url": "https://example.invalid/TEST_SYNTHETIC_EVIDENCE",
+      "observed_at": "2026-10-15T00:00:00Z",
+      "note": "SYNTHETIC TEST ONLY; no actual quote or confirmation",
+      "account_id": "TEST_PAYER_B",
+      "traveler_id": "traveler_b",
+      "decision": "ELIGIBLE",
+      "valid_from": "2026-01-01",
+      "valid_until": "2028-12-31"
+    }
+  ]
+}

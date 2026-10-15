@@ -1,0 +1,9 @@
+{
+  "max_states": 5000,
+  "max_allocation_states": 20000,
+  "max_windows": 30,
+  "max_candidates_per_holiday": 10,
+  "max_candidates_total": 100,
+  "max_per_view": 5,
+  "leave_budgets_by_year": {}
+}
