@@ -1,0 +1,411 @@
+{
+  "audit_date": "2026-10-15",
+  "audit_readiness_verdict": "BLOCKED",
+  "booking_horizon": {
+    "advance_days": 360,
+    "all_prior_retained_windows_within_horizon": true,
+    "arithmetic_latest_date": "2027-10-10",
+    "audit_date": "2026-10-15",
+    "inventory_checked": false,
+    "may_1_days_ahead": 198,
+    "october_1_days_ahead": 351
+  },
+  "chart_conflict_verdict": "INCONCLUSIVE",
+  "execution_head": "f1e2670fe3c30ed41fe1651b35220b552f860aff",
+  "pr3_decision": "KEEP_RULE_VERSION_REVIEW_REQUIRED",
+  "proposed_runtime_evidence": null,
+  "purpose": "PUBLIC_RULE_EVIDENCE_AUDIT_ONLY_NOT_AWARD_QUOTE_NOT_AVAILABILITY_NOT_BOOKABLE",
+  "repo_chart_rating": "SECONDARY_CORROBORATION",
+  "routes": [
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "destination": "AKL",
+      "distance_miles_research": 5687,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "distance_status": "DISTANCE_PROVISIONAL",
+      "official_award_distance_miles": null,
+      "official_current_confirmed_miles": {
+        "J": null,
+        "W": null,
+        "Y": null
+      },
+      "origin": "HKG",
+      "pricing_status": "UNKNOWN",
+      "provisional_band": "5001_7500",
+      "repo_reference_miles": {
+        "J": 91000,
+        "W": 52000,
+        "Y": 27000
+      },
+      "route_status": "UNVERIFIED",
+      "route_type": null,
+      "ticketability_status": "NOT_CHECKED"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "destination": "HKG",
+      "distance_miles_research": 5687,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "distance_status": "DISTANCE_PROVISIONAL",
+      "official_award_distance_miles": null,
+      "official_current_confirmed_miles": {
+        "J": null,
+        "W": null,
+        "Y": null
+      },
+      "origin": "AKL",
+      "pricing_status": "UNKNOWN",
+      "provisional_band": "5001_7500",
+      "repo_reference_miles": {
+        "J": 91000,
+        "W": 52000,
+        "Y": 27000
+      },
+      "route_status": "UNVERIFIED",
+      "route_type": null,
+      "ticketability_status": "NOT_CHECKED"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "destination": "ZRH",
+      "distance_miles_research": 5774,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "distance_status": "DISTANCE_PROVISIONAL",
+      "official_award_distance_miles": null,
+      "official_current_confirmed_miles": {
+        "J": null,
+        "W": null,
+        "Y": null
+      },
+      "origin": "HKG",
+      "pricing_status": "UNKNOWN",
+      "provisional_band": "5001_7500",
+      "repo_reference_miles": {
+        "J": 91000,
+        "W": 52000,
+        "Y": 27000
+      },
+      "route_status": "UNVERIFIED",
+      "route_type": null,
+      "ticketability_status": "NOT_CHECKED"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "destination": "HKG",
+      "distance_miles_research": 5774,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "distance_status": "DISTANCE_PROVISIONAL",
+      "official_award_distance_miles": null,
+      "official_current_confirmed_miles": {
+        "J": null,
+        "W": null,
+        "Y": null
+      },
+      "origin": "ZRH",
+      "pricing_status": "UNKNOWN",
+      "provisional_band": "5001_7500",
+      "repo_reference_miles": {
+        "J": 91000,
+        "W": 52000,
+        "Y": 27000
+      },
+      "route_status": "UNVERIFIED",
+      "route_type": null,
+      "ticketability_status": "NOT_CHECKED"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "destination": "CTS",
+      "distance_miles_research": 2131,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "distance_status": "DISTANCE_PROVISIONAL",
+      "official_award_distance_miles": null,
+      "official_current_confirmed_miles": {
+        "J": null,
+        "W": null,
+        "Y": null
+      },
+      "origin": "HKG",
+      "pricing_status": "UNKNOWN",
+      "provisional_band": "751_2750_type2",
+      "repo_reference_miles": {
+        "J": 33000,
+        "W": 23000,
+        "Y": 13000
+      },
+      "route_status": "UNVERIFIED",
+      "route_type": 2,
+      "ticketability_status": "NOT_CHECKED"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "destination": "HKG",
+      "distance_miles_research": 2131,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "distance_status": "DISTANCE_PROVISIONAL",
+      "official_award_distance_miles": null,
+      "official_current_confirmed_miles": {
+        "J": null,
+        "W": null,
+        "Y": null
+      },
+      "origin": "CTS",
+      "pricing_status": "UNKNOWN",
+      "provisional_band": "751_2750_type2",
+      "repo_reference_miles": {
+        "J": 33000,
+        "W": 23000,
+        "Y": 13000
+      },
+      "route_status": "UNVERIFIED",
+      "route_type": 2,
+      "ticketability_status": "NOT_CHECKED"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "destination": "SYD",
+      "distance_miles_research": 4581,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "distance_status": "DISTANCE_PROVISIONAL",
+      "official_award_distance_miles": null,
+      "official_current_confirmed_miles": {
+        "J": null,
+        "W": null,
+        "Y": null
+      },
+      "origin": "HKG",
+      "pricing_status": "UNKNOWN",
+      "provisional_band": "2751_5000",
+      "repo_reference_miles": {
+        "J": 60000,
+        "W": 39000,
+        "Y": 20000
+      },
+      "route_status": "UNVERIFIED",
+      "route_type": null,
+      "ticketability_status": "NOT_CHECKED"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "destination": "HKG",
+      "distance_miles_research": 4581,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "distance_status": "DISTANCE_PROVISIONAL",
+      "official_award_distance_miles": null,
+      "official_current_confirmed_miles": {
+        "J": null,
+        "W": null,
+        "Y": null
+      },
+      "origin": "SYD",
+      "pricing_status": "UNKNOWN",
+      "provisional_band": "2751_5000",
+      "repo_reference_miles": {
+        "J": 60000,
+        "W": 39000,
+        "Y": 20000
+      },
+      "route_status": "UNVERIFIED",
+      "route_type": null,
+      "ticketability_status": "NOT_CHECKED"
+    }
+  ],
+  "sources": [
+    {
+      "checked_at": "2026-10-15",
+      "effective_from": "2026-01-01",
+      "effective_to": null,
+      "evidence_rating": "OFFICIAL_CURRENT",
+      "id": "T1_TERMS",
+      "limitations": [
+        "No numeric Standard chart; no 2027 guarantee."
+      ],
+      "locator": "PDF page index 22 / printed 23; General pages index 19-20",
+      "page_title": "Cathay Membership Programme Terms and Conditions",
+      "supports": [
+        "Standard clauses 3/7/8; General clauses 5/6/9/16"
+      ],
+      "tier": 1,
+      "url": "https://www.cathaypacific.com/content/dam/focal-point/cx/membership/programme-update/Cathay-membership-programme-terms-and-conditions-2026-EN.pdf"
+    },
+    {
+      "checked_at": "2026-10-15",
+      "effective_from": "2026-01-01",
+      "effective_to": null,
+      "evidence_rating": "OFFICIAL_CURRENT",
+      "id": "T1_LEGAL",
+      "limitations": [
+        "Not a new price chart."
+      ],
+      "page_title": "Cathay Membership Programme Terms and Conditions",
+      "supports": [
+        "Live legal page displays same commencement date."
+      ],
+      "tier": 1,
+      "url": "https://www.cathaypacific.com/cx/en_HK/legal-and-privacy/cathay-membership-terms-and-conditions.html"
+    },
+    {
+      "access": "Browser rendered successfully; text-only fetch empty; curl returned SPA shell.",
+      "checked_at": "2026-10-15",
+      "effective_from": null,
+      "effective_to": null,
+      "evidence_rating": "OFFICIAL_CURRENT",
+      "id": "T1_REDEEM",
+      "limitations": [
+        "Browser-visible Sign in to redeem; no authenticated price query performed."
+      ],
+      "page_title": "Redeem flight awards | Cathay HK",
+      "supports": [
+        "Current mileage-search entry point."
+      ],
+      "tier": 1,
+      "url": "https://www.cathaypacific.com/cx/en_HK/book-a-trip/redeem-flights/redeem-flight-awards.html"
+    },
+    {
+      "access": "Browser rendered; no full numeric Standard table in inspected content.",
+      "checked_at": "2026-10-15",
+      "effective_from": null,
+      "effective_to": null,
+      "evidence_rating": "OFFICIAL_CURRENT",
+      "id": "T1_CHART",
+      "limitations": [
+        "Visible upgrade table is not Standard Award pricing."
+      ],
+      "page_title": "Flight awards charts | Cathay HK",
+      "supports": [
+        "Redirects Standard pricing to flight search."
+      ],
+      "tier": 1,
+      "url": "https://flights.cathaypacific.com/en_HK/redeem-flights/flight-award-chart.html"
+    },
+    {
+      "checked_at": "2026-10-15",
+      "document_date": "2026-03-11",
+      "effective_from": "2025-04-15",
+      "effective_to": null,
+      "evidence_rating": "OFFICIAL_DATED",
+      "id": "T1_ANNUAL",
+      "limitations": [
+        "Not full chart; reporting year does not establish 2026/2027 rates."
+      ],
+      "locator": "printed page 17 / PDF index 18",
+      "page_title": "Annual Report 2025",
+      "supports": [
+        "Confirms Standard redemption update effective 2025-04-15."
+      ],
+      "tier": 1,
+      "url": "https://www.cathaypacific.com/content/dam/cx/about-us/investor-relations/interim-annual-reports/en/2025_cx_annual_report_en.pdf"
+    },
+    {
+      "checked_at": "2026-10-15",
+      "effective_from": "2025-08-20",
+      "effective_to": null,
+      "evidence_rating": "OFFICIAL_DATED",
+      "id": "T1_EARNING",
+      "limitations": [
+        "Not redemption-price evidence; not used to classify CTS."
+      ],
+      "page_title": "Changes to Status Points and Asia Miles earnings on flights",
+      "supports": [
+        "Earning and Status Points adjustments."
+      ],
+      "tier": 1,
+      "url": "https://www.cathaypacific.com/cx/en_CA/membership/news-and-updates/Changes-to-your-Status-Points-and-Asia-Miles-earnings-on-flights.html"
+    },
+    {
+      "campaign_booking_deadline": "2026-08-24",
+      "campaign_departure_end": "2026-10-31",
+      "checked_at": "2026-10-15",
+      "currency_rating": "STALE_OR_UNCERTAIN",
+      "effective_from": null,
+      "effective_to": null,
+      "evidence_rating": "OFFICIAL_MARKETING",
+      "id": "T2_JAPAN",
+      "limitations": [
+        "Campaign ended; no chart effective/update date or 2027 quote; stale-price risk."
+      ],
+      "page_title": "Summer Bonus Miles Campaign",
+      "supports": [
+        "Tokyo-origin illustrative award table."
+      ],
+      "tier": 2,
+      "url": "https://flights.cathaypacific.com/en_JP/offers/bonus-miles2.html"
+    },
+    {
+      "checked_at": "2026-10-15",
+      "displayed_review_date": "2026-09-22",
+      "effective_from": null,
+      "effective_to": null,
+      "evidence_rating": "SECONDARY_CORROBORATION",
+      "id": "T3_POINTSPLUG",
+      "limitations": [
+        "Not official or independently authenticated quote."
+      ],
+      "page_title": "Cathay Pacific Asia Miles award chart and sweet spots",
+      "reported_effective_from": "2026-05-01",
+      "supports": [
+        "Reconstructed six-band values match repository."
+      ],
+      "tier": 3,
+      "url": "https://pointsplug.com/award-charts/cathay-asiamiles"
+    },
+    {
+      "checked_at": "2026-10-15",
+      "displayed_publication_date": "2026-05-29",
+      "effective_from": null,
+      "effective_to": null,
+      "evidence_rating": "SECONDARY_CORROBORATION",
+      "id": "T3_AFF",
+      "limitations": [
+        "Secondary reconstruction only."
+      ],
+      "page_title": "Cathay’s New Asia Miles Award Charts in 2026",
+      "reported_effective_from": "2026-05-01",
+      "supports": [
+        "Unofficial post-May-2026 table matches repository."
+      ],
+      "tier": 3,
+      "url": "https://www.australianfrequentflyer.com.au/cathay-pacific-award-charts/"
+    },
+    {
+      "checked_at": "2026-10-15",
+      "displayed_dates": [
+        "2026-03-25",
+        "2026-09-15"
+      ],
+      "effective_from": null,
+      "effective_to": null,
+      "evidence_rating": "SECONDARY_CORROBORATION",
+      "id": "T3_FLYASIA",
+      "limitations": [
+        "Cannot override official rules; not official mileage distances."
+      ],
+      "page_title": "亞洲萬里通標準獎勵 | Asia Miles 兌換國泰航空的規則",
+      "reported_effective_from": "2026-05-01",
+      "supports": [
+        "Reported May-2026 revision; manually reconstructed table."
+      ],
+      "tier": 3,
+      "url": "https://www.flyasia.co/2026/asiamiles-cathay-chart/"
+    },
+    {
+      "checked_at": "2026-10-15",
+      "displayed_publication_date": "2026-03-26",
+      "effective_from": null,
+      "effective_to": null,
+      "evidence_rating": "SECONDARY_CORROBORATION",
+      "id": "T3_MILELION",
+      "limitations": [
+        "March prediction differs from later reconstructions; destination link now shows current UI, not archived announcement."
+      ],
+      "page_title": "Cathay Pacific will devalue Asia Miles from May 2026",
+      "reported_effective_from": "2026-05-01",
+      "supports": [
+        "Contemporaneous discovery link to official redemption page."
+      ],
+      "tier": 3,
+      "url": "https://milelion.com/2026/03/26/cathay-pacific-will-devalue-asia-miles-from-may-2026/"
+    }
+  ],
+  "verified_for_2027": false
+}
