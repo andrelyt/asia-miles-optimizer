@@ -111,3 +111,12 @@ remain null; mixed estimates/partials cannot dominate full quoted costs. Snapsho
 VERIFIED, quoted labels and source syntax are not independent verification. Synthetic
 TEST examples/attestations must never become personal facts or live quotes. D2, live
 award/fare queries and booking remain deferred.
+
+PR4 caps candidates separately for each concrete window_id through
+max_candidates_per_window, then enforces max_candidates_total by window rotation.
+Never collapse all pre/post-holiday windows into one family-wide candidate allowance.
+Inspect both per-window cap diagnostics and search_truncated; a tight global/window
+limit can still omit opportunities. The old PR4 max_candidates_per_holiday key is
+rejected with a migration message. Multiple windows of one holiday remain alternatives,
+not multiple trips. Funding eligibility remains NOT_CHECKED independently, even when
+supplied evidence coverage is SUPPLIED_CONFIRMED; do not upgrade it to verification.

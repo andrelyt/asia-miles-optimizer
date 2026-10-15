@@ -207,10 +207,36 @@ the fictional 24,000-mile combined account snapshot.
 ## Bounds and determinism
 
 config/portfolio_config.json has max_states=5000, max_allocation_states=20000,
-max_windows=30, max_candidates_per_holiday=10, max_candidates_total=100 and
+max_windows=30, max_candidates_per_window=10, max_candidates_total=100 and
 max_per_view=5. The sample explicitly supplies smaller/different bounds. These
 are search limits, never award rules. The old portfolio placeholders inside the
 PR1/PR2 search config do not replace this separate PR4 contract.
+
+The candidate unit is a **concrete window_id**, not a holiday family or anchor.
+Every retained selected window receives up to max_candidates_per_window candidates
+before the global max_candidates_total cap. Neither the CLI nor the direct
+portfolio API applies a second family-wide cap. The global cap round-robins window
+IDs: when it has at least one slot per eligible window, no such window loses all
+candidates merely because another window's candidate IDs sort earlier. If global
+capacity is smaller than the number of windows, some windows necessarily disappear;
+search_truncated and per-window counts disclose that loss. max_windows remains a
+separate upstream limit; no candidate guarantee applies to unselected windows.
+
+The former PR4 setting max_candidates_per_holiday is rejected with a migration
+message; rename it to max_candidates_per_window. There is no implicit family cap
+or compatibility alias. Existing unused portfolio placeholders in the unchanged
+PR1/PR2 search_config.json are not PR4 controls. The synthetic example removes that
+unused search-config section and uses the explicit PR4 field only.
+
+The CLI reports orchestration_candidate_counts_by_window and the direct optimizer
+reports candidate_counts_by_window, each with before_window_cap, after_window_cap
+and after_global_cap. The latter counts viable supplied results after PR3/calendar
+revalidation, which runs linearly over the supplied list before retention caps.
+Global portfolio enumeration still receives at most max_candidates_total trips.
+Preserving multiple windows does not permit booking them as multiple trips for
+the same holiday: the existing family/anchor exclusion remains in force. It keeps
+alternatives for annual leave/comfort tradeoffs, including a later zero-leave
+window when an earlier window would exhaust another holiday's leave allowance.
 
 Portfolio states include attempted invalid combinations; funding states include
 reserved/generated branches and share one cap across all portfolios/eligibility

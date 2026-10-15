@@ -19,6 +19,8 @@ VIEWS = ('Miles Saver', 'Comfort First', 'Balanced', 'Leave Efficient')
 def portfolio_config(supplied=None):
     config = json.loads(CONFIG_PATH.read_text())
     if supplied is not None:
+        if isinstance(supplied, dict) and 'max_candidates_per_holiday' in supplied:
+            raise ValidationError('use max_candidates_per_window; the former family-wide max_candidates_per_holiday is no longer supported')
         if not isinstance(supplied, dict) or set(supplied) - set(config):
             raise ValidationError('unknown/invalid PR4 configuration')
         config.update(copy.deepcopy(supplied))
@@ -104,6 +106,8 @@ def _prepare(row, request, calendar, rules, budgets):
     blockers = []
     leave, years, dates = None, [], None
     if window:
+        if not isinstance(window.get('window_id'), str) or not window['window_id']:
+            return None, 'WINDOW_ID_REQUIRED'
         try:
             start, end = parse_date(window['start_date']), parse_date(window['end_date'])
             years = [str(y) for y in range(start.year, end.year + 1)]
@@ -146,6 +150,7 @@ def _prepare(row, request, calendar, rules, budgets):
         blockers.append('COMPLETE_MILEAGE_REQUIRED')
     tax = priced['taxes_hkd_per_person']
     return {'candidate_id': c['candidate_id'], 'priced': priced, 'candidate': c, 'dates': dates,
+            'window_key': window['window_id'] if window else 'UNRESOLVED_DATES',
             'holiday_key': (window['holiday_type'], window['holiday_anchor_date']) if window else ('UNRESOLVED_DATES',),
             'leave': leave, 'years': years, 'blockers': blockers, 'known_miles': known,
             'total_miles': known if complete_miles else None,
@@ -353,25 +358,28 @@ def optimize_portfolios(priced_candidates, request, calendar, rules, balances_by
             unique[tid] = row
     truncated = False
     ordered = sorted(unique.values(), key=lambda r: str(r.get('candidate_id')) if isinstance(r, dict) else '')
-    if len(ordered) > config['max_candidates_total']:
-        truncated = True
-        ordered = diverse_limit(ordered, config['max_candidates_total'],
-            lambda r: ((r.get('candidate') or {}).get('holiday_window') or {}).get('holiday_type'),
-            lambda r: str(r.get('candidate_id')))
     trips = []
     for row in ordered:
         trip, reason = _prepare(row, request, calendar, rules, budgets)
         if reason: rejected[reason] += 1
         else: trips.append(trip)
-    by_holiday = {}
-    for t in trips: by_holiday.setdefault(t['holiday_key'], []).append(t)
+    by_window = {}
+    for t in trips: by_window.setdefault(t['window_key'], []).append(t)
     trips = []
-    for key in sorted(by_holiday):
-        group = by_holiday[key]
-        selected = diverse_limit(group, config['max_candidates_per_holiday'],
-                                 lambda t: (t['dates'], t['priced']['pricing_status'], tuple(l['cabin'] for l in t['candidate']['legs'])),
+    window_counts = {}
+    for key in sorted(by_window):
+        group = by_window[key]
+        selected = diverse_limit(group, config['max_candidates_per_window'],
+                                 lambda t: (t['priced']['pricing_status'], tuple(l['cabin'] for l in t['candidate']['legs'])),
                                  lambda t: (t['total_miles'] is None, t['candidate_id']))
         truncated |= len(selected) < len(group); trips.extend(selected)
+        window_counts[key] = {'before_window_cap': len(group), 'after_window_cap': len(selected)}
+    if len(trips) > config['max_candidates_total']:
+        truncated = True
+        trips = diverse_limit(trips, config['max_candidates_total'], lambda t: t['window_key'],
+                              lambda t: (t['total_miles'] is None, t['candidate_id']))
+    for key in window_counts:
+        window_counts[key]['after_global_cap'] = sum(t['window_key'] == key for t in trips)
     trips.sort(key=lambda t: t['candidate_id'])
     counter = {'visited': 0, 'truncated': False}; visited = 0; rows = []
     frontier = [()]
@@ -396,6 +404,7 @@ def optimize_portfolios(priced_candidates, request, calendar, rules, balances_by
     return {**fronts, 'views': recommendation_views(fronts, config['max_per_view']),
             'rejected': dict(sorted(rejected.items())), 'search_truncated': truncated or counter['truncated'],
             'diagnostics': {'portfolio_states_visited': visited, 'allocation_states_visited': counter['visited'],
+                            'candidate_counts_by_window': window_counts,
                             'config': config, 'leave_budgets_by_year': budgets, 'trip_candidates_retained': len(trips)},
             'trips': [t['priced'] for t in trips],
             'balances_by_account': dict(sorted(balances.items())) if balances is not None else None,

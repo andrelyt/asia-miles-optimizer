@@ -181,3 +181,10 @@ Missing taxes remain null and cannot enable full-cost ranking. See
 [PR4 inputs, budgets, bounds and evidence](docs/PR4_PLANNER.md) and the acceptance
 [specification](docs/PR4_PORTFOLIO_SPEC.md). The original kernel, PR1–PR3 rules,
 rounding and schemas remain unchanged; D2, live search and booking remain deferred.
+
+PR4 candidate retention is capped **per concrete holiday window_id**, using
+`max_candidates_per_window`, before the global `max_candidates_total` limit.
+Both CLI and direct optimizer preserve window alternatives; global capacity is
+shared by window rotation, with per-window counts and `search_truncated` disclosed.
+The obsolete PR4 `max_candidates_per_holiday` setting must be renamed; it is not
+silently interpreted as a family cap. Bounds do not guarantee global optimality.

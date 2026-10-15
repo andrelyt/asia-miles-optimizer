@@ -60,18 +60,21 @@ def plan(supplied, base_dir='.'):
                                  for k in ('beam_truncated', 'path_limit_reached'))
         for c in found['candidates']: candidates[c['candidate_id']] = c
     groups = {}
-    for c in candidates.values(): groups.setdefault(c['holiday_window']['holiday_type'], []).append(c)
+    for c in candidates.values(): groups.setdefault(c['holiday_window']['window_id'], []).append(c)
     selected = []
-    for family in sorted(groups):
-        group = groups[family]
-        kept = diverse_limit(group, config['max_candidates_per_holiday'],
-                             lambda c: (bool(evidence.get(c['candidate_id'])), c['holiday_window']['window_id'],
-                                        tuple(l['cabin'] for l in c['legs']), c['ticketing_mode']),
+    window_counts = {}
+    for window_id in sorted(groups):
+        group = groups[window_id]
+        kept = diverse_limit(group, config['max_candidates_per_window'],
+                             lambda c: (bool(evidence.get(c['candidate_id'])), tuple(l['cabin'] for l in c['legs']), c['ticketing_mode']),
                              lambda c: (not bool(evidence.get(c['candidate_id'])), c['candidate_id']))
         truncated |= len(kept) < len(group); selected.extend(kept)
-    kept = diverse_limit(selected, config['max_candidates_total'], lambda c: c['holiday_window']['holiday_type'],
+        window_counts[window_id] = {'before_window_cap': len(group), 'after_window_cap': len(kept)}
+    kept = diverse_limit(selected, config['max_candidates_total'], lambda c: c['holiday_window']['window_id'],
                          lambda c: (not bool(evidence.get(c['candidate_id'])), c['candidate_id']))
     truncated |= len(kept) < len(selected)
+    for window_id in window_counts:
+        window_counts[window_id]['after_global_cap'] = sum(c['holiday_window']['window_id'] == window_id for c in kept)
     # Do not run PR3's exponential per-trip account enumeration: PR4 allocates all
     # trips globally under its explicit state limit, using PR3 ticket requirements.
     priced = [price_candidate(c, request, rules, evidence.get(c['candidate_id'])) for c in sorted(kept, key=lambda c: c['candidate_id'])]
@@ -83,6 +86,7 @@ def plan(supplied, base_dir='.'):
         'request_digest': stable_id('request_', request), 'route_digest': stable_id('routes_', raw_graph)}
     result['diagnostics']['holiday_windows'] = windows['diagnostics']
     result['diagnostics']['route_search'] = route_diagnostics
+    result['diagnostics']['orchestration_candidate_counts_by_window'] = window_counts
     result['diagnostics']['windows_searched'] = len(selected_windows)
     result['diagnostics']['unused_candidate_evidence'] = sorted(set(evidence) - {c['candidate_id'] for c in kept})
     return result

@@ -140,10 +140,6 @@
       "preserve_strategy_diversity": true,
       "longhaul_distance_threshold_miles": 4000
     },
-    "portfolio": {
-      "max_candidates_per_holiday": 10,
-      "max_portfolios_before_pruning": 5000
-    },
     "notes": [
       "These are search/performance defaults, not Asia Miles policy rules.",
       "Changing these values must not change award pricing policy.",
@@ -153,7 +149,7 @@
   "portfolio_config": {
     "max_states": 2000,
     "max_allocation_states": 50000,
-    "max_candidates_per_holiday": 4,
+    "max_candidates_per_window": 4,
     "max_per_view": 3
   },
   "evidence_by_candidate": {
