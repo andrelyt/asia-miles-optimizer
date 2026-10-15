@@ -1,0 +1,32 @@
+{
+  "evidence_level": "THIRD_PARTY_OBSERVED",
+  "observed_on": "2026-10-15",
+  "source_url": "https://www.flyasia.co/miles/asia-miles/calculator/",
+  "purpose": "THIRD_PARTY_COMPARISON_ONLY_NOT_ROUTE_EVIDENCE",
+  "note": "Historical report inputs use displayed rounded distances. No live verification or official quote. Replayed on synthetic TEST airport chains, not real-service fixtures.",
+  "cases": [
+    {"id":"MUSE_X1","report":"docs/research/FLYASIA_RESEARCH_MUSE.md#mixed-cabin","distances":[498,1355],"cabins":["Y","J"],"route_type":2,"observed_miles":27600,"v1_miles":27600},
+    {"id":"MUSE_X4","report":"docs/research/FLYASIA_RESEARCH_MUSE.md#mixed-cabin","distances":[498,1355],"cabins":["J","Y"],"route_type":2,"observed_miles":18300,"v1_miles":18300},
+    {"id":"MUSE_X3","report":"docs/research/FLYASIA_RESEARCH_MUSE.md#mixed-cabin","distances":[498,1355],"cabins":["W","J"],"route_type":2,"observed_miles":30300,"v1_miles":30300},
+    {"id":"GROK_T0","report":"docs/research/FLYASIA_RESEARCH_GROK.md","distances":[498,1801],"cabins":["J","Y"],"route_type":2,"observed_miles":17300,"v1_miles":17300},
+    {"id":"GROK_T3","report":"docs/research/FLYASIA_RESEARCH_GROK.md","distances":[498,1801],"cabins":["Y","W"],"route_type":2,"observed_miles":20800,"v1_miles":20800},
+    {"id":"GROK_T4","report":"docs/research/FLYASIA_RESEARCH_GROK.md","distances":[498,1801],"cabins":["W","J"],"route_type":2,"observed_miles":30800,"v1_miles":30800},
+    {"id":"GROK_T5","report":"docs/research/FLYASIA_RESEARCH_GROK.md","distances":[498,1801],"cabins":["W","Y"],"route_type":2,"observed_miles":15100,"v1_miles":15100},
+    {"id":"GROK_T17","report":"docs/research/FLYASIA_RESEARCH_GROK.md","distances":[711,730],"cabins":["J","Y"],"route_type":1,"observed_miles":17800,"v1_miles":17800}
+  ],
+  "synthetic_boundary": {
+    "id":"TEST_INFERRED_ROUNDING_BOUNDARY",
+    "report":"docs/research/FLYASIA_RESEARCH_MUSE.md#relation-to-this-repos-standard_mixed",
+    "evidence_level":"THIRD_PARTY_OBSERVED",
+    "observation_kind":"REPORTED_IMPLEMENTATION_INFERENCE_NOT_UI_OBSERVED",
+    "distances":[505.5444444444444,494.4555555555556],"cabins":["J","Y"],"route_type":1,
+    "v1_miles":18000,"reported_implementation_implied_miles":18100,
+    "note":"Synthetic boundary probes the reported nearest-mile-before-hundred behavior. 18,100 is inferred, not an observed airline/tool quote; mismatch requires review, never kernel mutation."
+  },
+  "partner_toggle": {
+    "id":"MUSE_X9B","evidence_level":"THIRD_PARTY_OBSERVED",
+    "report":"docs/research/FLYASIA_RESEARCH_MUSE.md#mixed-cabin",
+    "distances":[498,1355],"cabins":["Y","J"],"observed_partner_miles":31700,
+    "expected_adapter_status":"NEEDS_AIRLINE_QUOTE"
+  }
+}
