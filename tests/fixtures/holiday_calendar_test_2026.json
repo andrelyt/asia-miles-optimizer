@@ -1,0 +1,39 @@
+{
+  "calendar_id": "TEST_SYNTHETIC_2026_NOT_REAL_HOLIDAYS",
+  "jurisdiction": "TEST",
+  "year": 2026,
+  "source_status": "OFFICIAL",
+  "source_url": "https://example.invalid/synthetic-test-only",
+  "observed_at": "2026-10-15T00:00:00Z",
+  "days": [
+    {
+      "date": "2026-01-01",
+      "day_type": "PUBLIC_HOLIDAY",
+      "holiday_name": "new_year"
+    },
+    {
+      "date": "2026-01-03",
+      "day_type": "MAKEUP_WORKDAY"
+    },
+    {
+      "date": "2026-04-03",
+      "day_type": "PUBLIC_HOLIDAY",
+      "holiday_name": "qingming"
+    },
+    {
+      "date": "2026-05-01",
+      "day_type": "PUBLIC_HOLIDAY",
+      "holiday_name": "labor_day"
+    },
+    {
+      "date": "2026-06-19",
+      "day_type": "PUBLIC_HOLIDAY",
+      "holiday_name": "dragon_boat"
+    },
+    {
+      "date": "2026-10-01",
+      "day_type": "PUBLIC_HOLIDAY",
+      "holiday_name": "national_day"
+    }
+  ]
+}

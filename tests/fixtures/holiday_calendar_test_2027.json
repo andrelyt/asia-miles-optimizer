@@ -1,0 +1,15 @@
+{
+  "calendar_id": "TEST_SYNTHETIC_2027_NOT_REAL_HOLIDAYS",
+  "jurisdiction": "TEST",
+  "year": 2027,
+  "source_status": "ESTIMATED",
+  "source_url": "https://example.invalid/synthetic-test-only",
+  "observed_at": "2026-10-15T00:00:00Z",
+  "days": [
+    {
+      "date": "2027-01-01",
+      "day_type": "PUBLIC_HOLIDAY",
+      "holiday_name": "new_year"
+    }
+  ]
+}

@@ -23,3 +23,12 @@ V2 remains out of scope: live availability, automatic geographic graph search, e
 When asked to implement or extend V2, read `AGENTS.md`, `docs/V2_DESIGN.md`, `docs/V2_IMPLEMENTATION_PLAN.md`, the schemas and search config before coding. Treat those files as the current V2 Alpha design contract.
 
 V2 discovery must feed candidates through the V1.1 deterministic kernel rather than reimplement pricing policy. Keep holiday status, route evidence, award-seat evidence and ticketability independent. An `ESTIMATED` holiday, `UNVERIFIED` route, unchecked award seat or theoretical multi-trip structure must never be silently upgraded by recommendation prose.
+
+PR1 Holiday/Leave interfaces are documented in `docs/PR1_HOLIDAY_LEAVE.md`.
+Use `generate_windows()` with schema-conforming requests and supplied calendar
+snapshots; inspect diagnostics and holiday_uncertainty. Missing adjacent calendar
+years and holiday anchors are explicit data gaps. Null destination/transit day
+estimates must stay unknown until flights are supplied. Independent budgets are
+checked per window, not as an annual portfolio. Synthetic TEST calendars must
+never be described as actual official holiday announcements. PR2–PR4 remain
+unimplemented after PR1.
