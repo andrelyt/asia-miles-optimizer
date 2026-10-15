@@ -1,0 +1,126 @@
+{
+  "snapshot_id": "HKG_FOUR_DEST_RESEARCH_20261015",
+  "observed_at": "2026-10-15T00:00:00Z",
+  "edges": [
+    {
+      "origin": "HKG",
+      "destination": "AKL",
+      "operating_carrier": "CX",
+      "distance_miles": 5687,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "cabins": [
+        "Y",
+        "W",
+        "J"
+      ],
+      "route_status": "UNVERIFIED",
+      "source_url": "https://flights.cathaypacific.com/destinations/en_HK/flights-from-hong-kong-to-auckland",
+      "observed_at": "2026-10-15T00:00:00Z"
+    },
+    {
+      "origin": "AKL",
+      "destination": "HKG",
+      "operating_carrier": "CX",
+      "distance_miles": 5687,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "cabins": [
+        "Y",
+        "W",
+        "J"
+      ],
+      "route_status": "UNVERIFIED",
+      "source_url": "https://flights.cathaypacific.com/destinations/en_HK/flights-from-new-zealand-to-hong-kong-sar",
+      "observed_at": "2026-10-15T00:00:00Z"
+    },
+    {
+      "origin": "HKG",
+      "destination": "ZRH",
+      "operating_carrier": "CX",
+      "distance_miles": 5774,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "cabins": [
+        "Y",
+        "W",
+        "J"
+      ],
+      "route_status": "UNVERIFIED",
+      "source_url": "https://flights.cathaypacific.com/destinations/en_HK/flights-from-hong-kong-sar-to-zurich",
+      "observed_at": "2026-10-15T00:00:00Z"
+    },
+    {
+      "origin": "ZRH",
+      "destination": "HKG",
+      "operating_carrier": "CX",
+      "distance_miles": 5774,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "cabins": [
+        "Y",
+        "W",
+        "J"
+      ],
+      "route_status": "UNVERIFIED",
+      "source_url": "https://flights.cathaypacific.com/destinations/en_CH/flights-from-zurich-to-hong-kong-sar",
+      "observed_at": "2026-10-15T00:00:00Z"
+    },
+    {
+      "origin": "HKG",
+      "destination": "CTS",
+      "operating_carrier": "CX",
+      "distance_miles": 2131,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "cabins": [
+        "Y",
+        "W",
+        "J"
+      ],
+      "route_status": "UNVERIFIED",
+      "source_url": "https://flights.cathaypacific.com/destinations/en_HK/flights-from-hong-kong-to-sapporo",
+      "observed_at": "2026-10-15T00:00:00Z"
+    },
+    {
+      "origin": "CTS",
+      "destination": "HKG",
+      "operating_carrier": "CX",
+      "distance_miles": 2131,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "cabins": [
+        "Y",
+        "W",
+        "J"
+      ],
+      "route_status": "UNVERIFIED",
+      "source_url": "https://flights.cathaypacific.com/destinations/en_HK/flights-from-sapporo",
+      "observed_at": "2026-10-15T00:00:00Z"
+    },
+    {
+      "origin": "HKG",
+      "destination": "SYD",
+      "operating_carrier": "CX",
+      "distance_miles": 4581,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "cabins": [
+        "Y",
+        "W",
+        "J"
+      ],
+      "route_status": "UNVERIFIED",
+      "source_url": "https://flights.cathaypacific.com/destinations/en_HK/flights-from-hong-kong-to-sydney",
+      "observed_at": "2026-10-15T00:00:00Z"
+    },
+    {
+      "origin": "SYD",
+      "destination": "HKG",
+      "operating_carrier": "CX",
+      "distance_miles": 4581,
+      "distance_source": "APPROXIMATE_GREAT_CIRCLE_RESEARCH_VALUE_NOT_CATHAY_TICKETED_MILEAGE",
+      "cabins": [
+        "Y",
+        "W",
+        "J"
+      ],
+      "route_status": "UNVERIFIED",
+      "source_url": "https://flights.cathaypacific.com/destinations/en_HK/flights-from-sydney",
+      "observed_at": "2026-10-15T00:00:00Z"
+    }
+  ]
+}
