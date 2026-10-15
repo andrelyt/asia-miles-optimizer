@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "holiday_calendar.schema.json",
+  "title": "Holiday Calendar Snapshot",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "calendar_id",
+    "jurisdiction",
+    "year",
+    "source_status",
+    "days"
+  ],
+  "properties": {
+    "calendar_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "jurisdiction": {
+      "type": "string",
+      "minLength": 1
+    },
+    "year": {
+      "type": "integer"
+    },
+    "source_status": {
+      "enum": [
+        "OFFICIAL",
+        "ESTIMATED"
+      ]
+    },
+    "source_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "observed_at": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
+    },
+    "days": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "date",
+          "day_type"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "day_type": {
+            "enum": [
+              "PUBLIC_HOLIDAY",
+              "WEEKEND",
+              "MAKEUP_WORKDAY",
+              "WORKDAY",
+              "PERSONAL_DAY_OFF",
+              "BLOCKED_DAY"
+            ]
+          },
+          "holiday_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "source_status": {
+            "enum": [
+              "OFFICIAL",
+              "ESTIMATED"
+            ]
+          },
+          "source_url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
