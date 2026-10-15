@@ -80,7 +80,7 @@ def diverse_limit(rows, limit, key, order):
     return result
 
 
-def _prepare(row, request, calendar, rules, budgets):
+def _prepare(row, request, calendar, rules, budgets, reference_chart=None):
     if not isinstance(row, dict) or not isinstance(row.get('candidate'), dict):
         return None, 'INVALID_PR3_RESULT'
     if row.get('status') == 'UNSUPPORTED' or any(str(d).startswith('INVALID_OR_MISSING_INPUT') for d in row.get('diagnostics', [])):
@@ -90,7 +90,7 @@ def _prepare(row, request, calendar, rules, budgets):
     c = row['candidate']
     # Replay supplied evidence through PR3; cached totals and per-trip payer choices
     # are not trusted annual constraints. No account enumeration inside PR3 here.
-    priced = price_candidate(c, request, rules, row.get('input_evidence'))
+    priced = price_candidate(c, request, rules, row.get('input_evidence'), reference_chart=reference_chart)
     if priced['status'] == 'UNSUPPORTED' or 'candidate' not in priced:
         return None, 'INVALID_OR_UNSUPPORTED_PR3_RESULT'
     if any('INVALID_STANDARD_QUOTE_MILES' in t.get('diagnostics', []) for t in priced['tickets']):
@@ -148,12 +148,19 @@ def _prepare(row, request, calendar, rules, budgets):
     known = sum(t['miles_per_person'] for t in tickets if t['miles_per_person'] is not None) * len(c['traveler_ids'])
     if not complete_miles:
         blockers.append('COMPLETE_MILEAGE_REQUIRED')
+    estimate = priced.get('estimate')
+    if estimate:
+        # Separate planning tickets; strict quote fields remain untouched.
+        tickets = estimate['tickets']
+        complete_miles = True
+        known = estimate['group_miles']
     tax = priced['taxes_hkd_per_person']
     return {'candidate_id': c['candidate_id'], 'priced': priced, 'candidate': c, 'dates': dates,
             'window_key': window['window_id'] if window else 'UNRESOLVED_DATES',
             'holiday_key': (window['holiday_type'], window['holiday_anchor_date']) if window else ('UNRESOLVED_DATES',),
             'leave': leave, 'years': years, 'blockers': blockers, 'known_miles': known,
             'total_miles': known if complete_miles else None,
+            'planning_tickets': tickets, 'reference_estimate': estimate,
             'taxes_hkd': tax * len(c['traveler_ids']) if tax is not None else None}, None
 
 
@@ -178,7 +185,7 @@ def _portfolio(trips, request, budgets, balances, eligibility, counter, config):
     jobs = []
     for trip in trips:
         review = trip['priced'].get('rule_review') or {}
-        for ticket in trip['priced']['tickets']:
+        for ticket in trip['planning_tickets']:
             if ticket['miles_per_person'] is None:
                 continue
             for tid in traveler_ids:
@@ -223,13 +230,22 @@ def _portfolio(trips, request, budgets, balances, eligibility, counter, config):
     taxes_known = all(t['taxes_hkd'] is not None for t in trips)
     prices = {t['priced']['pricing_status'] for t in trips}
     price_status = 'UNKNOWN' if not all_known or 'UNKNOWN' in prices else 'RULE_ESTIMATED' if 'RULE_ESTIMATED' in prices else 'QUOTED'
+    reference_trips = [t for t in trips if t['reference_estimate']]
+    reference_only = len(reference_trips) == len(trips)
     group = 'CONDITIONAL' if missing else 'CONFIRMED_BUDGET_FEASIBLE'
-    confirmed_allocation = allocation if all_known and allocation_status == 'FEASIBLE' else None
-    spend = {a: sum(j['miles'] for j in confirmed_allocation if j['payer'] == a) for a in sorted(balances)} if confirmed_allocation is not None else None
+    if price_status == 'RULE_ESTIMATED' and group == 'CONFIRMED_BUDGET_FEASIBLE':
+        group = 'ESTIMATED_BUDGET_FEASIBLE'
+        missing.add('ESTIMATED_PRICING_NOT_AIRLINE_QUOTE')
+    if reference_trips:
+        missing.add('REFERENCE_ESTIMATE_NOT_AIRLINE_QUOTE')
+        group = ('ESTIMATED_BUDGET_FEASIBLE' if all_known and known_balances and
+                 allocation_status == 'FEASIBLE' and complete_dates else 'CONDITIONAL')
+    resolved_allocation = allocation if all_known and allocation_status == 'FEASIBLE' else None
+    spend = {a: sum(j['miles'] for j in resolved_allocation if j['payer'] == a) for a in sorted(balances)} if resolved_allocation is not None else None
     annual_spend = None
-    if confirmed_allocation is not None:
+    if resolved_allocation is not None:
         annual_spend = {a: {} for a in sorted(balances)}
-        for j in confirmed_allocation:
+        for j in resolved_allocation:
             year = j['booking_year']
             annual_spend[j['payer']][year] = annual_spend[j['payer']].get(year, 0) + j['miles']
     identities = [(t['candidate_id'], t['priced'].get('evaluation_id')) for t in trips]
@@ -238,7 +254,7 @@ def _portfolio(trips, request, budgets, balances, eligibility, counter, config):
     evidence = {channel: sorted({t['priced'][channel] for t in trips}, key=str)
                 for channel in ('holiday_status', 'route_status', 'pricing_status', 'award_seat_status', 'ticketability_status')}
     destination = [t['candidate'].get('holiday_window', {}).get('estimated_destination_full_days') for t in trips if t['dates']]
-    return {'portfolio_id': pid, 'candidate_ids': sorted(t['candidate_id'] for t in trips), 'status': group,
+    result = {'portfolio_id': pid, 'candidate_ids': sorted(t['candidate_id'] for t in trips), 'status': group,
             'trip_count': len(trips), 'holiday_families': sorted({t['holiday_key'][0] for t in trips}),
             'travel_calendar_days': days, 'estimated_destination_full_days': sum(destination) if len(destination) == len(trips) and all(v is not None for v in destination) else None,
             'leave_dates_by_traveler_by_year': leave_dates, 'leave_days_by_traveler_by_year': leave_counts,
@@ -251,7 +267,7 @@ def _portfolio(trips, request, budgets, balances, eligibility, counter, config):
             'known_taxes_hkd_subtotal': sum(t['taxes_hkd'] for t in trips if t['taxes_hkd'] is not None),
             'account_spend_miles': spend, 'account_spend_by_booking_year': annual_spend,
             'remaining_miles_by_account': {a: balances[a] - spend[a] for a in spend} if spend is not None else None,
-            'account_allocation': confirmed_allocation, 'account_allocation_status': allocation_status,
+            'account_allocation': resolved_allocation, 'account_allocation_status': allocation_status,
             'known_ticket_allocation': allocation, 'funding_eligibility_status': 'NOT_CHECKED',
             'funding_eligibility_evidence_status': 'SUPPLIED_CONFIRMED' if eligibility_ready else 'UNKNOWN',
             'pricing_status': price_status, 'evidence': evidence,
@@ -260,7 +276,37 @@ def _portfolio(trips, request, budgets, balances, eligibility, counter, config):
             'missing_data': sorted(missing | ({'TAX_QUOTE_REQUIRED'} if not taxes_known else set())), 'longhaul_cabin_mean_rank': cabin_mean, 'longhaul_cabin_histogram': histogram,
             'flight_sectors': sectors, 'transfers': sectors - 2 * len(trips), 'reposition_legs': 0,
             'complete_price_comparison_eligible': not missing and all(t['priced']['complete_price_comparison_eligible'] for t in trips),
-            'schedule_status': 'NOT_CHECKED_WINDOW_ENDPOINTS_ARE_PLANNING_ASSUMPTIONS'}, None
+            'schedule_status': 'NOT_CHECKED_WINDOW_ENDPOINTS_ARE_PLANNING_ASSUMPTIONS'}
+    if reference_trips:
+        # Never put estimated annual spending in the existing quote/confirmed fields.
+        result['estimate'] = {
+            'total_miles': result['total_miles'],
+            'miles_by_traveler': {tid: sum(t['total_miles'] // len(traveler_ids) for t in trips)
+                                  for tid in traveler_ids} if all_known else None,
+            'account_allocation': resolved_allocation,
+            'account_allocation_status': allocation_status,
+            'account_spend_miles': spend, 'remaining_miles_by_account': result['remaining_miles_by_account'],
+            'budget_status': group if group == 'ESTIMATED_BUDGET_FEASIBLE' else 'UNKNOWN',
+            'budget_scope': 'MATHEMATICAL_SIMULATION_ELIGIBILITY_NOT_VERIFIED',
+            'basis': 'SECONDARY_CORROBORATED_REFERENCE_CHART',
+            'reference_digests': sorted({t['reference_estimate']['reference_digest'] for t in reference_trips}),
+            'distance_status': 'DISTANCE_PROVISIONAL',
+            'cabin_mean_rank': sum(CABIN_RANK[l['cabin']] for t in trips for l in t['candidate']['legs']) / sectors,
+            'rule_applicability': 'CURRENT_REFERENCE_NOT_VERIFIED_FOR_TRAVEL_DATES'}
+        result['planning_pareto_only'] = True
+        result['ranking_basis'] = 'RULE_ESTIMATED_MILES'
+        result['planning_destinations'] = sorted(t['candidate']['destination'] for t in trips)
+        for field in ('total_miles', 'account_allocation', 'account_spend_miles',
+                      'account_spend_by_booking_year', 'remaining_miles_by_account', 'known_ticket_allocation'):
+            result[field] = None
+        result['known_miles_subtotal'] = sum(t['priced']['known_group_miles_subtotal'] for t in trips)
+        result['account_allocation_status'] = 'NOT_CHECKED'
+        result['complete_price_comparison_eligible'] = False
+        # A mixed quote/reference portfolio is conditional; never pretend all
+        # component estimates share one homogeneous reference comparison basis.
+        if not reference_only:
+            result['planning_pareto_only'] = False
+    return result, None
 
 
 def dominates(a, b):
@@ -294,7 +340,46 @@ def pareto_front(rows):
     return sorted([r for r in rows if not any(other is not r and dominates(other, r) for other in rows)], key=lambda r: r['portfolio_id'])
 
 
-def recommendation_views(fronts, limit):
+
+def planning_pareto_front(rows):
+    """Estimate-only front, partitioned by destinations and evidence basis.
+
+    Taxes are explicitly outside this planning comparison; it never dominates
+    a quote or unknown-cost row. Preserve cabin, duration, leave and trips tradeoffs.
+    """
+    groups = {}; untouched = []
+    for row in rows:
+        if (not row.get('planning_pareto_only') or row['estimate']['total_miles'] is None or
+                row['travel_calendar_days'] is None):
+            untouched.append(row); continue
+        key = stable_id('', {k: row[k] for k in ('status', 'evidence', 'holiday_families', 'planning_destinations')})
+        key += stable_id('', {'reference': row['estimate']['reference_digests'],
+            'years': {tid: sorted(years) for tid, years in row['leave_days_by_traveler_by_year'].items()},
+            'accounts': sorted(row['estimate']['account_spend_miles'] or {}),
+            'destination_days_known': row['estimated_destination_full_days'] is not None})
+        groups.setdefault(key, []).append(row)
+    front = pareto_front(untouched)
+    for group in groups.values():
+        def vector(r):
+            values = [-r['trip_count'], -r['travel_calendar_days'], r['estimate']['total_miles'],
+                      -(r['longhaul_cabin_mean_rank'] or 0), -r['estimate']['cabin_mean_rank'],
+                      r['flight_sectors'], r['transfers']]
+            if r['estimated_destination_full_days'] is not None:
+                values.append(-r['estimated_destination_full_days'])
+            for tid in sorted(r['leave_days_by_traveler_by_year']):
+                for year in sorted(r['leave_days_by_traveler_by_year'][tid]):
+                    values.append(r['leave_days_by_traveler_by_year'][tid][year])
+            values.extend((r['estimate']['account_spend_miles'] or {}).get(a, 0)
+                          for a in sorted(r['estimate']['account_spend_miles'] or {}))
+            return values
+        vectors = [(r, vector(r)) for r in group]
+        for row, v in vectors:
+            if not any(len(v) == len(w) and all(a <= b for a, b in zip(w, v)) and
+                       any(a < b for a, b in zip(w, v)) for other, w in vectors if other is not row):
+                front.append(row)
+    return sorted(front, key=lambda r: r['portfolio_id'])
+
+def recommendation_views(fronts, limit, reference_mode=False):
     result = {}
     for view in VIEWS:
         def order(r):
@@ -310,6 +395,24 @@ def recommendation_views(fronts, limit):
                                     'Balanced': 'Nondominated diversity; no weighted score',
                                     'Leave Efficient': 'Zero leave first, then calendar days per group leave day'}[view]}
         for group, rows in fronts.items():
+            if reference_mode and view in ('Miles Saver', 'Balanced'):
+                def planning_order(r):
+                    estimated = r.get('estimate', {}).get('total_miles')
+                    miles = r['total_miles'] if r['total_miles'] is not None else estimated
+                    tier = 0 if r['pricing_status'] == 'QUOTED' and miles is not None else 1 if estimated is not None else 2
+                    return (tier, -r['trip_count'] if view == 'Balanced' else 0,
+                            miles if miles is not None else 0, r['portfolio_id'])
+                result[view][group] = [r['portfolio_id'] for r in sorted(rows, key=planning_order)[:limit]]
+                basis = ('EVIDENCE_TIER_THEN_MILES' if any(r['pricing_status'] == 'QUOTED' for r in rows)
+                         else 'RULE_ESTIMATED_MILES' if any(r.get('estimate') for r in rows) else 'UNKNOWN_DETERMINISTIC')
+                result[view].setdefault('ranking_basis_by_group', {})[group] = basis
+                all_rows = [r for values in fronts.values() for r in values]
+                result[view]['ranking_basis'] = ('EVIDENCE_TIER_THEN_MILES' if any(r['pricing_status'] == 'QUOTED' for r in all_rows)
+                    else 'RULE_ESTIMATED_MILES' if any(r.get('estimate') for r in all_rows) else 'UNKNOWN_DETERMINISTIC')
+                result[view]['evidence_tier_order'] = ['QUOTED', 'RULE_ESTIMATED', 'UNKNOWN']
+                result[view]['ordering'] = ('Evidence tier, then estimated miles; no taxes or complete-cost comparison'
+                    if view == 'Miles Saver' else 'Evidence tier, then trip count, then estimated miles; no weighted score')
+                continue
             by_count = {}
             for r in sorted(rows, key=order):
                 by_count.setdefault(r['trip_count'], []).append(r)
@@ -327,7 +430,7 @@ def recommendation_views(fronts, limit):
 
 
 def optimize_portfolios(priced_candidates, request, calendar, rules, balances_by_account=None,
-                        funding_eligibility=None, config=None):
+                        funding_eligibility=None, config=None, reference_chart=None):
     """Pure bounded portfolio selection, reusing actual PR1/PR3 contracts.
 
     Replays original supplied PR3 evidence; never trusts cached price/allocation.
@@ -360,7 +463,7 @@ def optimize_portfolios(priced_candidates, request, calendar, rules, balances_by
     ordered = sorted(unique.values(), key=lambda r: str(r.get('candidate_id')) if isinstance(r, dict) else '')
     trips = []
     for row in ordered:
-        trip, reason = _prepare(row, request, calendar, rules, budgets)
+        trip, reason = _prepare(row, request, calendar, rules, budgets, reference_chart)
         if reason: rejected[reason] += 1
         else: trips.append(trip)
     by_window = {}
@@ -398,10 +501,11 @@ def optimize_portfolios(priced_candidates, request, calendar, rules, balances_by
         frontier = following
         if not frontier or visited >= config['max_states']: break
     truncated |= visited >= config['max_states']
-    fronts = {'budget_feasible': pareto_front([r for r in rows if r['status'] == 'CONFIRMED_BUDGET_FEASIBLE']),
-              'conditional': pareto_front([r for r in rows if r['status'] == 'CONDITIONAL'])}
+    front_function = planning_pareto_front if reference_chart is not None else pareto_front
+    fronts = {'budget_feasible': front_function([r for r in rows if r['status'] == 'CONFIRMED_BUDGET_FEASIBLE']),
+              'conditional': front_function([r for r in rows if r['status'] in ('CONDITIONAL', 'ESTIMATED_BUDGET_FEASIBLE')])}
     rejected['PARETO_DOMINATED'] = len(rows) - sum(len(v) for v in fronts.values())
-    return {**fronts, 'views': recommendation_views(fronts, config['max_per_view']),
+    return {**fronts, 'views': recommendation_views(fronts, config['max_per_view'], reference_chart is not None),
             'rejected': dict(sorted(rejected.items())), 'search_truncated': truncated or counter['truncated'],
             'diagnostics': {'portfolio_states_visited': visited, 'allocation_states_visited': counter['visited'],
                             'candidate_counts_by_window': window_counts,

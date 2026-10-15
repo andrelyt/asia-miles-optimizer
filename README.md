@@ -188,3 +188,28 @@ Both CLI and direct optimizer preserve window alternatives; global capacity is
 shared by window rotation, with per-window counts and `search_truncated` disclosed.
 The obsolete PR4 `max_candidates_per_holiday` setting must be renamed; it is not
 silently interpreted as a family cap. Bounds do not guarantee global optimality.
+
+
+## Phase 2B-2 — optional reference planning estimates
+
+The default PR3 official review/quote contract remains strict. An explicit
+`reference_chart` profile now permits separate RULE_ESTIMATED planning arithmetic
+through the existing V1 chart lookup, with SECONDARY_CORROBORATED_REFERENCE
+provenance. Read [the full interface and safety contract](docs/REFERENCE_CHART_ESTIMATE.md)
+and [the E100/E200 validation](validation/2027_REFERENCE_CHART_ESTIMATE.md).
+
+Reference values live in `estimate`, never `quote`; top-level quoted mileage stays
+null without a quote. `official_pricing_status` still records the unpassed review
+or quote gate. Source publishers, checked date, chart/rule digests and provisional
+bands are required. This does not change the Phase 2B-1 INCONCLUSIVE official-price
+verdict or certify future applicability.
+
+Planning Miles Saver/Balanced may rank estimated miles, explicitly labeled
+RULE_ESTIMATED_MILES. Planning-only Pareto excludes tax/cash and cannot dominate
+quoted/unknown evidence classes. Comfort First/Leave Efficient keep their ordering
+logic. Account simulation uses independent, cumulative, indivisible ticket jobs;
+ESTIMATED_BUDGET_FEASIBLE remains inside conditional, never confirmed budget or
+full-price comparison. This protection also applies to existing mixed estimates.
+Unknown balances, seats, ticketability and taxes remain unknown/not checked.
+No runtime quote, applicability review, beneficiary eligibility or account evidence
+is fabricated. Existing calendars/routes and the 2027 rule review warning remain.

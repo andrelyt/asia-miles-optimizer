@@ -1,0 +1,724 @@
+{
+  "comparison": {
+    "Balanced": {
+      "intersection": 2,
+      "jaccard": 0.25,
+      "overlap": 0.4
+    },
+    "Comfort First": {
+      "intersection": 1,
+      "jaccard": 0.1111111111111111,
+      "overlap": 0.2
+    },
+    "Leave Efficient": {
+      "intersection": 2,
+      "jaccard": 0.25,
+      "overlap": 0.4
+    },
+    "Miles Saver": {
+      "intersection": 3,
+      "jaccard": 0.42857142857142855,
+      "overlap": 0.6
+    }
+  },
+  "data_label": "CONDITIONAL_REFERENCE_ESTIMATE_NOT_AWARD_AVAILABILITY_NOT_BOOKABLE",
+  "execution_head": "7c80c671f9284b900b6d4d9f82aa72cf3174b323",
+  "matched_control_comparison": {
+    "Balanced": {
+      "intersection": 2,
+      "jaccard": 0.25,
+      "overlap": 0.4
+    },
+    "Comfort First": {
+      "intersection": 0,
+      "jaccard": 0.0,
+      "overlap": 0.0
+    },
+    "Leave Efficient": {
+      "intersection": 1,
+      "jaccard": 0.1111111111111111,
+      "overlap": 0.2
+    },
+    "Miles Saver": {
+      "intersection": 2,
+      "jaccard": 0.25,
+      "overlap": 0.4
+    }
+  },
+  "matched_unknown_price_controls": {
+    "E100": {
+      "command": [
+        "python3",
+        "-B",
+        "planner.py",
+        "--input",
+        "/tmp/amo-reference-b8lof1rw/E100_CONTROL_input.json",
+        "--output",
+        "/tmp/amo-reference-b8lof1rw/E100_CONTROL_result.json"
+      ],
+      "exit_code": 0,
+      "pareto_count": 1310,
+      "runtime_seconds": 0.944726,
+      "states": 5050,
+      "views": {
+        "Balanced": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_0033b3f051912cb2c2ff683e",
+            "portfolio_01ff3b4e0551b75c3c9a6136",
+            "portfolio_00c02e6b52bb1d8866ea3004"
+          ],
+          "ordering": "Nondominated diversity; no weighted score"
+        },
+        "Comfort First": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_04894c2041993737d7366a3c",
+            "portfolio_10519c9e7f163efb6fe50efb",
+            "portfolio_0e7e67606ceb77bf6809b92c",
+            "portfolio_40c605a388e5a5d1dd917153",
+            "portfolio_018fb75bb008f20c9c0737a3"
+          ],
+          "ordering": "Mean longhaul ordinal cabin rank, then trips"
+        },
+        "Leave Efficient": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_3f61c6d18f0d9844ffc84f7f",
+            "portfolio_025bf6d946f14640fcbe3748",
+            "portfolio_88769958b13c31d8e5d89be2",
+            "portfolio_0b5c4165744dd1388e13e8f3",
+            "portfolio_f3e4cfa33c3cddd2e1fd43ab"
+          ],
+          "ordering": "Zero leave first, then calendar days per group leave day"
+        },
+        "Miles Saver": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_0033b3f051912cb2c2ff683e",
+            "portfolio_01ff3b4e0551b75c3c9a6136",
+            "portfolio_00c02e6b52bb1d8866ea3004"
+          ],
+          "ordering": "Mileage only within price classes; never total-cost ranking"
+        }
+      }
+    },
+    "E200": {
+      "command": [
+        "python3",
+        "-B",
+        "planner.py",
+        "--input",
+        "/tmp/amo-reference-b8lof1rw/E200_CONTROL_input.json",
+        "--output",
+        "/tmp/amo-reference-b8lof1rw/E200_CONTROL_result.json"
+      ],
+      "exit_code": 0,
+      "pareto_count": 5068,
+      "runtime_seconds": 4.46966175,
+      "states": 20100,
+      "views": {
+        "Balanced": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_0000e75c58670a08284a8714",
+            "portfolio_002403a688e3cc003fb86e5d",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_00266a8940f0170d42338176"
+          ],
+          "ordering": "Nondominated diversity; no weighted score"
+        },
+        "Comfort First": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_00266a8940f0170d42338176",
+            "portfolio_100a918813729878cc664406",
+            "portfolio_00e1cc0813dceb6df6311e96",
+            "portfolio_17440900d81731cd0755ca4f",
+            "portfolio_002403a688e3cc003fb86e5d"
+          ],
+          "ordering": "Mean longhaul ordinal cabin rank, then trips"
+        },
+        "Leave Efficient": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_1abc419af2cf0d43e92286f1",
+            "portfolio_00a1a8d8c0ae46ce7e2746eb",
+            "portfolio_1c29817e2d76b5c73086a855",
+            "portfolio_0b5c4165744dd1388e13e8f3",
+            "portfolio_30980b01b07487572dd9e2cd"
+          ],
+          "ordering": "Zero leave first, then calendar days per group leave day"
+        },
+        "Miles Saver": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0000e75c58670a08284a8714",
+            "portfolio_0017c47dba5c0c6b2c730d78",
+            "portfolio_001ab767671420451fa40205",
+            "portfolio_002403a688e3cc003fb86e5d",
+            "portfolio_011300eb3a7d979a0602f7b3"
+          ],
+          "ordering": "Mileage only within price classes; never total-cost ranking"
+        }
+      }
+    }
+  },
+  "reference_profile_digest": "reference_3469a10ccd50ec1c931a9cba",
+  "runs": {
+    "E100": {
+      "cabin_trip_occurrences": {
+        "J/J": 292,
+        "J/W": 275,
+        "W/J": 235,
+        "W/W": 260,
+        "Y/Y": 120
+      },
+      "candidate_caps": {
+        "after_global_cap": 100,
+        "after_window_cap": 360,
+        "before_window_cap": 408
+      },
+      "candidate_destination_cabin_estimates": {
+        "AKL J/J": {
+          "group": 364000,
+          "per_person": 182000
+        },
+        "AKL J/W": {
+          "group": 286000,
+          "per_person": 143000
+        },
+        "AKL W/J": {
+          "group": 286000,
+          "per_person": 143000
+        },
+        "AKL W/W": {
+          "group": 208000,
+          "per_person": 104000
+        },
+        "CTS J/J": {
+          "group": 132000,
+          "per_person": 66000
+        },
+        "CTS J/W": {
+          "group": 112000,
+          "per_person": 56000
+        },
+        "CTS W/J": {
+          "group": 112000,
+          "per_person": 56000
+        },
+        "CTS W/W": {
+          "group": 92000,
+          "per_person": 46000
+        },
+        "CTS Y/Y": {
+          "group": 52000,
+          "per_person": 26000
+        },
+        "SYD J/J": {
+          "group": 240000,
+          "per_person": 120000
+        },
+        "SYD J/W": {
+          "group": 198000,
+          "per_person": 99000
+        },
+        "SYD W/J": {
+          "group": 198000,
+          "per_person": 99000
+        },
+        "SYD W/W": {
+          "group": 156000,
+          "per_person": 78000
+        },
+        "ZRH J/J": {
+          "group": 364000,
+          "per_person": 182000
+        },
+        "ZRH J/W": {
+          "group": 286000,
+          "per_person": 143000
+        },
+        "ZRH W/J": {
+          "group": 286000,
+          "per_person": 143000
+        },
+        "ZRH W/W": {
+          "group": 208000,
+          "per_person": 104000
+        }
+      },
+      "candidates": 100,
+      "command": [
+        "python3",
+        "-B",
+        "planner.py",
+        "--input",
+        "/tmp/amo-reference-b8lof1rw/E100_input.json",
+        "--output",
+        "/tmp/amo-reference-b8lof1rw/E100_result.json"
+      ],
+      "config": {
+        "leave_budgets_by_year": {},
+        "max_allocation_states": 20000,
+        "max_candidates_per_window": 15,
+        "max_candidates_total": 100,
+        "max_per_view": 5,
+        "max_states": 25000,
+        "max_windows": 30
+      },
+      "confirmed_budget_count": 0,
+      "destination_trip_occurrences": {
+        "AKL": 283,
+        "CTS": 413,
+        "SYD": 237,
+        "ZRH": 249
+      },
+      "estimated_budget_feasible_count": 0,
+      "estimated_group_miles_distribution": {
+        "104000": 4,
+        "112000": 12,
+        "132000": 7,
+        "144000": 3,
+        "156000": 9,
+        "164000": 12,
+        "184000": 11,
+        "198000": 7,
+        "204000": 8,
+        "208000": 21,
+        "224000": 8,
+        "240000": 4,
+        "244000": 10,
+        "248000": 6,
+        "250000": 14,
+        "260000": 14,
+        "264000": 5,
+        "268000": 7,
+        "286000": 21,
+        "288000": 10,
+        "290000": 4,
+        "292000": 4,
+        "300000": 7,
+        "310000": 8,
+        "312000": 4,
+        "320000": 9,
+        "330000": 7,
+        "332000": 4,
+        "338000": 25,
+        "340000": 9,
+        "352000": 8,
+        "354000": 8,
+        "364000": 14,
+        "372000": 6,
+        "378000": 14,
+        "396000": 8,
+        "398000": 21,
+        "406000": 12,
+        "416000": 16,
+        "418000": 26,
+        "438000": 6,
+        "442000": 7,
+        "448000": 8,
+        "456000": 7,
+        "476000": 18,
+        "480000": 2,
+        "484000": 21,
+        "494000": 36,
+        "496000": 9,
+        "52000": 5,
+        "526000": 9,
+        "562000": 3,
+        "572000": 46,
+        "604000": 7,
+        "650000": 31,
+        "728000": 8,
+        "92000": 6
+      },
+      "exit_code": 0,
+      "input_sha256": "42ddb276a7ec40c6ea2be80fe464151e54f5a118f371da5445287ac20306f409",
+      "output_sha256": "8f89f279c90a6803dbbc0ced4d142d5c1d4f5a86fe9e4f2f3a6da1accebcc124",
+      "pareto_count": 636,
+      "pre_pareto_count": 1310,
+      "rejected": {
+        "ANNUAL_LEAVE_BUDGET_EXCEEDED": 1034,
+        "PARETO_DOMINATED": 674,
+        "SAME_HOLIDAY_ALTERNATIVE": 2706
+      },
+      "rule_estimated_candidates": 100,
+      "runtime_seconds": 0.9590030410000001,
+      "safety_checks": {
+        "estimated_routes_preserved": true,
+        "future_rule_warning": true,
+        "no_account_evidence_added": true,
+        "no_confirmed_budget": true,
+        "no_seat_or_ticketability_upgrade": true,
+        "not_full_price_comparable": true,
+        "quote_fields_null": true,
+        "tax_unknown_not_zero": true,
+        "truncation_visible": true
+      },
+      "search_truncated": true,
+      "states_visited": 5050,
+      "stderr": "",
+      "stdout": "",
+      "trip_count_distribution": {
+        "1": 90,
+        "2": 546
+      },
+      "views": {
+        "Balanced": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_34138029895c35f68f4e4530",
+            "portfolio_7f411ae0ee05970cdd10740f",
+            "portfolio_eb3d488beee3145a93d9749e",
+            "portfolio_f0b07400650f63f4fd1fc2ac",
+            "portfolio_18d7016a35ea5d4fae153176"
+          ],
+          "evidence_tier_order": [
+            "QUOTED",
+            "RULE_ESTIMATED",
+            "UNKNOWN"
+          ],
+          "ordering": "Evidence tier, then trip count, then estimated miles; no weighted score",
+          "ranking_basis": "RULE_ESTIMATED_MILES",
+          "ranking_basis_by_group": {
+            "budget_feasible": "UNKNOWN_DETERMINISTIC",
+            "conditional": "RULE_ESTIMATED_MILES"
+          }
+        },
+        "Comfort First": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0bddc3d71f078ecfd5976496",
+            "portfolio_0ba30e8ef7bf2dcaff37eaa0",
+            "portfolio_0c045ebdc533d1c66b56591e",
+            "portfolio_72d707cb3e822e2d8bb9d55d",
+            "portfolio_08d7492b6cfd9d0070f775f6"
+          ],
+          "ordering": "Mean longhaul ordinal cabin rank, then trips"
+        },
+        "Leave Efficient": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0446402b12793dcb02ade485",
+            "portfolio_0f470c97a73a00987a580802",
+            "portfolio_5728707aff154aba6fdd3e8a",
+            "portfolio_375930b2c81d2a0deca0cba2",
+            "portfolio_a0c7f578f6453df2acf46860"
+          ],
+          "ordering": "Zero leave first, then calendar days per group leave day"
+        },
+        "Miles Saver": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_04de3bf90882c0086b3661d8",
+            "portfolio_0754dd02eb41d1150d67bda8",
+            "portfolio_2cdc725e24894a49a7623452",
+            "portfolio_8946e8607ee4ad6d120e5df6",
+            "portfolio_9ace3483f686127e602f1332"
+          ],
+          "evidence_tier_order": [
+            "QUOTED",
+            "RULE_ESTIMATED",
+            "UNKNOWN"
+          ],
+          "ordering": "Evidence tier, then estimated miles; no taxes or complete-cost comparison",
+          "ranking_basis": "RULE_ESTIMATED_MILES",
+          "ranking_basis_by_group": {
+            "budget_feasible": "UNKNOWN_DETERMINISTIC",
+            "conditional": "RULE_ESTIMATED_MILES"
+          }
+        }
+      }
+    },
+    "E200": {
+      "cabin_trip_occurrences": {
+        "J/J": 941,
+        "J/W": 747,
+        "W/J": 725,
+        "W/W": 806,
+        "Y/Y": 287
+      },
+      "candidate_caps": {
+        "after_global_cap": 200,
+        "after_window_cap": 360,
+        "before_window_cap": 408
+      },
+      "candidate_destination_cabin_estimates": {
+        "AKL J/J": {
+          "group": 364000,
+          "per_person": 182000
+        },
+        "AKL J/W": {
+          "group": 286000,
+          "per_person": 143000
+        },
+        "AKL W/J": {
+          "group": 286000,
+          "per_person": 143000
+        },
+        "AKL W/W": {
+          "group": 208000,
+          "per_person": 104000
+        },
+        "CTS J/J": {
+          "group": 132000,
+          "per_person": 66000
+        },
+        "CTS J/W": {
+          "group": 112000,
+          "per_person": 56000
+        },
+        "CTS W/J": {
+          "group": 112000,
+          "per_person": 56000
+        },
+        "CTS W/W": {
+          "group": 92000,
+          "per_person": 46000
+        },
+        "CTS Y/Y": {
+          "group": 52000,
+          "per_person": 26000
+        },
+        "SYD J/J": {
+          "group": 240000,
+          "per_person": 120000
+        },
+        "SYD J/W": {
+          "group": 198000,
+          "per_person": 99000
+        },
+        "SYD W/J": {
+          "group": 198000,
+          "per_person": 99000
+        },
+        "SYD W/W": {
+          "group": 156000,
+          "per_person": 78000
+        },
+        "ZRH J/J": {
+          "group": 364000,
+          "per_person": 182000
+        },
+        "ZRH J/W": {
+          "group": 286000,
+          "per_person": 143000
+        },
+        "ZRH W/J": {
+          "group": 286000,
+          "per_person": 143000
+        },
+        "ZRH W/W": {
+          "group": 208000,
+          "per_person": 104000
+        }
+      },
+      "candidates": 200,
+      "command": [
+        "python3",
+        "-B",
+        "planner.py",
+        "--input",
+        "/tmp/amo-reference-b8lof1rw/E200_input.json",
+        "--output",
+        "/tmp/amo-reference-b8lof1rw/E200_result.json"
+      ],
+      "config": {
+        "leave_budgets_by_year": {},
+        "max_allocation_states": 20000,
+        "max_candidates_per_window": 15,
+        "max_candidates_total": 200,
+        "max_per_view": 5,
+        "max_states": 25000,
+        "max_windows": 30
+      },
+      "confirmed_budget_count": 0,
+      "destination_trip_occurrences": {
+        "AKL": 851,
+        "CTS": 1122,
+        "SYD": 561,
+        "ZRH": 972
+      },
+      "estimated_budget_feasible_count": 0,
+      "estimated_group_miles_distribution": {
+        "104000": 10,
+        "112000": 24,
+        "132000": 12,
+        "144000": 8,
+        "156000": 12,
+        "164000": 24,
+        "184000": 25,
+        "198000": 11,
+        "204000": 10,
+        "208000": 43,
+        "224000": 20,
+        "240000": 8,
+        "244000": 30,
+        "248000": 8,
+        "250000": 23,
+        "260000": 36,
+        "264000": 16,
+        "268000": 25,
+        "286000": 41,
+        "288000": 28,
+        "290000": 9,
+        "292000": 9,
+        "300000": 11,
+        "310000": 27,
+        "312000": 12,
+        "320000": 42,
+        "330000": 30,
+        "332000": 9,
+        "338000": 73,
+        "340000": 48,
+        "352000": 20,
+        "354000": 26,
+        "364000": 55,
+        "372000": 11,
+        "378000": 22,
+        "396000": 20,
+        "398000": 90,
+        "406000": 46,
+        "416000": 72,
+        "418000": 93,
+        "438000": 11,
+        "448000": 13,
+        "456000": 13,
+        "476000": 50,
+        "480000": 8,
+        "484000": 11,
+        "494000": 131,
+        "496000": 45,
+        "52000": 9,
+        "526000": 27,
+        "562000": 2,
+        "572000": 192,
+        "604000": 19,
+        "650000": 128,
+        "728000": 29,
+        "92000": 8
+      },
+      "exit_code": 0,
+      "input_sha256": "6726b33b92b04c10382b435ff42d3f5b8b3f02389e232445d553c7e470b61a35",
+      "output_sha256": "fa1bca32db32d5592b24e40c58c398215a661019fc94418764533ecc8a58401f",
+      "pareto_count": 1835,
+      "pre_pareto_count": 5068,
+      "rejected": {
+        "ANNUAL_LEAVE_BUDGET_EXCEEDED": 4043,
+        "PARETO_DOMINATED": 3233,
+        "SAME_HOLIDAY_ALTERNATIVE": 10989
+      },
+      "rule_estimated_candidates": 200,
+      "runtime_seconds": 2.5626633749999996,
+      "safety_checks": {
+        "estimated_routes_preserved": true,
+        "future_rule_warning": true,
+        "no_account_evidence_added": true,
+        "no_confirmed_budget": true,
+        "no_seat_or_ticketability_upgrade": true,
+        "not_full_price_comparable": true,
+        "quote_fields_null": true,
+        "tax_unknown_not_zero": true,
+        "truncation_visible": true
+      },
+      "search_truncated": true,
+      "states_visited": 20100,
+      "stderr": "",
+      "stdout": "",
+      "trip_count_distribution": {
+        "1": 164,
+        "2": 1671
+      },
+      "views": {
+        "Balanced": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_099873b6c6d7b5e467329880",
+            "portfolio_1418656856ac2c2e7216d3dc",
+            "portfolio_31abb7c2f2263566094af724",
+            "portfolio_34138029895c35f68f4e4530",
+            "portfolio_7f411ae0ee05970cdd10740f"
+          ],
+          "evidence_tier_order": [
+            "QUOTED",
+            "RULE_ESTIMATED",
+            "UNKNOWN"
+          ],
+          "ordering": "Evidence tier, then trip count, then estimated miles; no weighted score",
+          "ranking_basis": "RULE_ESTIMATED_MILES",
+          "ranking_basis_by_group": {
+            "budget_feasible": "UNKNOWN_DETERMINISTIC",
+            "conditional": "RULE_ESTIMATED_MILES"
+          }
+        },
+        "Comfort First": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_01b0ab386308e5005ad1f1d1",
+            "portfolio_0ba30e8ef7bf2dcaff37eaa0",
+            "portfolio_020d0bff6a615b2a34f55232",
+            "portfolio_6240c26457502f0d45754776",
+            "portfolio_01ac5ef856ea5ac0929fe1f3"
+          ],
+          "ordering": "Mean longhaul ordinal cabin rank, then trips"
+        },
+        "Leave Efficient": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_0446402b12793dcb02ade485",
+            "portfolio_01ac5ef856ea5ac0929fe1f3",
+            "portfolio_3656c3c9fcbb035df86f8e34",
+            "portfolio_0253c27eb241f237215b4725",
+            "portfolio_5728707aff154aba6fdd3e8a"
+          ],
+          "ordering": "Zero leave first, then calendar days per group leave day"
+        },
+        "Miles Saver": {
+          "budget_feasible": [],
+          "conditional": [
+            "portfolio_04de3bf90882c0086b3661d8",
+            "portfolio_0754dd02eb41d1150d67bda8",
+            "portfolio_0c5384c2b6a14dbf66421d24",
+            "portfolio_2cdc725e24894a49a7623452",
+            "portfolio_3d4d998acc4099605a8d86ce"
+          ],
+          "evidence_tier_order": [
+            "QUOTED",
+            "RULE_ESTIMATED",
+            "UNKNOWN"
+          ],
+          "ordering": "Evidence tier, then estimated miles; no taxes or complete-cost comparison",
+          "ranking_basis": "RULE_ESTIMATED_MILES",
+          "ranking_basis_by_group": {
+            "budget_feasible": "UNKNOWN_DETERMINISTIC",
+            "conditional": "RULE_ESTIMATED_MILES"
+          }
+        }
+      }
+    }
+  },
+  "sensitivity_verdict": "PARTIAL_IMPROVEMENT_STILL_HIGHLY_SENSITIVE",
+  "synthetic_budget_validation": {
+    "confirmed_budget_feasible": 0,
+    "data_label": "SYNTHETIC_TEST_ONLY_NO_PERSONAL_ACCOUNT_DATA",
+    "estimated_budget_feasible": 1,
+    "funding_eligibility_status": "NOT_CHECKED",
+    "nonpooling_and_annual_consumption": "Covered by test_260k_per_person_cannot_pool_300k_250k and test_cumulative_accounts_across_two_trips"
+  },
+  "tests": {
+    "after": 298,
+    "before": 258,
+    "errors": 0,
+    "failed": 0,
+    "new": 40,
+    "passed": 298
+  }
+}

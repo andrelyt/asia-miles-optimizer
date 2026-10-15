@@ -3,7 +3,7 @@ from optimizer import evaluate
 from .award_adapter import adapt_candidate
 
 
-def price_candidate(candidate, request, rules, evidence=None, balances_by_account=None):
+def _official_price_candidate(candidate, request, rules, evidence=None, balances_by_account=None):
     """Evaluate ready shared-itinerary tickets; preserve partial prices as subtotals."""
     result = adapt_candidate(candidate, request, rules, evidence, balances_by_account)
     travelers = result.get('candidate', {}).get('traveler_ids', [])
@@ -38,4 +38,35 @@ def price_candidate(candidate, request, rules, evidence=None, balances_by_accoun
     result['miles_by_traveler'] = {t: evaluated['per_person_miles'] for t in travelers}
     result['complete_price_comparison_eligible'] = (result['status'] == 'EVALUATED' and
         result['pricing_status'] == 'QUOTED' and evaluated['complete_price_comparison_eligible'])
+    return result
+
+
+def price_candidate(candidate, request, rules, evidence=None, balances_by_account=None,
+                    reference_chart=None):
+    """Strict quote path first; optional separate reference planning estimate.
+
+    No reference profile means the original PR3 result, unchanged. Neither a
+    reference profile nor its estimates constitutes an applicability review.
+    """
+    result = _official_price_candidate(candidate, request, rules, evidence, balances_by_account)
+    if reference_chart is None:
+        return result
+    result.update(estimate=None, quote=None, official_pricing_status=result['status'])
+    if result['status'] == 'EVALUATED' and result['pricing_status'] == 'QUOTED':
+        result['quote'] = {'per_person_miles': result['per_person_miles'],
+                           'group_miles': result['group_miles'], 'evidence': result['input_evidence']}
+        return result
+    if result['status'] not in ('RULE_VERSION_REVIEW_REQUIRED', 'NEEDS_AIRLINE_QUOTE'):
+        return result
+    from .reference_estimate import reference_estimate
+    estimate, reason = reference_estimate(candidate, request, rules, reference_chart)
+    if estimate is None:
+        result['diagnostics'].append(reason)
+        return result
+    from .route_graph import stable_id
+    result.update(status='RULE_ESTIMATED', pricing_status='RULE_ESTIMATED', estimate=estimate,
+                  complete_price_comparison_eligible=False)
+    result['evaluation_id'] = stable_id('evaluation_', {'official_evaluation_id': result['evaluation_id'],
+                                                      'estimate': estimate})
+    result['diagnostics'].append('REFERENCE_ESTIMATE_NOT_AIRLINE_QUOTE')
     return result

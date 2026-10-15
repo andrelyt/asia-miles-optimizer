@@ -27,7 +27,7 @@ def plan(supplied, base_dir='.'):
     """PR1 -> PR2 -> PR3 -> PR4. No quote generation, I/O except local resources."""
     if not isinstance(supplied, dict): raise ValidationError('planner input must be an object')
     allowed = {'data_label', 'request', 'calendars', 'route_graph', 'rules', 'search_config',
-               'portfolio_config', 'evidence_by_candidate', 'balances_by_account', 'funding_eligibility'}
+               'portfolio_config', 'evidence_by_candidate', 'balances_by_account', 'funding_eligibility', 'reference_chart'}
     if set(supplied) - allowed or not {'request', 'calendars', 'route_graph', 'rules'} <= set(supplied):
         raise ValidationError('unknown/missing planner inputs')
     base = Path(base_dir)
@@ -45,6 +45,7 @@ def plan(supplied, base_dir='.'):
     if not isinstance(evidence, dict): raise ValidationError('evidence_by_candidate must be an object')
     balances = _resource(supplied.get('balances_by_account'), base)
     eligibility = _resource(supplied.get('funding_eligibility'), base)
+    reference = _resource(supplied.get('reference_chart'), base)
     windows = generate_windows(calendar, window_request(request, budgets), search)
     selected_windows = diverse_limit(windows['windows'], config['max_windows'], lambda w: w['holiday_type'],
                                     lambda w: (w['holiday_type'], w['start_date'], w['end_date'], w['window_id']))
@@ -77,8 +78,8 @@ def plan(supplied, base_dir='.'):
         window_counts[window_id]['after_global_cap'] = sum(c['holiday_window']['window_id'] == window_id for c in kept)
     # Do not run PR3's exponential per-trip account enumeration: PR4 allocates all
     # trips globally under its explicit state limit, using PR3 ticket requirements.
-    priced = [price_candidate(c, request, rules, evidence.get(c['candidate_id'])) for c in sorted(kept, key=lambda c: c['candidate_id'])]
-    result = optimize_portfolios(priced, request, calendar, rules, balances, eligibility, config)
+    priced = [price_candidate(c, request, rules, evidence.get(c['candidate_id']), reference_chart=reference) for c in sorted(kept, key=lambda c: c['candidate_id'])]
+    result = optimize_portfolios(priced, request, calendar, rules, balances, eligibility, config, reference_chart=reference)
     result['search_truncated'] |= truncated
     result['input_snapshots'] = {'data_label': supplied.get('data_label'),
         'calendar_ids': sorted(s['calendar_id'] for s in snapshots), 'route_snapshot_id': graph.snapshot_id,
@@ -89,6 +90,10 @@ def plan(supplied, base_dir='.'):
     result['diagnostics']['orchestration_candidate_counts_by_window'] = window_counts
     result['diagnostics']['windows_searched'] = len(selected_windows)
     result['diagnostics']['unused_candidate_evidence'] = sorted(set(evidence) - {c['candidate_id'] for c in kept})
+    if reference is not None:
+        result['input_snapshots']['reference_digest'] = stable_id('reference_', reference)
+        result['metadata']['reference_planning_enabled'] = True
+        result['metadata']['reference_notice'] = 'PLANNING ESTIMATE ONLY; NOT AN AIRLINE QUOTE; NOT VERIFIED FOR 2027; NOT BOOKABLE'
     return result
 
 

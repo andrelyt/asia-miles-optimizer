@@ -1,0 +1,65 @@
+{
+  "basis": "SECONDARY_CORROBORATED_REFERENCE_CHART",
+  "evidence_level": "SECONDARY_CORROBORATED_REFERENCE",
+  "chart_version": "CX_REFERENCE_POST_MAY_2026_CHECKED_20261015",
+  "checked_at": "2026-10-15",
+  "rules_version": "1.1",
+  "rules_digest": "rules_c35694cd59f50bcee6a1fc42",
+  "sources": [
+    {
+      "url": "https://www.australianfrequentflyer.com.au/cathay-pacific-award-charts/",
+      "checked_at": "2026-10-15",
+      "chart_digest": "chart_5aa15b63657a60d2d2f73113",
+      "evidence_level": "SECONDARY_CORROBORATION",
+      "independent_publication": true,
+      "note": "Independent editorial reconstruction; published 2026-05-29; Standard table matches six reference rows."
+    },
+    {
+      "url": "https://www.flyasia.co/2026/asiamiles-cathay-chart/",
+      "checked_at": "2026-10-15",
+      "chart_digest": "chart_5aa15b63657a60d2d2f73113",
+      "evidence_level": "SECONDARY_CORROBORATION",
+      "independent_publication": true,
+      "note": "Separately published manually reconstructed table; displayed update 2026-09-15; not official pricing."
+    }
+  ],
+  "route_bands": {
+    "HKG-CTS": {
+      "band": "751_2750_type2",
+      "distance_status": "DISTANCE_PROVISIONAL",
+      "route_type": 2,
+      "route_type_source_url": "https://www.cathaypacific.com/content/dam/focal-point/cx/membership/programme-update/Cathay-membership-programme-terms-and-conditions-2026-EN.pdf"
+    },
+    "CTS-HKG": {
+      "band": "751_2750_type2",
+      "distance_status": "DISTANCE_PROVISIONAL",
+      "route_type": 2,
+      "route_type_source_url": "https://www.cathaypacific.com/content/dam/focal-point/cx/membership/programme-update/Cathay-membership-programme-terms-and-conditions-2026-EN.pdf"
+    },
+    "HKG-SYD": {
+      "band": "2751_5000",
+      "distance_status": "DISTANCE_PROVISIONAL"
+    },
+    "SYD-HKG": {
+      "band": "2751_5000",
+      "distance_status": "DISTANCE_PROVISIONAL"
+    },
+    "HKG-AKL": {
+      "band": "5001_7500",
+      "distance_status": "DISTANCE_PROVISIONAL"
+    },
+    "AKL-HKG": {
+      "band": "5001_7500",
+      "distance_status": "DISTANCE_PROVISIONAL"
+    },
+    "HKG-ZRH": {
+      "band": "5001_7500",
+      "distance_status": "DISTANCE_PROVISIONAL"
+    },
+    "ZRH-HKG": {
+      "band": "5001_7500",
+      "distance_status": "DISTANCE_PROVISIONAL"
+    }
+  },
+  "notice": "PLANNING REFERENCE ONLY. NO AIRLINE QUOTE. NOT VERIFIED FOR 2027. NO SEAT CHECK. NOT BOOKABLE."
+}

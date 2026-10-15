@@ -212,3 +212,14 @@ Alpha is acceptable only if:
 
 ## 12. Deferred
 Live award-seat search, live cash/tax APIs, booking, login/account integration, global exhaustive graph search, UI, and unsupported alternative award pricing algorithms are post-Alpha.
+
+
+## Phase 2B-2 approved reference-planning extension
+
+An explicit supplied secondary-corroborated reference profile may support separate
+planning estimates without resolving the official applicability gate. The original
+gate is retained in official_pricing_status. Estimate and quote fields, evidence
+levels, planning-only Pareto, and estimated versus confirmed budget statuses are
+kept distinct; see [REFERENCE_CHART_ESTIMATE.md](REFERENCE_CHART_ESTIMATE.md).
+Default behavior and V1.1 pricing arithmetic remain unchanged. Estimated budgets
+cannot be labeled CONFIRMED_BUDGET_FEASIBLE, including older mixed-cabin estimates.

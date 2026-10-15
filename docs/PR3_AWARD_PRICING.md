@@ -241,3 +241,14 @@ Run all regressions:
 ```bash
 python3 -B -m unittest discover -p 'test_*.py' -v
 ```
+
+
+## Phase 2B-2 optional planning layer
+
+The ordinary Standard quote and applicability contracts above remain the default
+and are unchanged in award_adapter.py. The public price_candidate wrapper can now
+accept an explicit reference_chart. Its separate estimate channel is documented in
+[REFERENCE_CHART_ESTIMATE.md](REFERENCE_CHART_ESTIMATE.md). It may return
+status/pricing_status RULE_ESTIMATED while preserving official_pricing_status,
+quote=null and quoted totals=null. This is an explicit opt-in exception for
+planning reference arithmetic, not a new source of ordinary Standard quotes.
