@@ -1,0 +1,24 @@
+{
+  "calendar_id": "CN_2027_ESTIMATED_ANCHORS_ONLY_20261015",
+  "jurisdiction": "CN",
+  "year": 2027,
+  "source_status": "ESTIMATED",
+  "source_url": null,
+  "observed_at": "2026-10-15T00:00:00Z",
+  "days": [
+    {
+      "date": "2027-05-01",
+      "day_type": "PUBLIC_HOLIDAY",
+      "holiday_name": "labor_day",
+      "source_status": "ESTIMATED",
+      "source_url": null
+    },
+    {
+      "date": "2027-10-01",
+      "day_type": "PUBLIC_HOLIDAY",
+      "holiday_name": "national_day",
+      "source_status": "ESTIMATED",
+      "source_url": null
+    }
+  ]
+}
