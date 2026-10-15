@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+sample_output.json
+sample_comparison.csv
+*_result.json
+*_result.csv
