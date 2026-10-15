@@ -8,7 +8,7 @@ Evidence tags used throughout:
 |---|---|
 | `VERIFIED_BY_TOOL` | Reproduced on the public tool or by executing the same client module the page ships, and checked against the server-rendered default or a recorded UI case |
 | `DOCUMENTED_BY_SITE` | Stated on a FlyAsia page or tutorial; not re-run inside a gated tool |
-| `OBSERVED` | Seen in page HTML, embedded chart JSON, or the public calculator script |
+| `OBSERVED` | Seen in page HTML, embedded chart JSON, the public calculator script, or a logged-out live browser session |
 | `INFERRED` | A compact rule that fits the observed cases. Not an official rule |
 | `UNKNOWN` | Not observed and not stated |
 
@@ -21,7 +21,7 @@ FlyAsia ships four related Asia Miles planners. Three are public. One is members
 1. **Award map** (`/miles/asia-miles/idea/`) answers “with this many miles, which *direct* destinations from an origin are affordable, on which airline chart, in which cabin, and how many one-ways does that balance cover?” It does not search connections, dates, leave, or award seats.
 2. **Mixed-cabin calculator** (`/miles/asia-miles/calculator/`) prices exactly one one-way ticket of two connected segments. Miles are a distance-weighted blend of each cabin’s price at the *total* distance band, then rounded down to 100. It is not highest-cabin pricing.
 3. **oneworld round-the-world validator** (`/miles/asia-miles/oneworld-planner/`) is a manual multi-segment distance-band checker. It is not the multi-trip split planner. It prices the whole ticket on one Y/J/F band and checks stopover, transfer, open-jaw, carrier-mix, same-country, backtrack, and city-once rules. It still shows a price when rules fail.
-4. **分段兌換規劃器** (`/miles/asia-miles/split-planner/`) is the multi-trip searcher described in the 2026-10-09/12 tutorial. On 2026-10-15 the URL returned a membership lock (“需要升級會籍才能解鎖”). The tutorial says access is closed beta, granted for 12 months with 《Asia Miles 精讀手冊》 purchased through 2026-12-31. This research did not bypass that gate. The tutorial’s London+Tokyo scheme 1 (170,000 vs separate 215,000, save 45,000) and scheme 3 (210,000 vs 248,000, save 38,000) are `DOCUMENTED_BY_SITE`. The same skeletons, entered by hand into the *public* round-the-world validator, reproduce 13,529 miles / J 170,000 and 16,686 miles / J 210,000.
+4. **分段兌換規劃器** (`/miles/asia-miles/split-planner/`) is the multi-trip searcher described in the 2026-10-09/12 tutorial. On 2026-10-15 a logged-out browser showed a membership gate and no scheme cards: 「需要升級會籍才能解鎖」, 「檢查會員等級」, and an “Already a member” login. The tutorial says access is closed beta, granted for 12 months with 《Asia Miles 精讀手冊》 purchased through 2026-12-31. This research did not bypass that gate. The tutorial’s London+Tokyo scheme 1 (170,000 vs separate 215,000, save 45,000) and scheme 3 (210,000 vs 248,000, save 38,000) are `DOCUMENTED_BY_SITE`. The same skeletons, entered by hand into the *public* round-the-world validator, reproduce 13,529 miles / J 170,000 and 16,686 miles / J 210,000.
 
 Strongest design lesson for V2: keep route evidence, chart arithmetic, award seats, taxes, and ticketability as separate fields. FlyAsia already separates some of these in prose, then occasionally blurs them in warnings (a Category 2 alert can appear on a band that has no Category 2 price).
 
@@ -38,11 +38,19 @@ What worked:
 - Default server HTML matched the module output: map 15,000 miles → 73 destinations, cheapest 4,000 (economy, Taiwan); mixed cabin TPE–HKG–HND J+Y → 17,300; round-the-world default → 24,096 miles, Y 126,000 / J 250,000 / F 350,000, 3 stopovers, 0 transfers, 1 open jaw.
 - A separate hands-on UI pass on the mixed-cabin calculator supplied the HKG–TPE–NRT matrix below. Those totals match this module execution exactly (`VERIFIED_BY_TOOL`).
 
-What did not work:
+What did not work in the first pass:
 
-- Headless Chrome stopped on a Cloudflare “Just a moment…” interstitial, so this session did not click through a live browser. Module execution plus server-rendered defaults is the substitute.
-- Parallel fetches of some `?origin=` URLs hit a captcha redirect. TPE and SYD completed on retry. NRT and LHR origins were not captured (`UNKNOWN` for those origins).
+- Headless Chrome stopped on a Cloudflare “Just a moment…” interstitial, so that pass did not click through a live browser. Module execution plus server-rendered defaults was the substitute.
+- Parallel fetches of some `?origin=` URLs hit a captcha redirect. TPE and SYD completed on retry. NRT and LHR were not captured in that pass.
 - The split planner was not operated. No paywall bypass was attempted.
+
+Later logged-out live browser session (`OBSERVED`, 2026-10-15; award-map page stamp 11:36 HKT):
+
+- The award map was used for HKG balance steps and for origins TPE, NRT, LHR, and SYD. Those counts close the earlier NRT/LHR gap. Where the same balance was also run in the module, the destination counts match.
+- Round-the-world cases L1–L6c below were typed into the page. Route-existence warnings were advisory and did not fail a checklist row. An earlier reading of `oneworld-calculator.js` treated `other_carrier` as a hard `route_carrier_ok` failure. The live page supersedes that reading for product behavior.
+- The split planner, still logged out, showed only the membership gate. Confirmed blocker. Not bypassed.
+
+The mixed-cabin formula stays `INFERRED`. This live session did not re-open that calculator.
 
 Cabin letters used below: Y economy, W premium economy (`premium` in the FlyAsia UI), J business, F first.
 
@@ -69,9 +77,9 @@ Page dates (`OBSERVED` in Yoast JSON-LD): published 2026-07-17, modified 2026-07
 | Region chips | 全部 | 東亞, 東南亞, 南亞, 中東, 歐洲, 北美洲, 大洋洲 |
 | Button | 立即查看 | Enter in the miles field also recalculates |
 
-`OBSERVED` in script: the calculator rejects only a non-integer or a value below 1. The HTML `min=1000` is a browser hint. Entering 999 or 1,000 still runs and returns zero destinations, because the cheapest priced row in the HKG snapshot is 4,000, not because 1,000 is rejected.
+`OBSERVED` in the logged-out browser: miles default to 15,000, and the field minimum is 1,000. Origin is an autocomplete. The default is HKG. Choosing an airport sets `?origin=CODE`. Region chips are 全部, 東亞, 東南亞, 南亞, 中東, 歐洲, 北美洲, 大洋洲. There is no cabin filter, no airline filter, and no date filter.
 
-No date, cabin preference, passenger count, stopover, or airline filter exists on this tool.
+Below 4,000 miles the page shows an insufficient-miles message. The HKG floor is UO Taiwan at 4,000. An earlier module run of 999 and 1,000 returned an empty destination set; the user-visible state in the live session is that message. The script still rejects only a non-integer or a value below 1 (`OBSERVED`). The HTML `min=1000` is the control the live page enforces.
 
 ### Q3. Which origins work?
 
@@ -86,6 +94,8 @@ No date, cabin preference, passenger count, stopover, or airline filter exists o
 | SYD | 悉尼出發 | −33.9399, 151.1753 | 42 destinations, cheapest 10,000 QF Melbourne |
 
 SYD at 4,000 miles: 0 destinations. SYD at 10,000: 24 destinations, all QF domestic economy in one group (MEL, BNE, OOL, CBR, ADL, and others).
+
+`OBSERVED` logged-out browser, balance 15,000, destination counts: TPE 11, NRT 4, LHR 98, SYD 42. TPE and SYD match the table. NRT and LHR were not in the earlier fetch. Non-HKG origins work. Kickers and coordinate readouts for NRT and LHR were not copied; only the counts were.
 
 ### Q4. How are destinations discovered?
 
@@ -120,7 +130,7 @@ If the origin is not HKG, HK Express is applied in reverse only when that origin
 
 ### Q6. Which cabins?
 
-`OBSERVED`: table rows are 經濟, 特選經濟, 商務. First is not a column, even when the embedded Cathay chart has an F price. A price above the entered balance is shown dimmed, without a trip count. A missing cabin is an em dash.
+`OBSERVED` logged-out browser: output is map pins labeled with the cheapest miles (for example 4k) plus country cards. Card columns are airlines. Card rows are 經濟, 特選經濟, and 商務 only. First-class prices sit in the embedded chart and are never shown as a row. A price over the balance is grey and has no ×N. A missing cabin is an em dash. A destination appears when its cheapest economy price is less than or equal to the balance.
 
 `VERIFIED_BY_TOOL` at HKG / 15,000: priced cabins in the affordable set are economy and, where the price fits, premium. No first prices are emitted.
 
@@ -173,7 +183,7 @@ Japan is Category 2, so NRT economy on CX is 13,000, not the 9,000 Category 1 pr
 
 ### Q8. What does “×N 程” mean?
 
-`OBSERVED` / `VERIFIED_BY_TOOL`: `floor(balance / one_way_price)`, shown only when the result is greater than 1. Leftover miles are computed (`balance mod price`) but the card shows the price and the multiplier, not the leftover. At 15,000, UO TPE 4,000 displays ×3 (leftover 3,000). At 16,000 the same row displays ×4 (leftover 0). This is arithmetic capacity, not a suggested itinerary and not a round trip.
+`OBSERVED` / `VERIFIED_BY_TOOL`: ×N is how many one-ways that balance can afford, `floor(balance / one_way_price)`, shown only when the result is greater than 1. Leftover miles are computed (`balance mod price`) but the card shows the price and the multiplier, not the leftover. At 15,000, UO TPE 4,000 displays ×3 (leftover 3,000). At 16,000 the same row displays ×4 (leftover 0). The map is one-way only. `OBSERVED` on the page FAQ: double the figure for a round trip. The tool does not price the return, taxes, or seats.
 
 ### Q9. How are rows sorted, and is there a recommendation?
 
@@ -187,13 +197,27 @@ The first five matching rows are shown until “顯示更多航點”. That is a
 
 `OBSERVED`: chips filter already priced rows. They do not change distance or charts. Regions in code: east_asia, sea, south_asia, middle_east, europe, north_america, oceania, other. Africa and South America fall through to `other`. The chip row has no “other” / Africa button (`OBSERVED` in the HKG HTML).
 
+`OBSERVED` logged-out browser at 91,000 miles from HKG, pin counts by chip: 東亞 45, 東南亞 20, 南亞 8, 中東 3, 歐洲 13, 北美洲 9, 大洋洲 9. Those seven chips sum to 107. Johannesburg (JNB) is an extra pin with no chip, which brings the set to 108.
+
 ### Q11. Does it check schedules, award seats, or taxes?
 
-`DOCUMENTED_BY_SITE` on the sister calculators, and `OBSERVED` by absence here: no date, no seat query, no tax, no ticketing. A row means “this origin–destination pair is in the route snapshot and the static chart price is within the balance.” Route presence is not award inventory.
+`DOCUMENTED_BY_SITE` on the sister calculators, and `OBSERVED` by absence here, including the logged-out browser: no date, no seat query, no tax, no ticketing. A row means “this origin–destination pair is in the route snapshot and the static chart price is within the balance.” Route presence is not award inventory. The award-map page stamp in that session read 2026-10-15 11:36 HKT.
 
 ### Q12. Boundaries from cases
 
-`VERIFIED_BY_TOOL`, origin HKG:
+`OBSERVED` logged-out browser, origin HKG. A destination is shown when cheapest economy is within the balance.
+
+| Balance | Destinations |
+|---:|---:|
+| Below 4,000 | Insufficient-miles message. Floor is UO Taiwan 4,000 |
+| 4,000 | 11 |
+| 7,000 | 34 |
+| 9,000 | 58 |
+| 15,000 | 73 |
+| 30,000 | 102 |
+| 91,000 | 108 |
+
+`VERIFIED_BY_TOOL` module run, same origin. Use this table for the intermediate balances the live session did not re-type. Counts that both methods hit (4,000, 7,000, 9,000, 15,000, 91,000) agree.
 
 | Balance | Destinations | Groups | Cheapest | Regions with at least one destination |
 |---:|---:|---:|---|---|
@@ -209,7 +233,7 @@ The first five matching rows are shown until “顯示更多航點”. That is a
 | 91,000 | 108 | 60 | UO TPE ×22 | no new destinations |
 | 160,000 | 108 | 60 | UO TPE ×40 | no new destinations |
 
-`INFERRED`: under this snapshot the destination set saturates at 43,000 miles. Higher balances only increase the one-way multiplier. Long-haul J prices (LHR J 91,000, JFK J 119,000) do not add airports; those airports already entered on economy.
+`INFERRED` from the module steps, and consistent with the live 30,000 → 102 and 91,000 → 108 counts: under this snapshot the destination set saturates at 43,000 miles. Higher balances only increase the one-way multiplier. Long-haul J prices (LHR J 91,000, JFK J 119,000) do not add airports; those airports already entered on economy.
 
 ### Q13. What data is embedded?
 
@@ -382,11 +406,11 @@ Bands (`OBSERVED`), identical to this repo’s `oneworld_bands` and to the chart
 - Stopover vs transfer is a user choice only when the airports connect. The script comment says 24 hours is the intended meaning (`DOCUMENTED_BY_SITE` in the instructions). The validator does not read dates, so it cannot check the 24-hour claim (`OBSERVED`).
 - Carrier mix: at least 2 oneworld airlines if CX is absent, at least 3 if CX is present.
 - Origin and final airport must be in the same country.
-- Origin city and final city must not appear as an intermediate stop or open-jaw end (no backtrack).
+- Origin city and final city must not appear as an intermediate point (no 走回頭路). Ending at the origin is not that failure. `OBSERVED` live session: HKG–LHR–HKG passes the backtrack row. HKG–NRT–HKG–LHR–HKG fails 走回頭路 even when the middle HKG is marked 轉機.
 - A city may be a stopover or open-jaw point only once, and may be passed at most twice.
-- `other_carrier` (the route snapshot shows a different airline on that city pair) is a hard failure. `none` (no row in the snapshot) is only an advisory; the itinerary can still pass. `OBSERVED` in comments dated 2026-09-14: absence of data is not treated as proof the route is impossible.
-- A non-oneworld carrier removes the price entirely (`cost = null`) even if a band was found.
-- If checks fail but the carrier is oneworld and the distance is inside 50,000, the Y/J/F numbers stay on screen, visually de-emphasized. V1.1 instead marks the scenario invalid and nulls the valued cost.
+- Route-existence warnings are advisory only. `OBSERVED` logged-out browser: forcing an airline the page does not treat as the known carrier for that city pair did not fail a checklist row. An earlier reading of `oneworld-calculator.js` treated `other_carrier` as a hard `route_carrier_ok` failure and treated `none` as advisory (script comment dated 2026-09-14: absence of data is not proof the route is impossible). The live page supersedes that hard-failure reading.
+- A non-oneworld carrier removes the price entirely (`cost = null`) even if a band was found. This remains a script observation. The live session did not re-enter the CZ case.
+- If checklist rules fail but a band price exists, the Y/J/F numbers stay on screen. `OBSERVED` in the live session on the failing rows below. V1.1 instead marks the scenario invalid and nulls the valued cost.
 - Share URL shape (`OBSERVED`): `?route=HKG-LHR:S:CX,LHR-JFK:S:BA,...&cabin=j` with S/T/O stop codes.
 - Route snapshot used by the validator: 1,335 origin airports (`OBSERVED`).
 
@@ -400,9 +424,27 @@ Default itinerary (`VERIFIED_BY_TOOL`, matches the server-rendered page):
 | 4 | LAX–SYD | QF | stopover | 7,495 | confirmed |
 | 5 | SYD–HKG | CX | end | 4,593 | confirmed |
 
-Total **24,096**. Band 20,001–25,000. Y **126,000** / J **250,000** / F **350,000**. Counts 3 / 5 stopovers, 0 / 2 transfers, 1 / 2 open jaws. All checks pass. The article-style GCMAP mileages are not what this tool uses; see the distance anomaly under scheme 3.
+Total **24,096**. Band 20,001–25,000. Y **126,000** / J **250,000** / F **350,000**. Counts 3 / 5 stopovers, 0 / 2 transfers, 1 / 2 open jaws. All checks pass. The same default, re-entered in the logged-out browser, is case L1 below. The article-style GCMAP mileages are not what this tool uses; see the distance anomaly under scheme 3.
 
 W is not a cabin. Passing cabin code `w` falls back to J pricing (`VERIFIED_BY_TOOL` on HKG–LHR–HKG: selected price 170,000, which is the J column).
+
+### Logged-out browser cases
+
+`OBSERVED` 2026-10-15. Caps on the page: 5 stopovers, 2 transfers, 2 open jaws, 50,000 miles. With CX the airline minimum is 3; otherwise it is 2. Prices stay on screen when a checklist row fails.
+
+| ID | Itinerary | Miles | Checks | Prices |
+|---|---|---:|---|---|
+| L1 | Default: HKG–LHR CX, LHR–JFK BA, JFK–SFO AS open jaw, LAX–SYD QF, SYD–HKG CX | 24,096 | PASS. 3/5 stopovers, 1/2 open jaws | Y 126,000 / J 250,000 / F 350,000 |
+| L2 | HKG–LHR CX, LHR–HKG BA | 11,971 | Backtrack PASS. Airline minimum FAIL (only 2 airlines, and CX is one of them) | Y 95,000 / J 170,000 / F 250,000 |
+| L2b | HKG–NRT JL, NRT–HKG CX, HKG–LHR BA, LHR–HKG BA. Middle HKG marked 轉機 | 15,647 | FAIL 走回頭路 | Y 105,000 / J 210,000 / F 310,000 |
+| L3 | HKG–LHR BA, LHR–JFK AA, JFK–HKG CX | 17,487 | PASS | Y 105,000 / J 210,000 / F 310,000 |
+| L4 | HKG–LHR BA, open jaw CDG–JFK AA, JFK–HKG CX | 17,669 | PASS. 1 open jaw | Y 105,000 / J 210,000 / F 310,000 |
+| L5 | L4 routed via MIA | 19,544 | PASS. Band steps up | Y 115,000 / J 230,000 / F 330,000 |
+| L6a | 3 transfers (cities not copied) | — | FAIL 3/2 transfers | still displayed |
+| L6b | 3 open jaws, plus backtrack, plus airline-count failure | — | FAIL | still displayed |
+| L6c | 6 stopovers (cities not copied) | — | FAIL 6/5 stopovers | still displayed |
+
+L2 shows that a simple return to HKG is not 走回頭路. L2b shows that touching HKG in the middle is, even as a connection. L5 is the same skeleton as L4 with MIA on the path; 19,544 miles is the 18,001–20,000 band (Y 115,000 / J 230,000 / F 330,000), one band above L4’s 14,001–18,000.
 
 ### Regional skeletons on this validator
 
@@ -422,13 +464,13 @@ These are manual itineraries, not split-planner search results.
 | Backtrack via HKG | HKG–NRT–HKG–LHR–CDG | 9,877 | **fail** backtrack and same-country (ends in FR) | J 135,000 shown |
 | Ends in another country | HKG–LHR–JFK | 9,428 | **fail** same-country and carrier mix | J 135,000 shown |
 | CZ on HKG–CAN | HKG–CAN CZ, CAN–NRT JL, NRT–HKG CX | 3,753 | **fail** not all oneworld; price **withheld** | none |
-| Wrong carrier where another airline is known | HKG–LHR on JL | — | **fail** `route_carrier_ok` | J still shown if the rest is oneworld |
+| Known-carrier mismatch | Forcing the wrong airline on a sector | — | route warning only; checklist row did not fail. Live session supersedes the earlier `route_carrier_ok` hard-fail reading | price still shown |
 | Missing route (`none`) | LHR–SYD on a long sample | — | advisory only, until some other check fails | price can remain |
 | Single sector HKG–LHR CX | | 5,985 | fail same-country and carrier mix | J 100,000 shown |
 | 10 sectors, many stops | HKG–BKK–DOH–LHR–MAD–JFK–ORD–LAX–HND–TPE–HKG | 21,716 | fail stopover cap (8 > 5). HND–TPE status `none` | J 250,000 shown |
 | Repeat JFK | HKG–JFK–LHR–SYD–JFK–HKG | 40,087 | fail city-once. Still inside 50,000, top band | J 280,000 shown |
 
-`VERIFIED_BY_TOOL` for the rows above. Positioning, ground transport, and cash are not fields on this tool. A surface open jaw is only a broken airport chain.
+`VERIFIED_BY_TOOL` for the rows above except the known-carrier row, which is the live-browser result. Positioning, ground transport, and cash are not fields on this tool. A surface open jaw is only a broken airport chain.
 
 Distance anomaly, scheme 3 (`DOCUMENTED_BY_SITE` vs `VERIFIED_BY_TOOL`): the oneworld chart article lists HKG–LHR 5,994, LHR–DOH 3,261, DOH–CAN 3,858, CAN–HND 1,794, HND–HKG 1,805, total about 16,711. The validator’s haversine sums to **16,686** (5,985 + 3,256 + 3,850 + 1,793 + 1,801). Both totals sit in 14,001–18,000, so J stays 210,000. The newer split-planner tutorial prints 16,686 for the Guangzhou scheme, which matches the validator rather than the older 16,711. `INFERRED`: the tools share one haversine, and the older article used an external mileage source (the same article points readers at GCMAP).
 
@@ -438,7 +480,7 @@ Distance anomaly, scheme 3 (`DOCUMENTED_BY_SITE` vs `VERIFIED_BY_TOOL`): the one
 
 Tool URL tried: https://www.flyasia.co/miles/asia-miles/split-planner/
 
-`OBSERVED` on 2026-10-15: HTTP page renders a Paid Memberships Pro lock. Heading “需要升級會籍才能解鎖”. Login link returns to this URL. No planner form, no scheme cards, and no planner script were in the anonymous HTML. Page JSON-LD: published 2026-10-06, modified 2026-10-08. Description: enter each trip’s cities; the system places boundary points and compares Asia Miles with separate standard awards.
+`OBSERVED` logged-out browser, 2026-10-15: the page is a membership gate. Visible copy is 「需要升級會籍才能解鎖」 and 「檢查會員等級」, plus an “Already a member” login. No scheme cards and no planner form. The gate was not bypassed. The anonymous HTML from the earlier fetch was a Paid Memberships Pro lock with the same heading and a login link back to this URL, and it contained no planner script. Page JSON-LD: published 2026-10-06, modified 2026-10-08. Description: enter each trip’s cities; the system places boundary points and compares Asia Miles with separate standard awards.
 
 Tutorial: https://www.flyasia.co/2026/asiamiles-split-planner/  
 `DOCUMENTED_BY_SITE`: posted 2026-10-09, also stamped 2026-10-12, author 林扁. Closed beta. Buying 《Asia Miles 精讀手冊》 through 2026-12-31 includes 12 months of planner access. This research did not enter that flow.
@@ -543,7 +585,7 @@ flowchart TD
   C --> D{"All oneworld and distance at most 50000"}
   D -->|no| E["No band price, or over-cap message"]
   D -->|yes| F["Show Y, J, and F for that band anyway"]
-  F --> G["Checklist: caps, backtrack, city once, same country, carrier mix, known-carrier contradiction"]
+  F --> G["Checklist: caps 5/2/2, backtrack, city once, same country, carrier mix. Route warnings stay advisory"]
   G --> H["Pass styling or fail styling; price remains"]
 ```
 
@@ -579,6 +621,11 @@ Re-run key: airports file dated 2026-09-29, chart payload captured 2026-10-15, h
 | M6 | TPE, 15,000 | 11 destinations, cheapest UO HKG 4,000 ×3 |
 | M7 | SYD, 15,000 | 42 destinations, cheapest QF MEL 10,000 |
 | M8 | SYD, 4,000 | 0 destinations |
+| M9 | NRT, 15,000 | 4 destinations. `OBSERVED` live browser |
+| M10 | LHR, 15,000 | 98 destinations. `OBSERVED` live browser |
+| M11 | HKG, 30,000 | 102 destinations. `OBSERVED` live browser |
+| M12 | HKG, below 4,000 | Insufficient-miles message. Floor UO Taiwan 4,000. `OBSERVED` live browser |
+| M13 | HKG, 91,000 region pins | 東亞 45, 東南亞 20, 南亞 8, 中東 3, 歐洲 13, 北美 9, 大洋洲 9, plus JNB with no chip |
 
 ### Mixed cabin
 
@@ -614,10 +661,21 @@ Re-run key: airports file dated 2026-09-29, chart payload captured 2026-10-15, h
 | R7 | 3 transfers | 14,472 | fail cap, J 210,000 still shown |
 | R8 | CZ metal | 3,753 | price withheld |
 | R9 | cabin code W | | falls back to J column |
+| R10 / L1 | Live default, same airports as R0 | 24,096 | PASS, 3/5 stops, 1/2 open jaws, Y 126,000 / J 250,000 / F 350,000 |
+| R11 / L2 | HKG–LHR CX, LHR–HKG BA | 11,971 | backtrack pass, airline minimum fail, Y 95,000 / J 170,000 / F 250,000 |
+| R12 / L2b | HKG–NRT–HKG–LHR–HKG, middle HKG marked 轉機 | 15,647 | fail 走回頭路, Y 105,000 / J 210,000 / F 310,000 |
+| R13 / L3 | HKG–LHR BA, LHR–JFK AA, JFK–HKG CX | 17,487 | pass, Y 105,000 / J 210,000 / F 310,000 |
+| R14 / L4 | HKG–LHR BA, open jaw CDG–JFK AA, JFK–HKG CX | 17,669 | pass, 1 open jaw, same prices as R13 |
+| R15 / L5 | R14 via MIA | 19,544 | band step, Y 115,000 / J 230,000 / F 330,000 |
+| R16 / L6a | 3 transfers | | fail 3/2. Price still shown |
+| R17 / L6b | 3 open jaws + backtrack + airline count | | fail. Price still shown |
+| R18 / L6c | 6 stopovers | | fail 6/5. Price still shown |
+
+R10–R18 are `OBSERVED` in the logged-out browser. R0–R9 remain the earlier module run.
 
 ### Split planner
 
-No anonymous execution. Documented pairs only: scheme 1 **170,000 vs 215,000 save 45,000**; scheme 3 **210,000 vs 248,000 save 38,000**. R1 and R2 are the public-validator reconstructions of those skeletons.
+No anonymous execution. The logged-out browser confirmed the gate and showed no scheme cards. Documented pairs only: scheme 1 **170,000 vs 215,000 save 45,000**; scheme 3 **210,000 vs 248,000 save 38,000**. R1 and R2 are the public-validator reconstructions of those skeletons.
 
 ---
 
@@ -628,10 +686,10 @@ No anonymous execution. Documented pairs only: scheme 1 **170,000 vs 215,000 sav
 3. `OBSERVED`: mixed cabin is pro-rata of the total-band price. oneworld mixed cabins, per the chart article, are charged at the highest cabin on the ticket. The two tools implement different rules on purpose.
 4. `OBSERVED`: oneworld carrier count matches this repo (3 with CX, 2 without). Member list on FlyAsia has 16 codes, including HA, FJ, and WY. This repo’s `allowed_carriers` list does not include those three. That is a rules-file gap to verify officially, not something this research changes.
 5. `OBSERVED`: FlyAsia derives open jaws, backtracks, and city-once from the sector list. V1.1 trusts caller-supplied `stopovers`, `transfers`, `open_jaws`, and `total_flight_distance_mi`.
-6. `OBSERVED`: a known carrier contradiction fails the oneworld tool; a missing route does not. “Not in the snapshot” is not “unpublished.”
+6. `OBSERVED` logged-out browser: route-existence warnings are advisory. Forcing a carrier the page does not treat as the known operator did not fail a checklist row. Prices still display when stopover, transfer, open-jaw, backtrack, or airline-minimum checks fail. An earlier script reading that treated `other_carrier` as a hard failure is not the behavior of the page.
 7. `DOCUMENTED_BY_SITE` and consistent with charts: separate-ticket baselines in the split tutorial use CX J 91,000 for Europe one-way and CX cat2 J 33,000 for Japan one-way.
 8. `OBSERVED`: none of the public tools read a calendar, a leave balance, a seat map, or a tax quote.
-9. `DOCUMENTED_BY_SITE`: since 2023-10-10 the origin/final city cannot be an intermediate stop or open jaw, which is why a multi-trip ticket ends near Hong Kong (Guangzhou, Shanghai) instead of back at HKG.
+9. `DOCUMENTED_BY_SITE` and `OBSERVED` live: since 2023-10-10 the origin or final city cannot appear in the middle of the ticket. Ending at the origin is allowed (L2 passes backtrack). Passing through home fails even when that stop is marked 轉機 (L2b). That is why a multi-trip ticket ends near Hong Kong (Guangzhou, Shanghai) instead of routing back through HKG and out again.
 10. `INFERRED`: FlyAsia’s “save Z” figure is only meaningful next to the baseline definition. Scheme 1’s 45,000 includes a separate HKG–Tokyo sector the oneworld ticket does not cover, and excludes a cash positioning fare.
 
 ---
@@ -642,7 +700,7 @@ No anonymous execution. Documented pairs only: scheme 1 **170,000 vs 215,000 sav
 |---|---|---|
 | Page-embedded `awardCharts` | CX and partner standard tables | Captured 2026-10-15 with the tools |
 | `uoChart` | HK Express zone fares | Same |
-| `syncedRoutes` per origin | Direct map edges | HKG, TPE, SYD snapshots |
+| `syncedRoutes` per origin | Direct map edges | HKG, TPE, SYD snapshots. Live browser also counted NRT (4 at 15,000) and LHR (98 at 15,000) |
 | `nonOneworldLimits` | Which partner city pairs may be priced | Same |
 | `airports.json?ver=1.133.0` | 9,800 airports, coordinates, country | Reader timestamp 2026-09-29 |
 | oneworld `routeNetwork` | 1,335 origins of carrier hints for the validator and mixed-cabin advisories | Captured 2026-10-15 |
@@ -748,7 +806,7 @@ No anonymous execution. Documented pairs only: scheme 1 **170,000 vs 215,000 sav
 - `OBSERVED`: mixed-cabin route warnings do not affect the number, and the Category 2 banner does not check whether that band has a Category 2 price.
 - `OBSERVED`: mixed cabin will price BKK–LHR in Cathay mode while advising that the sector does not look like Cathay.
 - `OBSERVED`: oneworld price remains visible after rule failure, which is easy to screenshot as “the cost.”
-- `OBSERVED`: `none` in the route snapshot does not fail the ticket. A real non-operated sector can look legal.
+- `OBSERVED` live session: a route-existence warning, including a forced wrong airline, does not fail the checklist. A sector the snapshot does not support can still look legal. Prices remain visible after a failed rule.
 - `DOCUMENTED_BY_SITE`: distances can sit about 1% off Cathay. The CAN example moved 16,711 → 16,686 without changing the band. A case closer to a cut point would change the price. V1.1’s 250-mile headroom warning is the right response.
 - `OBSERVED`: no dates, so the 24-hour transfer rule is not enforced.
 - `OBSERVED`: split planner is unusable without a membership. The public tutorial can drift from the gated binary.
@@ -765,7 +823,8 @@ No anonymous execution. Documented pairs only: scheme 1 **170,000 vs 215,000 sav
 - Whether a missing route (`none`) is accepted by Cathay agents the way the validator accepts it.
 - The gated planner’s real fourth card, its objective, its boundary list beyond the examples, and whether scheme 1’s card says PVG or SHA.
 - The 672,000 → 280,000 four-Europe example. Not reproduced.
-- NRT and LHR as award-map origins. Fetches did not return a page.
+- Which four destinations NRT showed, and which 98 LHR showed. Only the counts were recorded.
+- The city lists behind live cases L6a and L6c. Only the failing caps (3/2 transfers, 6/5 stopovers) were recorded.
 - Taxes, fuel, seat counts, and ticketability for every example above. All `UNKNOWN` / not checked.
 - Whether FlyAsia’s partner chart matches any Cathay partner table sector by sector.
 
@@ -775,6 +834,8 @@ No anonymous execution. Documented pairs only: scheme 1 **170,000 vs 215,000 sav
 
 - https://www.flyasia.co/miles/asia-miles/idea/
 - https://www.flyasia.co/miles/asia-miles/idea/?origin=TPE
+- https://www.flyasia.co/miles/asia-miles/idea/?origin=NRT
+- https://www.flyasia.co/miles/asia-miles/idea/?origin=LHR
 - https://www.flyasia.co/miles/asia-miles/idea/?origin=SYD
 - https://www.flyasia.co/miles/asia-miles/calculator/
 - https://www.flyasia.co/miles/asia-miles/oneworld-planner/
