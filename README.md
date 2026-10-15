@@ -78,3 +78,21 @@ Python 保留舱位代码/等级、票种分派、单程/连续性验证、账�
 - 独立账户枚举在票/旅客数量很多时呈指数增长；当前用于小规模人工候选。
 
 规则来源含官方条款及第三方重建表，URL 保留在规则文件；本次重构没有重新认定这些表为官方报价，最终以国泰实际搜索和客服整票报价为准。
+
+
+## V2.0 Alpha design baseline
+
+V1.1 remains the stable deterministic supplied-candidate kernel. V2.0 Alpha adds bounded candidate discovery and holiday/leave planning **around** that kernel; it must not duplicate award-policy logic.
+
+Authoritative V2 development contracts:
+- `AGENTS.md` — repository-wide agent/development guardrails
+- `docs/V2_DESIGN.md` — product, architecture, evidence states and acceptance baseline
+- `docs/V2_IMPLEMENTATION_PLAN.md` — milestone/PR implementation sequence for Codex
+- `schemas/travel_request.schema.json` — structured planning request contract
+- `schemas/holiday_calendar.schema.json` — official/estimated holiday snapshot contract
+- `schemas/route_graph.schema.json` — route evidence snapshot contract
+- `config/search_config.json` — search/performance bounds; **not** award-policy rules
+
+Development order: Holiday/Leave Engine → Route Graph & Standard Candidate Generator → V1 Adapter → Portfolio/CLI. Live award inventory, booking and global exhaustive search remain post-Alpha.
+
+For future China holiday years, do not invent official makeup-workday arrangements before the authoritative calendar is published. Estimated calendars must remain visibly `ESTIMATED` end-to-end.
