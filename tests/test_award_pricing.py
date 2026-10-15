@@ -336,12 +336,62 @@ class AwardPricingTests(unittest.TestCase):
             result = self.price()
             kernel.assert_called_once_with(result['scenario'], self.rules, result['settings'])
 
-    def test_zero_quoted_miles_need_no_account_allocation(self):
+    def test_zero_quoted_miles_are_rejected_before_v1_evaluation(self):
         for quote in self.ev['quotes'].values(): quote['miles_per_person'] = 0
-        result = self.price(balances_by_account={'TEST_ZERO': 0})
+        with patch('discovery.award_pricing.evaluate') as kernel:
+            result = self.price(balances_by_account={'TEST_ZERO': 0})
+            kernel.assert_not_called()
+        self.assertEqual(result['status'], 'NEEDS_DATA')
+        self.assertFalse(result['v1_evaluated'])
+        self.assertIsNone(result['scenario'])
+        self.assertIsNone(result['group_miles'])
+        self.assertIsNone(result['per_person_miles'])
+        self.assertFalse(result['complete_price_comparison_eligible'])
+        self.assertEqual(result['known_miles_subtotal_per_person'], 0)
+        self.assertTrue(all(t['miles_per_person'] is None for t in result['tickets']))
+        self.assertTrue(all(t['diagnostics'] == ['INVALID_STANDARD_QUOTE_MILES'] for t in result['tickets']))
+
+    def test_zero_miles_plus_quoted_zero_taxes_cannot_become_comparable(self):
+        for quote in self.ev['quotes'].values(): quote['miles_per_person'] = 0
+        self.ev['tax_quote'] = dict(bound(self.c, self.rules, 'AIRLINE_QUOTED'), hkd_per_person=0)
+        with patch('discovery.award_pricing.evaluate') as kernel:
+            result = self.price(); kernel.assert_not_called()
+        self.assertEqual(result['status'], 'NEEDS_DATA')
+        self.assertIsNone(result['kernel_result'])
+        self.assertFalse(result['complete_price_comparison_eligible'])
+        self.assertEqual(result['known_group_miles_subtotal'], 0)
+        self.assertTrue(all(t['group_miles'] is None for t in result['tickets']))
+
+    def test_one_nonpositive_quote_keeps_only_valid_ticket_subtotals(self):
+        for invalid_ticket in ('outbound_1', 'return_2'):
+            for invalid_miles in (0, -1):
+                with self.subTest(ticket=invalid_ticket, miles=invalid_miles):
+                    ev = copy.deepcopy(self.ev)
+                    ev['quotes'][invalid_ticket]['miles_per_person'] = invalid_miles
+                    ev['tax_quote'] = dict(bound(self.c, self.rules, 'AIRLINE_QUOTED'), hkd_per_person=0)
+                    with patch('discovery.award_pricing.evaluate') as kernel:
+                        result = self.price(evidence=ev); kernel.assert_not_called()
+                    self.assertEqual(result['status'], 'NEEDS_DATA')
+                    self.assertEqual(result['pricing_status'], 'UNKNOWN')
+                    self.assertFalse(result['complete_price_comparison_eligible'])
+                    self.assertIsNone(result['group_miles'])
+                    self.assertEqual(result['known_miles_subtotal_per_person'], 10000)
+                    self.assertEqual(result['known_group_miles_subtotal'], 20000)
+                    bad = next(t for t in result['tickets'] if t['ticket_id'] == invalid_ticket)
+                    self.assertEqual(bad['status'], 'NEEDS_DATA')
+                    self.assertIn('INVALID_STANDARD_QUOTE_MILES', bad['diagnostics'])
+                    self.assertIsNone(bad['miles_per_person'])
+                    self.assertIsNone(bad['group_miles'])
+
+    def test_positive_miles_with_quoted_zero_taxes_still_evaluate(self):
+        for quote in self.ev['quotes'].values(): quote['miles_per_person'] = 1
+        self.ev['tax_quote'] = dict(bound(self.c, self.rules, 'AIRLINE_QUOTED'), hkd_per_person=0)
+        result = self.price()
         self.assertEqual(result['status'], 'EVALUATED')
-        self.assertEqual(result['group_miles'], 0)
-        self.assertEqual(result['account_allocation_status'], 'NOT_REQUIRED')
+        self.assertEqual(result['group_miles'], 4)
+        self.assertEqual(result['taxes_hkd_per_person'], 0)
+        self.assertTrue(result['complete_price_comparison_eligible'])
+        self.assertEqual(result['evidence_verification_status'], 'SUPPLIED_EVIDENCE_NOT_INDEPENDENTLY_VERIFIED')
 
 
 if __name__ == '__main__':

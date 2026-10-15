@@ -49,6 +49,10 @@ The optional `evidence` mapping has these keys:
 A source record needs `source_url` (HTTP(S) with host), `observed_at` (timezone-aware
 ISO datetime) and `evidence_level`. These are **caller-supplied attestations**;
 this package does not retrieve URLs, corroborate sources or establish freshness.
+Public output makes this explicit through
+`evidence_verification_status=SUPPLIED_EVIDENCE_NOT_INDEPENDENTLY_VERIFIED`.
+AIRLINE_QUOTED and manual applicability reviews do not authenticate an airline
+quote, its source domain, or official approval of future rule applicability.
 A live external check is still required where appropriate. There is no invented
 quote expiry duration. Quote prices must apply equally to every traveler on the
 shared itinerary; traveler-specific fare or cabin differences are unsupported.
@@ -82,12 +86,17 @@ not an assertion that this code verified official applicability.
 
 ### Ordinary Standard quotes
 
-A quote needs `evidence_level="AIRLINE_QUOTED"` and nonnegative integer
+A quote needs `evidence_level="AIRLINE_QUOTED"` and strictly positive integer
 `miles_per_person`, plus the source, scope and dates above. The adapter uses this
 number as V1 `standard` input and reports QUOTED. The internal V1 `verified` input
 flag merely records this supplied quote classification; it is not independent
 verification. A one-sector quote and a two-sector whole-ticket quote stay distinct.
 Without the quote, miles remain null / pricing UNKNOWN / NEEDS_AIRLINE_QUOTE.
+Zero/nonpositive or otherwise invalid Standard mileage returns NEEDS_DATA with
+INVALID_STANDARD_QUOTE_MILES on the affected ticket. That ticket contributes no
+known mileage subtotal; any valid other ticket is retained only as a partial
+subtotal. The whole scenario does not enter V1 evaluation or complete comparison.
+Zero quoted taxes and zero account balances remain valid numeric inputs.
 No ordinary Standard price is derived from distance charts. THIRD_PARTY_OBSERVED,
 assumption values, wrong rule bindings and missing provenance do not become quotes.
 

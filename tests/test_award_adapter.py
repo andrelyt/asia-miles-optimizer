@@ -88,6 +88,14 @@ class AwardAdapterTests(unittest.TestCase):
             self.assertEqual(self.adapt(evidence=ev)['status'], 'NEEDS_DATA')
             self.assertEqual(self.adapt(balances_by_account={'TEST_A': value})['status'], 'NEEDS_DATA')
 
+    def test_zero_standard_quote_is_invalid_but_zero_account_balance_is_valid(self):
+        ev = copy.deepcopy(self.ev); ev['quotes']['outbound_1']['miles_per_person'] = 0
+        row = self.adapt(evidence=ev)
+        self.assertEqual(row['status'], 'NEEDS_DATA')
+        self.assertEqual(row['tickets'][0]['diagnostics'], ['INVALID_STANDARD_QUOTE_MILES'])
+        self.assertIsNone(row['tickets'][0]['miles_per_person'])
+        self.assertEqual(self.adapt(balances_by_account={'TEST_ZERO': 0})['status'], 'READY_FOR_EVALUATION')
+
     def test_unsupported_modes_schemes_and_roundtrip_grouping(self):
         for mode in ('ROUNDTRIP_AWARD', 'AWARD_PLUS_CASH', 'ONEWORLD_MULTI'):
             c = copy.deepcopy(self.c); c['ticketing_mode'] = mode; reidentify(c)

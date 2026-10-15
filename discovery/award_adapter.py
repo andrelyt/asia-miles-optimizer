@@ -147,7 +147,11 @@ def _ticket(ticket, candidate, rules, inputs, quotes, review):
         if not (_dated(quote, candidate, rules, review) and sourced(quote, {"AIRLINE_QUOTED"})):
             row["diagnostics"] = ["SOURCED_STANDARD_QUOTE_REQUIRED"]
             return row, None
-        miles = number(quote.get("miles_per_person"), "quoted miles", integer=True)
+        try:
+            miles = number(quote.get("miles_per_person"), "quoted miles", positive=True, integer=True)
+        except ValueError:
+            row.update(status="NEEDS_DATA", diagnostics=["INVALID_STANDARD_QUOTE_MILES"])
+            return row, None
         row.update(status="EVALUATED", pricing_status="QUOTED", miles_per_person=miles)
         return row, {"id": tid, "scheme": "standard", "miles_per_person": miles, "pricing_status": "verified"}
     if ticket["proposed_scheme"] != "standard_mixed":
@@ -205,6 +209,7 @@ def adapt_candidate(candidate, request, rules, evidence=None, balances_by_accoun
     result = {"status": "NEEDS_DATA", "candidate_id": candidate.get("candidate_id") if isinstance(candidate, dict) else None,
               "diagnostics": [], "tickets": [], "scenario": None, "settings": None,
               "pricing_status": "UNKNOWN", "award_seat_status": "NOT_CHECKED", "ticketability_status": "NOT_CHECKED",
+              "evidence_verification_status": "SUPPLIED_EVIDENCE_NOT_INDEPENDENTLY_VERIFIED",
               "complete_price_comparison_eligible": False, "validation_scope": "V1_INPUT_MODEL_ONLY",
               "rule_review": copy.deepcopy(evidence.get("rule_review")) if isinstance(evidence, dict) else None,
               "holiday_status": None,
