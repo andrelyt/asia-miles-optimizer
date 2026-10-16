@@ -213,3 +213,27 @@ full-price comparison. This protection also applies to existing mixed estimates.
 Unknown balances, seats, ticketability and taxes remain unknown/not checked.
 No runtime quote, applicability review, beneficiary eligibility or account evidence
 is fabricated. Existing calendars/routes and the 2027 rule review warning remain.
+
+
+## Phase 2C — opt-in decision families and approximate own-account scenario
+
+`planner.py` accepts `decision_families: true` and optional `approximate_funding`.
+Read [the Phase 2C contract](docs/DECISION_FAMILIES.md). Families group direct
+roundtrip strategies by holiday, destination and directional cabins; dates and IDs
+are excluded from the key. They add representatives, planning Pareto, four Top-5
+views and a diverse shortlist of at most eight families without removing candidates
+or original portfolio rows. This abstraction currently supports direct roundtrips;
+connecting structures fail explicitly rather than being silently merged.
+
+Approximate funding is a separate, explicit **each traveler pays their own tickets**
+scenario. It never pools balances or assigns another traveler as payer. Whole-horizon
+spending and per-year leave are accumulated independently. Unknown miles/balances
+stay conditional; mathematical success is at most ESTIMATED_BUDGET_FEASIBLE inside
+conditional, never confirmed funding or full-price comparison. Default payer/beneficiary
+allocation is unchanged. Keep personal runtime inputs/results private; committed
+metrics use anonymous traveler IDs and a scenario digest without balance values.
+
+Exhaustion metadata describes only the supplied candidate universe. Even all 408
+candidates and all 83,436 one/two-trip states do not establish a global optimum,
+real flights, 2027 tariff applicability, seats, taxes or bookability. See the
+[real-preference validation](validation/2027_REAL_PREFERENCE_PORTFOLIO.md).

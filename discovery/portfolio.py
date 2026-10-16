@@ -10,6 +10,7 @@ from .award_adapter import rules_digest
 from .award_pricing import price_candidate
 from .leave_engine import _request, evaluate_window
 from .portfolio_funding import allocate
+from .approximate_funding import simulate, validate_scenario
 from .route_graph import stable_id
 
 CONFIG_PATH = Path(__file__).resolve().parents[1] / 'config/portfolio_config.json'
@@ -164,7 +165,7 @@ def _prepare(row, request, calendar, rules, budgets, reference_chart=None):
             'taxes_hkd': tax * len(c['traveler_ids']) if tax is not None else None}, None
 
 
-def _portfolio(trips, request, budgets, balances, eligibility, counter, config):
+def _portfolio(trips, request, budgets, balances, eligibility, counter, config, approximate=None, audit=None):
     traveler_ids = sorted(t['id'] for t in request['travelers'])
     if len({t['holiday_key'] for t in trips}) != len(trips):
         return None, 'SAME_HOLIDAY_ALTERNATIVE'
@@ -178,9 +179,20 @@ def _portfolio(trips, request, budgets, balances, eligibility, counter, config):
         for tid, values in trip['leave'].items():
             for year in trip['years']:
                 leave[tid].setdefault(year, set()).update(v for v in values if v.startswith(year + '-'))
-    for tid, years in leave.items():
-        if any(len(days) > budgets[year][tid] for year, days in years.items()):
-            return None, 'ANNUAL_LEAVE_BUDGET_EXCEEDED'
+    breached = [tid for tid, years in leave.items() if any(len(days) > budgets[year][tid] for year, days in years.items())]
+    if breached:
+        if audit is not None:
+            for tid in breached: audit['leave_exceeded_by_traveler'][tid] += 1
+            if len(breached) == 1: audit['leave_exceeded_only_by_traveler'][breached[0]] += 1
+        return None, 'ANNUAL_LEAVE_BUDGET_EXCEEDED'
+    simulation = None
+    if approximate is not None:
+        complete = all(t['total_miles'] is not None for t in trips)
+        spend = {tid: sum(t['total_miles'] // len(traveler_ids) for t in trips) for tid in traveler_ids} if complete else None
+        simulation = simulate(spend, approximate)
+        if audit is not None: audit['funding_states'][simulation['status']] += 1
+        if simulation['status'] == 'INFEASIBLE':
+            return None, 'APPROXIMATE_TRAVELER_FUNDING_INFEASIBLE'
     missing = {reason for t in trips for reason in t['blockers']}
     jobs = []
     for trip in trips:
@@ -233,6 +245,9 @@ def _portfolio(trips, request, budgets, balances, eligibility, counter, config):
     reference_trips = [t for t in trips if t['reference_estimate']]
     reference_only = len(reference_trips) == len(trips)
     group = 'CONDITIONAL' if missing else 'CONFIRMED_BUDGET_FEASIBLE'
+    if approximate is not None:
+        missing.add('APPROXIMATE_BALANCES_NOT_AIRLINE_VERIFIED')
+        group = 'CONDITIONAL'
     if price_status == 'RULE_ESTIMATED' and group == 'CONFIRMED_BUDGET_FEASIBLE':
         group = 'ESTIMATED_BUDGET_FEASIBLE'
         missing.add('ESTIMATED_PRICING_NOT_AIRLINE_QUOTE')
@@ -249,6 +264,8 @@ def _portfolio(trips, request, budgets, balances, eligibility, counter, config):
             year = j['booking_year']
             annual_spend[j['payer']][year] = annual_spend[j['payer']].get(year, 0) + j['miles']
     identities = [(t['candidate_id'], t['priced'].get('evaluation_id')) for t in trips]
+    if simulation is not None:
+        identities.append(('approximate_scenario', simulation['scenario_digest']))
     pid = stable_id('portfolio_', {'trips': sorted(identities), 'request': _request(request),
                                   'budgets': budgets, 'balances': balances, 'eligibility': sorted(eligibility, key=lambda e: stable_id('', e))})
     evidence = {channel: sorted({t['priced'][channel] for t in trips}, key=str)
@@ -306,6 +323,15 @@ def _portfolio(trips, request, budgets, balances, eligibility, counter, config):
         # component estimates share one homogeneous reference comparison basis.
         if not reference_only:
             result['planning_pareto_only'] = False
+    if simulation is not None:
+        result['approximate_funding'] = simulation
+        result['status'] = ('ESTIMATED_BUDGET_FEASIBLE' if simulation['status'] == 'ESTIMATED_BUDGET_FEASIBLE'
+                            and complete_dates else 'CONDITIONAL')
+        result['complete_price_comparison_eligible'] = False
+        result['budget_blockers'] = sorted(set(result['budget_blockers']) | {'APPROXIMATE_BALANCES_NOT_AIRLINE_VERIFIED'})
+        result['missing_data'] = sorted(set(result['missing_data']) | {'APPROXIMATE_BALANCES_NOT_AIRLINE_VERIFIED'})
+        if result.get('estimate'):
+            result['estimate']['budget_status'] = result['status'] if result['status'] == 'ESTIMATED_BUDGET_FEASIBLE' else 'UNKNOWN'
     return result, None
 
 
@@ -430,13 +456,16 @@ def recommendation_views(fronts, limit, reference_mode=False):
 
 
 def optimize_portfolios(priced_candidates, request, calendar, rules, balances_by_account=None,
-                        funding_eligibility=None, config=None, reference_chart=None):
+                        funding_eligibility=None, config=None, reference_chart=None, approximate_funding=None):
     """Pure bounded portfolio selection, reusing actual PR1/PR3 contracts.
 
     Replays original supplied PR3 evidence; never trusts cached price/allocation.
     Missing funding confirmations keep numeric-feasible portfolios conditional.
     """
     request = normalized_request(request); config = portfolio_config(config); budgets = annual_budgets(request, config)
+    approximate = validate_scenario(approximate_funding, [t['id'] for t in request['travelers']])
+    if approximate is not None and balances_by_account is not None:
+        raise ValidationError('approximate self-funded scenario cannot be combined with payment-account allocation')
     if not isinstance(priced_candidates, list):
         raise ValidationError('priced_candidates must be a list')
     balances = copy.deepcopy(balances_by_account)
@@ -484,6 +513,7 @@ def optimize_portfolios(priced_candidates, request, calendar, rules, balances_by
     for key in window_counts:
         window_counts[key]['after_global_cap'] = sum(t['window_key'] == key for t in trips)
     trips.sort(key=lambda t: t['candidate_id'])
+    audit = {'leave_exceeded_by_traveler': Counter(), 'leave_exceeded_only_by_traveler': Counter(), 'funding_states': Counter()} if approximate is not None else None
     counter = {'visited': 0, 'truncated': False}; visited = 0; rows = []
     frontier = [()]
     for _ in range(request.get('max_trips', 1)):
@@ -494,7 +524,7 @@ def optimize_portfolios(priced_candidates, request, calendar, rules, balances_by
                     truncated = True; break
                 visited += 1
                 combination = indices + (index,)
-                row, reason = _portfolio([trips[i] for i in combination], request, budgets, balances, eligibility, counter, config)
+                row, reason = _portfolio([trips[i] for i in combination], request, budgets, balances, eligibility, counter, config, approximate, audit)
                 if reason: rejected[reason] += 1
                 else: rows.append(row); following.append(combination)
             if visited >= config['max_states']: break
@@ -505,7 +535,7 @@ def optimize_portfolios(priced_candidates, request, calendar, rules, balances_by
     fronts = {'budget_feasible': front_function([r for r in rows if r['status'] == 'CONFIRMED_BUDGET_FEASIBLE']),
               'conditional': front_function([r for r in rows if r['status'] in ('CONDITIONAL', 'ESTIMATED_BUDGET_FEASIBLE')])}
     rejected['PARETO_DOMINATED'] = len(rows) - sum(len(v) for v in fronts.values())
-    return {**fronts, 'views': recommendation_views(fronts, config['max_per_view'], reference_chart is not None),
+    result = {**fronts, 'views': recommendation_views(fronts, config['max_per_view'], reference_chart is not None),
             'rejected': dict(sorted(rejected.items())), 'search_truncated': truncated or counter['truncated'],
             'diagnostics': {'portfolio_states_visited': visited, 'allocation_states_visited': counter['visited'],
                             'candidate_counts_by_window': window_counts,
@@ -514,3 +544,13 @@ def optimize_portfolios(priced_candidates, request, calendar, rules, balances_by
             'balances_by_account': dict(sorted(balances.items())) if balances is not None else None,
             'funding_eligibility_evidence': sorted(eligibility, key=lambda e: stable_id('', e)), 'metadata': {'milestone': 'V2_ALPHA_PR4', 'rules_digest': rules_digest(rules),
                 'budget_feasibility_is_not_bookability': True, 'evidence_verification_status': 'SUPPLIED_EVIDENCE_NOT_INDEPENDENTLY_VERIFIED'}}
+
+    if approximate is not None:
+        result['diagnostics']['approximate_scenario'] = {
+            'scenario_digest': stable_id('funding_scenario_', approximate),
+            'evidence_level': 'USER_REPORTED_APPROXIMATE',
+            'policy': 'OWN_ACCOUNT_PER_TRAVELER_NO_POOLING',
+            'funding_states': dict(audit['funding_states']),
+            'leave_exceeded_by_traveler': dict(audit['leave_exceeded_by_traveler']),
+            'leave_exceeded_only_by_traveler': dict(audit['leave_exceeded_only_by_traveler'])}
+    return result

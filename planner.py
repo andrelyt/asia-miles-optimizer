@@ -3,6 +3,7 @@
 import argparse
 import copy
 import json
+import math
 from pathlib import Path
 import sys
 
@@ -27,7 +28,7 @@ def plan(supplied, base_dir='.'):
     """PR1 -> PR2 -> PR3 -> PR4. No quote generation, I/O except local resources."""
     if not isinstance(supplied, dict): raise ValidationError('planner input must be an object')
     allowed = {'data_label', 'request', 'calendars', 'route_graph', 'rules', 'search_config',
-               'portfolio_config', 'evidence_by_candidate', 'balances_by_account', 'funding_eligibility', 'reference_chart'}
+               'portfolio_config', 'evidence_by_candidate', 'balances_by_account', 'funding_eligibility', 'reference_chart', 'approximate_funding', 'decision_families'}
     if set(supplied) - allowed or not {'request', 'calendars', 'route_graph', 'rules'} <= set(supplied):
         raise ValidationError('unknown/missing planner inputs')
     base = Path(base_dir)
@@ -45,6 +46,10 @@ def plan(supplied, base_dir='.'):
     if not isinstance(evidence, dict): raise ValidationError('evidence_by_candidate must be an object')
     balances = _resource(supplied.get('balances_by_account'), base)
     eligibility = _resource(supplied.get('funding_eligibility'), base)
+    approximate = _resource(supplied.get('approximate_funding'), base)
+    family_mode = supplied.get('decision_families', False)
+    if type(family_mode) is not bool:
+        raise ValidationError('decision_families must be boolean')
     reference = _resource(supplied.get('reference_chart'), base)
     windows = generate_windows(calendar, window_request(request, budgets), search)
     selected_windows = diverse_limit(windows['windows'], config['max_windows'], lambda w: w['holiday_type'],
@@ -79,7 +84,7 @@ def plan(supplied, base_dir='.'):
     # Do not run PR3's exponential per-trip account enumeration: PR4 allocates all
     # trips globally under its explicit state limit, using PR3 ticket requirements.
     priced = [price_candidate(c, request, rules, evidence.get(c['candidate_id']), reference_chart=reference) for c in sorted(kept, key=lambda c: c['candidate_id'])]
-    result = optimize_portfolios(priced, request, calendar, rules, balances, eligibility, config, reference_chart=reference)
+    result = optimize_portfolios(priced, request, calendar, rules, balances, eligibility, config, reference_chart=reference, approximate_funding=approximate)
     result['search_truncated'] |= truncated
     result['input_snapshots'] = {'data_label': supplied.get('data_label'),
         'calendar_ids': sorted(s['calendar_id'] for s in snapshots), 'route_snapshot_id': graph.snapshot_id,
@@ -94,6 +99,21 @@ def plan(supplied, base_dir='.'):
         result['input_snapshots']['reference_digest'] = stable_id('reference_', reference)
         result['metadata']['reference_planning_enabled'] = True
         result['metadata']['reference_notice'] = 'PLANNING ESTIMATE ONLY; NOT AN AIRLINE QUOTE; NOT VERIFIED FOR 2027; NOT BOOKABLE'
+    if family_mode:
+        from discovery.decision_families import summarize_families
+        result['decision_families'] = summarize_families(result, request)
+    if approximate is not None or family_mode:
+        raw_count = sum(x['before_window_cap'] for x in window_counts.values())
+        retained = len(result['trips'])
+        expected = sum(math.comb(retained, n) for n in range(1, min(request.get('max_trips', 1), retained) + 1))
+        result['diagnostics']['universe'] = {
+            'generated_candidates': raw_count, 'retained_candidates': retained,
+            'candidate_cap_truncated': any(x['after_global_cap'] < x['before_window_cap'] for x in window_counts.values()),
+            'theoretical_portfolio_states': expected,
+            'portfolio_states_exhausted': result['diagnostics']['portfolio_states_visited'] == expected,
+            'CURRENT_UNIVERSE_EXHAUSTED': not result['search_truncated'] and result['diagnostics']['portfolio_states_visited'] == expected,
+            'scope': 'EXHAUSTIVE_WITHIN_CURRENT_CANDIDATE_UNIVERSE' if not result['search_truncated'] and result['diagnostics']['portfolio_states_visited'] == expected else 'BOUNDED_SUBSET',
+            'GLOBAL_OPTIMUM': False}
     return result
 
 

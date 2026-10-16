@@ -1,0 +1,1881 @@
+{
+  "CURRENT_UNIVERSE_EXHAUSTED": true,
+  "GLOBAL_OPTIMUM": false,
+  "PHASE_2C_DECISION_STABILITY_VERDICT": "MODERATELY_STABLE",
+  "balance_privacy": "Runtime balances and remainders omitted. Anonymous traveler IDs and scenario digest only; spend is a planning estimate.",
+  "best_one_trip": {
+    "Leave Efficient": {
+      "asymmetric": false,
+      "canonical_key": "1_TRIPS|OCT:AKL:J-J",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 364000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_04f5d2a699d0f5cfa1cbaba7",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 182000,
+          "traveler_b": 182000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": false
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 4
+        },
+        "traveler_b": {
+          "2027": 4
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 11
+        },
+        "traveler_b": {
+          "2027": 9
+        }
+      },
+      "longhaul_j": true,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_6a9e506cd34c8d5a8ad77470",
+      "taxes_hkd": null,
+      "travel_calendar_days": 9,
+      "trip_count": 1,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_ccfedf50b2033d651b6b7c9c",
+          "destination": "AKL",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "variant_count": 12
+    },
+    "Miles Saver": {
+      "asymmetric": false,
+      "canonical_key": "1_TRIPS|MAY:CTS:Y-Y",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 52000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_d34fb6256a06af528e67ac70",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 26000,
+          "traveler_b": 26000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": false
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 5
+        },
+        "traveler_b": {
+          "2027": 5
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 10
+        },
+        "traveler_b": {
+          "2027": 8
+        }
+      },
+      "longhaul_j": false,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_b0204ce084fb913005afdeeb",
+      "taxes_hkd": null,
+      "travel_calendar_days": 9,
+      "trip_count": 1,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_9bc5c8702a2c85c0f02c58a3",
+          "destination": "CTS",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-04-24"
+        }
+      ],
+      "variant_count": 6
+    }
+  },
+  "best_two_trip": {
+    "Balanced": {
+      "asymmetric": false,
+      "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:Y-Y",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 104000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_960039388602e5479a63bd2f",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 52000,
+          "traveler_b": 52000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": false
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 9
+        },
+        "traveler_b": {
+          "2027": 9
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 6
+        },
+        "traveler_b": {
+          "2027": 4
+        }
+      },
+      "longhaul_j": false,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_f04bbb07aed81d0e676c315a",
+      "taxes_hkd": null,
+      "travel_calendar_days": 18,
+      "trip_count": 2,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_9bc5c8702a2c85c0f02c58a3",
+          "destination": "CTS",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-04-24"
+        },
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_ab44d40c004ee514dc22e975",
+          "destination": "CTS",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "variant_count": 25
+    },
+    "Comfort First": {
+      "asymmetric": false,
+      "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:J-J",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 496000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_3447ce181b7cddb4d39fa2f8",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 248000,
+          "traveler_b": 248000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": true
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 9
+        },
+        "traveler_b": {
+          "2027": 9
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 6
+        },
+        "traveler_b": {
+          "2027": 4
+        }
+      },
+      "longhaul_j": true,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_e12606a15532ae65159fe1f4",
+      "taxes_hkd": null,
+      "travel_calendar_days": 18,
+      "trip_count": 2,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_e59bde765db767827ec70b0e",
+          "destination": "AKL",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-04-24"
+        },
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_3249385cc5c091c217ec678d",
+          "destination": "CTS",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "variant_count": 25
+    }
+  },
+  "comparisons": {
+    "C100_vs_C200": {
+      "Balanced": {
+        "exact": {
+          "intersection": 0,
+          "jaccard": 0.0,
+          "left_count": 5,
+          "overlap": 0.0,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 2,
+          "jaccard": 0.25,
+          "left_count": 5,
+          "overlap": 0.4,
+          "right_count": 5
+        }
+      },
+      "Comfort First": {
+        "exact": {
+          "intersection": 3,
+          "jaccard": 0.42857142857142855,
+          "left_count": 5,
+          "overlap": 0.6,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 5,
+          "jaccard": 1.0,
+          "left_count": 5,
+          "overlap": 1.0,
+          "right_count": 5
+        }
+      },
+      "Leave Efficient": {
+        "exact": {
+          "intersection": 4,
+          "jaccard": 0.6666666666666666,
+          "left_count": 5,
+          "overlap": 0.8,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 2,
+          "jaccard": 0.25,
+          "left_count": 5,
+          "overlap": 0.4,
+          "right_count": 5
+        }
+      },
+      "Miles Saver": {
+        "exact": {
+          "intersection": 1,
+          "jaccard": 0.1111111111111111,
+          "left_count": 5,
+          "overlap": 0.2,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 4,
+          "jaccard": 0.6666666666666666,
+          "left_count": 5,
+          "overlap": 0.8,
+          "right_count": 5
+        }
+      }
+    },
+    "C100_vs_C408": {
+      "Balanced": {
+        "exact": {
+          "intersection": 0,
+          "jaccard": 0.0,
+          "left_count": 5,
+          "overlap": 0.0,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 2,
+          "jaccard": 0.25,
+          "left_count": 5,
+          "overlap": 0.4,
+          "right_count": 5
+        }
+      },
+      "Comfort First": {
+        "exact": {
+          "intersection": 0,
+          "jaccard": 0.0,
+          "left_count": 5,
+          "overlap": 0.0,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 5,
+          "jaccard": 1.0,
+          "left_count": 5,
+          "overlap": 1.0,
+          "right_count": 5
+        }
+      },
+      "Leave Efficient": {
+        "exact": {
+          "intersection": 1,
+          "jaccard": 0.1111111111111111,
+          "left_count": 5,
+          "overlap": 0.2,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 1,
+          "jaccard": 0.1111111111111111,
+          "left_count": 5,
+          "overlap": 0.2,
+          "right_count": 5
+        }
+      },
+      "Miles Saver": {
+        "exact": {
+          "intersection": 1,
+          "jaccard": 0.1111111111111111,
+          "left_count": 5,
+          "overlap": 0.2,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 4,
+          "jaccard": 0.6666666666666666,
+          "left_count": 5,
+          "overlap": 0.8,
+          "right_count": 5
+        }
+      }
+    },
+    "C200_vs_C408": {
+      "Balanced": {
+        "exact": {
+          "intersection": 1,
+          "jaccard": 0.1111111111111111,
+          "left_count": 5,
+          "overlap": 0.2,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 5,
+          "jaccard": 1.0,
+          "left_count": 5,
+          "overlap": 1.0,
+          "right_count": 5
+        }
+      },
+      "Comfort First": {
+        "exact": {
+          "intersection": 0,
+          "jaccard": 0.0,
+          "left_count": 5,
+          "overlap": 0.0,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 5,
+          "jaccard": 1.0,
+          "left_count": 5,
+          "overlap": 1.0,
+          "right_count": 5
+        }
+      },
+      "Leave Efficient": {
+        "exact": {
+          "intersection": 1,
+          "jaccard": 0.1111111111111111,
+          "left_count": 5,
+          "overlap": 0.2,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 2,
+          "jaccard": 0.25,
+          "left_count": 5,
+          "overlap": 0.4,
+          "right_count": 5
+        }
+      },
+      "Miles Saver": {
+        "exact": {
+          "intersection": 2,
+          "jaccard": 0.25,
+          "left_count": 5,
+          "overlap": 0.4,
+          "right_count": 5
+        },
+        "family": {
+          "intersection": 5,
+          "jaccard": 1.0,
+          "left_count": 5,
+          "overlap": 1.0,
+          "right_count": 5
+        }
+      }
+    }
+  },
+  "config": {
+    "max_allocation_states": 20000,
+    "max_candidates_per_window": 17,
+    "max_per_view": 5,
+    "max_states": 90000,
+    "max_trips": 2,
+    "max_windows": 30,
+    "runtime_ceiling_seconds": 60
+  },
+  "execution_base_head": "88f3cc803d234e7f0c8a2098ad218bf8f8d6e4dc",
+  "funding_policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+  "implementation_sha256": {
+    "discovery/approximate_funding.py": "459a75f2b31738e032d3f700bc0e729ca37b7d174923543ebf1a15699c756dd0",
+    "discovery/decision_families.py": "8b07c106bada8d88cf112b849c6de3804b1d7d2503266e90da05aba4e9d738ca",
+    "discovery/portfolio.py": "efd7dd752b7372aef5aa4e1189c95e4948df21a4f305d934cc4794501bdeb0ff",
+    "planner.py": "2c00098ab0d73635fdea0e71d0ad5171693da6b111dcc54e4c0fe71e8ff87975"
+  },
+  "notice": [
+    "PLANNING ONLY",
+    "NOT BOOKABLE",
+    "NO LIVE SEAT CHECK",
+    "NO AIRLINE QUOTE",
+    "TAXES UNKNOWN"
+  ],
+  "phase": "2C",
+  "python": "Python 3.9.6",
+  "run_provenance": {
+    "memory_measurement": "Cumulative child-process ru_maxrss after completion on macOS; observed, not a hard memory limit. Wall-time ceiling enforced externally.",
+    "primary": "Completed search snapshots; final family presentation reapplied without search. C100/C200 replay non-presentation results exactly identical.",
+    "repeat": {
+      "C100": {
+        "blocker": null,
+        "cumulative_children_peak_rss_mib": 55.859375,
+        "exit_code": 0,
+        "runtime_seconds": 3.717650041
+      },
+      "C200": {
+        "blocker": null,
+        "cumulative_children_peak_rss_mib": 104.53125,
+        "exit_code": 0,
+        "runtime_seconds": 6.347878
+      },
+      "C408": {
+        "blocker": "RUNTIME_CEILING_60_SECONDS",
+        "cumulative_children_peak_rss_mib": 125.90625,
+        "exit_code": -15,
+        "runtime_seconds": 60.530928
+      }
+    }
+  },
+  "runs": {
+    "C100": {
+      "confirmed_budget_feasible_portfolios": 0,
+      "estimated_budget_feasible_families": 164,
+      "estimated_budget_feasible_portfolios": 555,
+      "exact_top5": {
+        "Balanced": [
+          "portfolio_2bf8206f849871788c7751d3",
+          "portfolio_776b60dc4415b8c4ccd0a87d",
+          "portfolio_01b0eee59891cd731ea0fda9",
+          "portfolio_34c1ae50196f1d4b41d8d2cf",
+          "portfolio_7bb97e8c801edfe4578dca6b"
+        ],
+        "Comfort First": [
+          "portfolio_054de496e4b93afb961dd879",
+          "portfolio_0c70785434801f771fb41507",
+          "portfolio_269bdc73e8995827b3039664",
+          "portfolio_19f4fb19febccbda2cd1a052",
+          "portfolio_169aa6c8b844425fbacaaa55"
+        ],
+        "Leave Efficient": [
+          "portfolio_48198a906e4734b99eadb703",
+          "portfolio_05c6abe25348b6eb6cbbaa7d",
+          "portfolio_6f15e528ea4ee887e696050b",
+          "portfolio_081544454c39934a246f9dc0",
+          "portfolio_b372554ce9e654ae6f9b2130"
+        ],
+        "Miles Saver": [
+          "portfolio_108987fc8c7f3f9a0b1df73a",
+          "portfolio_dfe41132f191ac5d365bfc88",
+          "portfolio_f0a848ddfc827a5007195008",
+          "portfolio_49df31fad3e874051193aaac",
+          "portfolio_67e17d9bb7916612a4a726f1"
+        ]
+      },
+      "exit_code": 0,
+      "families": 164,
+      "family_pareto_count": 164,
+      "family_top5": {
+        "Balanced": [
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:W-W",
+            "family_id": "family_7545a6e586c5bde427f9b344"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:W-J|OCT:CTS:Y-Y",
+            "family_id": "family_6bc67b17f4b5360bfefd79ab"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:J-W",
+            "family_id": "family_26fa1edc41a2e57b03b194f9"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:W-J",
+            "family_id": "family_751cfd4a91d69ab21d299433"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:J-J|OCT:CTS:Y-Y",
+            "family_id": "family_2c79908e33d4ebc21771d315"
+          }
+        ],
+        "Comfort First": [
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:J-J",
+            "family_id": "family_3447ce181b7cddb4d39fa2f8"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:J-W",
+            "family_id": "family_7e8cc490b1e3f4d946c577a8"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:W-J",
+            "family_id": "family_1a4042e7fbc61c375ca4dee8"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:W-W",
+            "family_id": "family_41c08575bf948120c50d6a63"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:Y-Y",
+            "family_id": "family_852d2f8f988e67b984a2ea1a"
+          }
+        ],
+        "Leave Efficient": [
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:J-J",
+            "family_id": "family_6bce2ab967eb7e14d65ea5d0"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:J-W",
+            "family_id": "family_9b6c7e7b59efc082c0d08fc4"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:ZRH:J-J",
+            "family_id": "family_4aeac27c218bc53af803ce66"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:ZRH:W-J",
+            "family_id": "family_7e3a95451109736699c43dfb"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:ZRH:W-W",
+            "family_id": "family_3c836514ffc5eaed0e26d0bc"
+          }
+        ],
+        "Miles Saver": [
+          {
+            "canonical_key": "1_TRIPS|MAY:CTS:Y-Y",
+            "family_id": "family_d34fb6256a06af528e67ac70"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:Y-Y",
+            "family_id": "family_1a07791fd54ab0d7afc1d5e8"
+          },
+          {
+            "canonical_key": "1_TRIPS|MAY:CTS:W-W",
+            "family_id": "family_e5f701d9ef15403eb8bf8848"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:W-W",
+            "family_id": "family_004be1ce76e16b1519df95ae"
+          },
+          {
+            "canonical_key": "1_TRIPS|MAY:CTS:J-W",
+            "family_id": "family_695c78e80f42c7e8c23fa5c3"
+          }
+        ]
+      },
+      "final_presentation_sha256": "6aa2544ef86c5d239933ef38fc64074f994023db5c33fb550f4498289218f938",
+      "funding_before_pareto": {
+        "ESTIMATED_BUDGET_FEASIBLE": 1040,
+        "INFEASIBLE": 287
+      },
+      "leave_exceeded_by_traveler": {
+        "traveler_a": 412,
+        "traveler_b": 984
+      },
+      "leave_exceeded_only_by_traveler": {
+        "traveler_b": 572
+      },
+      "observed_peak_rss_mib": 60.078125,
+      "primary_output_sha256": "4f26915daf7781e5c3d196a17fede79daabeebc5079f7d13d672d07051992ebf",
+      "rejected": {
+        "ANNUAL_LEAVE_BUDGET_EXCEEDED": 984,
+        "APPROXIMATE_TRAVELER_FUNDING_INFEASIBLE": 287,
+        "PARETO_DOMINATED": 485,
+        "SAME_HOLIDAY_ALTERNATIVE": 2739
+      },
+      "returned_portfolios": 555,
+      "runtime_seconds": 1.0253944590000001,
+      "search_truncated": true,
+      "states_explored": 5050,
+      "universe": {
+        "CURRENT_UNIVERSE_EXHAUSTED": false,
+        "GLOBAL_OPTIMUM": false,
+        "candidate_cap_truncated": true,
+        "generated_candidates": 408,
+        "portfolio_states_exhausted": true,
+        "retained_candidates": 100,
+        "scope": "BOUNDED_SUBSET",
+        "theoretical_portfolio_states": 5050
+      }
+    },
+    "C200": {
+      "confirmed_budget_feasible_portfolios": 0,
+      "estimated_budget_feasible_families": 221,
+      "estimated_budget_feasible_portfolios": 1463,
+      "exact_top5": {
+        "Balanced": [
+          "portfolio_057602143a2b0494d970a43d",
+          "portfolio_72e5cbc1bfca42505b6282f7",
+          "portfolio_94ffadacebdfe5dea5fecaf7",
+          "portfolio_120f912c97540c37da9a9514",
+          "portfolio_1839933a92d4be6661a2e847"
+        ],
+        "Comfort First": [
+          "portfolio_0335ba6d9714651949d3134c",
+          "portfolio_0c70785434801f771fb41507",
+          "portfolio_269bdc73e8995827b3039664",
+          "portfolio_19f4fb19febccbda2cd1a052",
+          "portfolio_0861a7aed5ea27e70ddce82b"
+        ],
+        "Leave Efficient": [
+          "portfolio_48198a906e4734b99eadb703",
+          "portfolio_05c6abe25348b6eb6cbbaa7d",
+          "portfolio_6a29c1bf584f7cb3eae2f489",
+          "portfolio_081544454c39934a246f9dc0",
+          "portfolio_b372554ce9e654ae6f9b2130"
+        ],
+        "Miles Saver": [
+          "portfolio_108987fc8c7f3f9a0b1df73a",
+          "portfolio_1b2ea998dc46abdb17bfa8dd",
+          "portfolio_5b28a1d24af393b85c676a90",
+          "portfolio_892f8a86f28d406ba786b7a4",
+          "portfolio_a437cb6bc355116fa4c1d3cb"
+        ]
+      },
+      "exit_code": 0,
+      "families": 221,
+      "family_pareto_count": 221,
+      "family_top5": {
+        "Balanced": [
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:Y-Y",
+            "family_id": "family_960039388602e5479a63bd2f"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:W-W|OCT:CTS:Y-Y",
+            "family_id": "family_f1b642eff845324fad68d6e5"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:W-W",
+            "family_id": "family_7545a6e586c5bde427f9b344"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:J-W|OCT:CTS:Y-Y",
+            "family_id": "family_1d41be355e9c43a96d2989e7"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:W-J|OCT:CTS:Y-Y",
+            "family_id": "family_6bc67b17f4b5360bfefd79ab"
+          }
+        ],
+        "Comfort First": [
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:J-J",
+            "family_id": "family_3447ce181b7cddb4d39fa2f8"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:J-W",
+            "family_id": "family_7e8cc490b1e3f4d946c577a8"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:W-J",
+            "family_id": "family_1a4042e7fbc61c375ca4dee8"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:W-W",
+            "family_id": "family_41c08575bf948120c50d6a63"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:Y-Y",
+            "family_id": "family_852d2f8f988e67b984a2ea1a"
+          }
+        ],
+        "Leave Efficient": [
+          {
+            "canonical_key": "1_TRIPS|OCT:AKL:J-W",
+            "family_id": "family_adfd5a99b94d63b072eddec5"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:J-J",
+            "family_id": "family_6bce2ab967eb7e14d65ea5d0"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:J-W",
+            "family_id": "family_9b6c7e7b59efc082c0d08fc4"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:W-J",
+            "family_id": "family_766246df4baf5813ea6d7a13"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:SYD:W-W",
+            "family_id": "family_e7de5c66881c6e470c834143"
+          }
+        ],
+        "Miles Saver": [
+          {
+            "canonical_key": "1_TRIPS|MAY:CTS:Y-Y",
+            "family_id": "family_d34fb6256a06af528e67ac70"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:Y-Y",
+            "family_id": "family_1a07791fd54ab0d7afc1d5e8"
+          },
+          {
+            "canonical_key": "1_TRIPS|MAY:CTS:W-W",
+            "family_id": "family_e5f701d9ef15403eb8bf8848"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:W-W",
+            "family_id": "family_004be1ce76e16b1519df95ae"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:Y-Y",
+            "family_id": "family_960039388602e5479a63bd2f"
+          }
+        ]
+      },
+      "final_presentation_sha256": "129309bf3069558cedbe5f744edf1e939e5348897befff00fdf0a5042dbdbf44",
+      "funding_before_pareto": {
+        "ESTIMATED_BUDGET_FEASIBLE": 3765,
+        "INFEASIBLE": 1235
+      },
+      "leave_exceeded_by_traveler": {
+        "traveler_a": 1747,
+        "traveler_b": 4111
+      },
+      "leave_exceeded_only_by_traveler": {
+        "traveler_b": 2364
+      },
+      "observed_peak_rss_mib": 107.484375,
+      "primary_output_sha256": "e9040ab21f8f92fc964749ddc7b2ad7d7f441f578070c9a1d6e81f58e355407a",
+      "rejected": {
+        "ANNUAL_LEAVE_BUDGET_EXCEEDED": 4111,
+        "APPROXIMATE_TRAVELER_FUNDING_INFEASIBLE": 1235,
+        "PARETO_DOMINATED": 2302,
+        "SAME_HOLIDAY_ALTERNATIVE": 10989
+      },
+      "returned_portfolios": 1463,
+      "runtime_seconds": 2.253129708,
+      "search_truncated": true,
+      "states_explored": 20100,
+      "universe": {
+        "CURRENT_UNIVERSE_EXHAUSTED": false,
+        "GLOBAL_OPTIMUM": false,
+        "candidate_cap_truncated": true,
+        "generated_candidates": 408,
+        "portfolio_states_exhausted": true,
+        "retained_candidates": 200,
+        "scope": "BOUNDED_SUBSET",
+        "theoretical_portfolio_states": 20100
+      }
+    },
+    "C408": {
+      "confirmed_budget_feasible_portfolios": 0,
+      "estimated_budget_feasible_families": 231,
+      "estimated_budget_feasible_portfolios": 5231,
+      "exact_top5": {
+        "Balanced": [
+          "portfolio_057602143a2b0494d970a43d",
+          "portfolio_0947bab72f8e703656eb275e",
+          "portfolio_23e197c9d0a1d42267aff53c",
+          "portfolio_2d8aa2ccee38b5b3bfe0810b",
+          "portfolio_309fc96574b8f97572ddf6f2"
+        ],
+        "Comfort First": [
+          "portfolio_00d63d00611a23205ce91289",
+          "portfolio_0b93c7286ef336e7675e0b90",
+          "portfolio_18f6f4725665357b24c5c56e",
+          "portfolio_154d9700a2a00e5d5402eff9",
+          "portfolio_006ea4f217a367fd6dc622ae"
+        ],
+        "Leave Efficient": [
+          "portfolio_0f9c18a789d924d4b4834cbb",
+          "portfolio_05c6abe25348b6eb6cbbaa7d",
+          "portfolio_41bfd553618bb9a8a46a5433",
+          "portfolio_06416b54d8ecdeddee3b8684",
+          "portfolio_47a5d0c9bf839cab72c98e49"
+        ],
+        "Miles Saver": [
+          "portfolio_0a0e55a22e2e66299b87e0d2",
+          "portfolio_0f9c18a789d924d4b4834cbb",
+          "portfolio_108987fc8c7f3f9a0b1df73a",
+          "portfolio_11d62efe5447f23fa12fbb10",
+          "portfolio_1b2ea998dc46abdb17bfa8dd"
+        ]
+      },
+      "exit_code": 0,
+      "families": 231,
+      "family_pareto_count": 231,
+      "family_top5": {
+        "Balanced": [
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:Y-Y",
+            "family_id": "family_960039388602e5479a63bd2f"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:W-W|OCT:CTS:Y-Y",
+            "family_id": "family_f1b642eff845324fad68d6e5"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:W-W",
+            "family_id": "family_7545a6e586c5bde427f9b344"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:J-W|OCT:CTS:Y-Y",
+            "family_id": "family_1d41be355e9c43a96d2989e7"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:W-J|OCT:CTS:Y-Y",
+            "family_id": "family_6bc67b17f4b5360bfefd79ab"
+          }
+        ],
+        "Comfort First": [
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:J-J",
+            "family_id": "family_3447ce181b7cddb4d39fa2f8"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:J-W",
+            "family_id": "family_7e8cc490b1e3f4d946c577a8"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:W-J",
+            "family_id": "family_1a4042e7fbc61c375ca4dee8"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:W-W",
+            "family_id": "family_41c08575bf948120c50d6a63"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:Y-Y",
+            "family_id": "family_852d2f8f988e67b984a2ea1a"
+          }
+        ],
+        "Leave Efficient": [
+          {
+            "canonical_key": "1_TRIPS|OCT:AKL:J-J",
+            "family_id": "family_04f5d2a699d0f5cfa1cbaba7"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:AKL:J-W",
+            "family_id": "family_adfd5a99b94d63b072eddec5"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:AKL:W-J",
+            "family_id": "family_196fdb61ef01c4685364f4f9"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:AKL:W-W",
+            "family_id": "family_5dc4bf332b7ea8f242678fa0"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:J-J",
+            "family_id": "family_6bce2ab967eb7e14d65ea5d0"
+          }
+        ],
+        "Miles Saver": [
+          {
+            "canonical_key": "1_TRIPS|MAY:CTS:Y-Y",
+            "family_id": "family_d34fb6256a06af528e67ac70"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:Y-Y",
+            "family_id": "family_1a07791fd54ab0d7afc1d5e8"
+          },
+          {
+            "canonical_key": "1_TRIPS|MAY:CTS:W-W",
+            "family_id": "family_e5f701d9ef15403eb8bf8848"
+          },
+          {
+            "canonical_key": "1_TRIPS|OCT:CTS:W-W",
+            "family_id": "family_004be1ce76e16b1519df95ae"
+          },
+          {
+            "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:Y-Y",
+            "family_id": "family_960039388602e5479a63bd2f"
+          }
+        ]
+      },
+      "final_presentation_sha256": "56b7de6416376076869efd94d11d5b2d6ee280f3a0eb215cd9a9459a852eca3a",
+      "funding_before_pareto": {
+        "ESTIMATED_BUDGET_FEASIBLE": 15657,
+        "INFEASIBLE": 4692
+      },
+      "leave_exceeded_by_traveler": {
+        "traveler_a": 7225,
+        "traveler_b": 17051
+      },
+      "leave_exceeded_only_by_traveler": {
+        "traveler_b": 9826
+      },
+      "observed_peak_rss_mib": 263.84375,
+      "primary_output_sha256": "691c9a962743c74f516d5ddf4326be3a854ee3eac1ca97ddd0efeedb10a4f882",
+      "rejected": {
+        "ANNUAL_LEAVE_BUDGET_EXCEEDED": 17051,
+        "APPROXIMATE_TRAVELER_FUNDING_INFEASIBLE": 4692,
+        "PARETO_DOMINATED": 10426,
+        "SAME_HOLIDAY_ALTERNATIVE": 46036
+      },
+      "returned_portfolios": 5231,
+      "runtime_seconds": 11.620166667,
+      "search_truncated": false,
+      "states_explored": 83436,
+      "universe": {
+        "CURRENT_UNIVERSE_EXHAUSTED": true,
+        "GLOBAL_OPTIMUM": false,
+        "candidate_cap_truncated": false,
+        "generated_candidates": 408,
+        "portfolio_states_exhausted": true,
+        "retained_candidates": 408,
+        "scope": "EXHAUSTIVE_WITHIN_CURRENT_CANDIDATE_UNIVERSE",
+        "theoretical_portfolio_states": 83436
+      }
+    }
+  },
+  "safety_checks": {
+    "calendar_remains_estimated": "PASS",
+    "no_confirmed_budget": "PASS",
+    "no_generated_airline_quote": "PASS",
+    "no_global_optimality": "PASS",
+    "no_pooling": "PASS",
+    "no_unknown_mileage_zero_fallback": "PASS",
+    "official_2027_review_gate_retained": "PASS",
+    "routes_remain_unverified": "PASS",
+    "seats_not_checked": "PASS",
+    "ticketability_not_checked": "PASS",
+    "unknown_taxes_not_zero": "PASS"
+  },
+  "scenario_digest": "funding_scenario_aaff3aece2c79bba9142b8b5",
+  "source_sha256": {
+    "rules_2026_10.json": "1b88502223b3df56da028d488c4a03d1517dc9daef074c51c55342f93d684867",
+    "validation/2027_calendar_estimated_anchors_only.json": "813c1bc5d94aa9b1e69a3d52e3b87ea2813e234fc05d426633772f308e00b10a",
+    "validation/2027_conditional_planner_input.json": "6820386f2ed610c2aa4fd93dca4788ccdee08c7f55b23f59b0cba3cf90580c18",
+    "validation/2027_hkg_four_dest_route_graph_unverified.json": "bed3c5b830c5378e56d50d0a4c3cad52321a5f8aee65a870bfa582d138462045",
+    "validation/2027_reference_chart_profile.json": "e078bea300d9b3777b99b9db47002fdaa3c6b53f9623814ab68a73d82865f9e7",
+    "validation/2027_travel_request.json": "7a0f2e3409761bb22a4acdd192d59694439146c988e2ba75b678354d38b229d5"
+  },
+  "tests": {
+    "added": 29,
+    "after": 327,
+    "baseline": 298,
+    "errors": 0,
+    "failed": 0,
+    "passed": 327
+  },
+  "verification_lead_count": 16,
+  "verification_leads": [
+    {
+      "cabin": "J",
+      "destination": "HKG",
+      "origin": "AKL",
+      "planning_date": "2027-05-02"
+    },
+    {
+      "cabin": "J",
+      "destination": "HKG",
+      "origin": "AKL",
+      "planning_date": "2027-10-03"
+    },
+    {
+      "cabin": "Y",
+      "destination": "HKG",
+      "origin": "CTS",
+      "planning_date": "2027-05-02"
+    },
+    {
+      "cabin": "J",
+      "destination": "HKG",
+      "origin": "CTS",
+      "planning_date": "2027-10-03"
+    },
+    {
+      "cabin": "Y",
+      "destination": "HKG",
+      "origin": "CTS",
+      "planning_date": "2027-10-03"
+    },
+    {
+      "cabin": "J",
+      "destination": "AKL",
+      "origin": "HKG",
+      "planning_date": "2027-04-24"
+    },
+    {
+      "cabin": "J",
+      "destination": "AKL",
+      "origin": "HKG",
+      "planning_date": "2027-09-25"
+    },
+    {
+      "cabin": "Y",
+      "destination": "CTS",
+      "origin": "HKG",
+      "planning_date": "2027-04-24"
+    },
+    {
+      "cabin": "J",
+      "destination": "CTS",
+      "origin": "HKG",
+      "planning_date": "2027-09-25"
+    },
+    {
+      "cabin": "Y",
+      "destination": "CTS",
+      "origin": "HKG",
+      "planning_date": "2027-09-25"
+    },
+    {
+      "cabin": "J",
+      "destination": "SYD",
+      "origin": "HKG",
+      "planning_date": "2027-04-24"
+    },
+    {
+      "cabin": "W",
+      "destination": "SYD",
+      "origin": "HKG",
+      "planning_date": "2027-04-24"
+    },
+    {
+      "cabin": "W",
+      "destination": "ZRH",
+      "origin": "HKG",
+      "planning_date": "2027-09-25"
+    },
+    {
+      "cabin": "J",
+      "destination": "HKG",
+      "origin": "SYD",
+      "planning_date": "2027-05-02"
+    },
+    {
+      "cabin": "W",
+      "destination": "HKG",
+      "origin": "SYD",
+      "planning_date": "2027-05-02"
+    },
+    {
+      "cabin": "W",
+      "destination": "HKG",
+      "origin": "ZRH",
+      "planning_date": "2027-10-03"
+    }
+  ],
+  "verification_shortlist": [
+    {
+      "asymmetric": false,
+      "canonical_key": "1_TRIPS|MAY:CTS:Y-Y",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 52000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_d34fb6256a06af528e67ac70",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 26000,
+          "traveler_b": 26000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": false
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 5
+        },
+        "traveler_b": {
+          "2027": 5
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 10
+        },
+        "traveler_b": {
+          "2027": 8
+        }
+      },
+      "longhaul_j": false,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_b0204ce084fb913005afdeeb",
+      "roles": [
+        "BEST_MILES_SAVER"
+      ],
+      "taxes_hkd": null,
+      "travel_calendar_days": 9,
+      "trip_count": 1,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_9bc5c8702a2c85c0f02c58a3",
+          "destination": "CTS",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-04-24"
+        }
+      ],
+      "variant_count": 6,
+      "verification_priority": "MEDIUM"
+    },
+    {
+      "asymmetric": false,
+      "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:Y-Y",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 104000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_960039388602e5479a63bd2f",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 52000,
+          "traveler_b": 52000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": false
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 9
+        },
+        "traveler_b": {
+          "2027": 9
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 6
+        },
+        "traveler_b": {
+          "2027": 4
+        }
+      },
+      "longhaul_j": false,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_f04bbb07aed81d0e676c315a",
+      "roles": [
+        "BEST_BALANCED",
+        "STRONG_TWO_TRIP"
+      ],
+      "taxes_hkd": null,
+      "travel_calendar_days": 18,
+      "trip_count": 2,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_9bc5c8702a2c85c0f02c58a3",
+          "destination": "CTS",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-04-24"
+        },
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_ab44d40c004ee514dc22e975",
+          "destination": "CTS",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "variant_count": 25,
+      "verification_priority": "MEDIUM"
+    },
+    {
+      "asymmetric": false,
+      "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:J-J",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 496000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_3447ce181b7cddb4d39fa2f8",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 248000,
+          "traveler_b": 248000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": true
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 9
+        },
+        "traveler_b": {
+          "2027": 9
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 6
+        },
+        "traveler_b": {
+          "2027": 4
+        }
+      },
+      "longhaul_j": true,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_e12606a15532ae65159fe1f4",
+      "roles": [
+        "BEST_COMFORT_FIRST",
+        "LONGHAUL_J"
+      ],
+      "taxes_hkd": null,
+      "travel_calendar_days": 18,
+      "trip_count": 2,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_e59bde765db767827ec70b0e",
+          "destination": "AKL",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-04-24"
+        },
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_3249385cc5c091c217ec678d",
+          "destination": "CTS",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "variant_count": 25,
+      "verification_priority": "HIGH"
+    },
+    {
+      "asymmetric": false,
+      "canonical_key": "1_TRIPS|OCT:AKL:J-J",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 364000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_04f5d2a699d0f5cfa1cbaba7",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 182000,
+          "traveler_b": 182000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": false
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 4
+        },
+        "traveler_b": {
+          "2027": 4
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 11
+        },
+        "traveler_b": {
+          "2027": 9
+        }
+      },
+      "longhaul_j": true,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_6a9e506cd34c8d5a8ad77470",
+      "roles": [
+        "BEST_LEAVE_EFFICIENT",
+        "STRONG_ONE_TRIP"
+      ],
+      "taxes_hkd": null,
+      "travel_calendar_days": 9,
+      "trip_count": 1,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_ccfedf50b2033d651b6b7c9c",
+          "destination": "AKL",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "variant_count": 12,
+      "verification_priority": "HIGH"
+    },
+    {
+      "asymmetric": true,
+      "canonical_key": "1_TRIPS|MAY:SYD:J-W",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 198000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_a086117b2998b9cc49d84766",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 99000,
+          "traveler_b": 99000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": false
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 5
+        },
+        "traveler_b": {
+          "2027": 5
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 10
+        },
+        "traveler_b": {
+          "2027": 8
+        }
+      },
+      "longhaul_j": true,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_8bbf165eecb58bcb25b92ae2",
+      "roles": [
+        "MIXED_CABIN_EFFICIENT"
+      ],
+      "taxes_hkd": null,
+      "travel_calendar_days": 9,
+      "trip_count": 1,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_4837c2c859ebb491fd8f681d",
+          "destination": "SYD",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "W",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-04-24"
+        }
+      ],
+      "variant_count": 6,
+      "verification_priority": "HIGH"
+    },
+    {
+      "asymmetric": false,
+      "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:ZRH:W-W",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 260000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_197aef217c9eb11e650e90cc",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 130000,
+          "traveler_b": 130000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": false
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 9
+        },
+        "traveler_b": {
+          "2027": 9
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 6
+        },
+        "traveler_b": {
+          "2027": 4
+        }
+      },
+      "longhaul_j": false,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_ddefa663cf6b112b46fe6c4d",
+      "roles": [
+        "DESTINATION_DIVERSITY"
+      ],
+      "taxes_hkd": null,
+      "travel_calendar_days": 18,
+      "trip_count": 2,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_9bc5c8702a2c85c0f02c58a3",
+          "destination": "CTS",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-04-24"
+        },
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_0315c74c61deea945db76746",
+          "destination": "ZRH",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "W",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "W",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "variant_count": 25,
+      "verification_priority": "HIGH"
+    },
+    {
+      "asymmetric": true,
+      "canonical_key": "1_TRIPS|MAY:SYD:W-J",
+      "complete_price_comparison_eligible": false,
+      "estimated_group_miles": 198000,
+      "evidence": {
+        "award_seat_status": [
+          "NOT_CHECKED"
+        ],
+        "holiday_status": [
+          "ESTIMATED"
+        ],
+        "pricing_status": [
+          "RULE_ESTIMATED"
+        ],
+        "route_status": [
+          "UNVERIFIED"
+        ],
+        "ticketability_status": [
+          "NOT_CHECKED"
+        ]
+      },
+      "family_id": "family_dbbba0db8d90f13563e60479",
+      "family_pareto": true,
+      "funding": {
+        "airline_balance_verification": "NOT_CHECKED",
+        "estimated_spend_by_traveler": {
+          "traveler_a": 99000,
+          "traveler_b": 99000
+        },
+        "evidence_level": "USER_REPORTED_APPROXIMATE",
+        "funding_eligibility_status": "NOT_CHECKED",
+        "near_approximate_limit_by_traveler": {
+          "traveler_a": false,
+          "traveler_b": false
+        },
+        "policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+        "status": "ESTIMATED_BUDGET_FEASIBLE"
+      },
+      "leave_days_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 5
+        },
+        "traveler_b": {
+          "2027": 5
+        }
+      },
+      "leave_remaining_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 10
+        },
+        "traveler_b": {
+          "2027": 8
+        }
+      },
+      "longhaul_j": true,
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "representative_portfolio_id": "portfolio_538f8a24c0dbba6ed7593737",
+      "roles": [
+        "MIXED_CABIN_ALTERNATIVE_DIRECTION"
+      ],
+      "taxes_hkd": null,
+      "travel_calendar_days": 9,
+      "trip_count": 1,
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_bd42e9977d03cdf15a66aa6c",
+          "destination": "SYD",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "W",
+          "start_date": "2027-04-24"
+        }
+      ],
+      "variant_count": 6,
+      "verification_priority": "HIGH"
+    }
+  ]
+}
