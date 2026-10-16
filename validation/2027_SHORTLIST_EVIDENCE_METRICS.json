@@ -1,0 +1,1951 @@
+{
+  "artifact_check_scope": "15 one-off data/policy consistency assertions, not additional unittest cases or a runtime evidence engine. Negative-seat timestamp rule is vacuous here: no negative inventory observation was made.",
+  "artifact_consistency_checks": {
+    "duplicate_queries_collapsed": "PASS",
+    "family_aggregation_complete": "PASS",
+    "independent_account_policy_preserved": "PASS",
+    "j_w_and_w_j_separate": "PASS",
+    "mixed_savings_consistent": "PASS",
+    "no_seat_observed_requires_timestamp": "PASS",
+    "official_source_scope_not_historical_substitution": "PASS",
+    "promote_not_bookable": "PASS",
+    "quote_precedes_reference_within_scope": "PASS",
+    "reuse_graph_complete": "PASS",
+    "schedule_independent_of_seat": "PASS",
+    "seat_independent_of_price": "PASS",
+    "unknown_seat_does_not_eliminate": "PASS",
+    "unknown_tax_not_zero": "PASS",
+    "very_low_buffer_retained": "PASS"
+  },
+  "checked_at": "2026-10-16T02:00:22Z",
+  "checked_at_semantics": "Public evidence audit completed at checked_at, with observations in the stated session window. Inventory checked_at is null because no authenticated inventory was accessed.",
+  "checked_on": "2026-10-16",
+  "current_public_surcharge_reference": {
+    "effective_from": "2026-08-01",
+    "evidence_status": "REFERENCE_TAX",
+    "included_in_plan_totals": false,
+    "journey_scope": "Applicable published CX sectors for a journey starting in Hong Kong; other journey origins/carriers require their own rules.",
+    "longhaul_sector_hkd": 1362,
+    "not_a_total_award_tax": true,
+    "not_verified_for_2027_issuance": true,
+    "notice_updated_on": "2026-10-15",
+    "other_sector_hkd_including_cts": 339,
+    "source_id": "CX_SURCHARGE",
+    "target_date_tax_amount": null
+  },
+  "evidence_reuse_graph": {
+    "minimality_reason": "Every one of the six route/date packets has at least one distinct dated directional requirement. No packet can supply another date or destination. Three broad bundles AKL/SYD/CTS touch all families but do NOT verify every component; ZRH still mandatory for full coverage.",
+    "minimum_complete_evidence_query_set": [
+      {
+        "cabins": [
+          "J"
+        ],
+        "departure_date": "2027-04-24",
+        "destination": "AKL",
+        "family_ids": [
+          "family_3447ce181b7cddb4d39fa2f8"
+        ],
+        "holiday": "labor_day",
+        "packet_id": "P1",
+        "priority": "P1",
+        "return_date": "2027-05-02"
+      },
+      {
+        "cabins": [
+          "J"
+        ],
+        "departure_date": "2027-09-25",
+        "destination": "AKL",
+        "family_ids": [
+          "family_04f5d2a699d0f5cfa1cbaba7"
+        ],
+        "holiday": "national_day",
+        "packet_id": "P2",
+        "priority": "P1",
+        "return_date": "2027-10-03"
+      },
+      {
+        "cabins": [
+          "W"
+        ],
+        "departure_date": "2027-09-25",
+        "destination": "ZRH",
+        "family_ids": [
+          "family_197aef217c9eb11e650e90cc"
+        ],
+        "holiday": "national_day",
+        "packet_id": "P3",
+        "priority": "P2",
+        "return_date": "2027-10-03"
+      },
+      {
+        "cabins": [
+          "J",
+          "W"
+        ],
+        "departure_date": "2027-04-24",
+        "destination": "SYD",
+        "family_ids": [
+          "family_a086117b2998b9cc49d84766",
+          "family_dbbba0db8d90f13563e60479"
+        ],
+        "holiday": "labor_day",
+        "packet_id": "P4",
+        "priority": "P3",
+        "return_date": "2027-05-02"
+      },
+      {
+        "cabins": [
+          "Y"
+        ],
+        "departure_date": "2027-04-24",
+        "destination": "CTS",
+        "family_ids": [
+          "family_197aef217c9eb11e650e90cc",
+          "family_960039388602e5479a63bd2f",
+          "family_d34fb6256a06af528e67ac70"
+        ],
+        "holiday": "labor_day",
+        "packet_id": "P5",
+        "priority": "P4",
+        "return_date": "2027-05-02"
+      },
+      {
+        "cabins": [
+          "J",
+          "Y"
+        ],
+        "departure_date": "2027-09-25",
+        "destination": "CTS",
+        "family_ids": [
+          "family_3447ce181b7cddb4d39fa2f8",
+          "family_960039388602e5479a63bd2f"
+        ],
+        "holiday": "national_day",
+        "packet_id": "P6",
+        "priority": "P4",
+        "return_date": "2027-10-03"
+      }
+    ],
+    "minimum_definition": "Six route/date roundtrip research packets cover all requirements. They contain 12 directional schedules and 16 cabin-specific inventory obligations, not six guaranteed API/UI calls.",
+    "naive_directional_cabin_checks": 20,
+    "naive_trip_occurrences": 10,
+    "route_bundles": [
+      {
+        "family_ids": [
+          "family_3447ce181b7cddb4d39fa2f8",
+          "family_04f5d2a699d0f5cfa1cbaba7"
+        ],
+        "not_reusable_across_dates_or_operators": [
+          "DATED_SCHEDULE",
+          "AWARD_SEATS",
+          "AIRLINE_QUOTE",
+          "TAX_QUOTE",
+          "TICKETABILITY"
+        ],
+        "reusable": [
+          "AIRLINE_ROUTE_PRODUCT",
+          "AIRCRAFT_FAMILY_CABIN_REFERENCE",
+          "REFERENCE_PRICING_BASIS",
+          "AUTHENTICATION_BOUNDARY"
+        ],
+        "route_bundle": "AKL"
+      },
+      {
+        "family_ids": [
+          "family_197aef217c9eb11e650e90cc"
+        ],
+        "not_reusable_across_dates_or_operators": [
+          "DATED_SCHEDULE",
+          "AWARD_SEATS",
+          "AIRLINE_QUOTE",
+          "TAX_QUOTE",
+          "TICKETABILITY"
+        ],
+        "reusable": [
+          "AIRLINE_ROUTE_PRODUCT",
+          "AIRCRAFT_FAMILY_CABIN_REFERENCE",
+          "REFERENCE_PRICING_BASIS",
+          "AUTHENTICATION_BOUNDARY"
+        ],
+        "route_bundle": "ZRH"
+      },
+      {
+        "family_ids": [
+          "family_a086117b2998b9cc49d84766",
+          "family_dbbba0db8d90f13563e60479"
+        ],
+        "not_reusable_across_dates_or_operators": [
+          "DATED_SCHEDULE",
+          "AWARD_SEATS",
+          "AIRLINE_QUOTE",
+          "TAX_QUOTE",
+          "TICKETABILITY"
+        ],
+        "reusable": [
+          "AIRLINE_ROUTE_PRODUCT",
+          "AIRCRAFT_FAMILY_CABIN_REFERENCE",
+          "REFERENCE_PRICING_BASIS",
+          "AUTHENTICATION_BOUNDARY"
+        ],
+        "route_bundle": "SYD"
+      },
+      {
+        "family_ids": [
+          "family_d34fb6256a06af528e67ac70",
+          "family_960039388602e5479a63bd2f",
+          "family_3447ce181b7cddb4d39fa2f8",
+          "family_197aef217c9eb11e650e90cc"
+        ],
+        "not_reusable_across_dates_or_operators": [
+          "DATED_SCHEDULE",
+          "AWARD_SEATS",
+          "AIRLINE_QUOTE",
+          "TAX_QUOTE",
+          "TICKETABILITY"
+        ],
+        "reusable": [
+          "AIRLINE_ROUTE_PRODUCT",
+          "AIRCRAFT_FAMILY_CABIN_REFERENCE",
+          "REFERENCE_PRICING_BASIS",
+          "AUTHENTICATION_BOUNDARY"
+        ],
+        "route_bundle": "CTS"
+      }
+    ],
+    "unique_directional_date_cabin_queries": 16,
+    "unique_directional_date_schedule_queries": 12,
+    "unique_roundtrip_date_packets": 6
+  },
+  "execution_head": "f0d324c55daba0387d7ffd8d736f25ac429643f2",
+  "families": [
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "canonical_key": "1_TRIPS|MAY:CTS:Y-Y",
+      "complete_price_comparison_eligible": false,
+      "cts_role": "PRIMARY_TRIP",
+      "decision_readiness": "MONITORING_PRIORITY_ONLY_NOT_BOOKABLE",
+      "estimated_group_miles": 52000,
+      "estimated_miles_per_traveler": {
+        "traveler_a": 26000,
+        "traveler_b": 26000
+      },
+      "evidence_readiness": {
+        "cabin": "REFERENCE",
+        "calendar": "REFERENCE",
+        "funding": "REFERENCE",
+        "pricing": "REFERENCE",
+        "schedule": "REFERENCE",
+        "seat": "UNKNOWN",
+        "tax": "UNKNOWN"
+      },
+      "family_id": "family_d34fb6256a06af528e67ac70",
+      "funding_eligibility": "NOT_CHECKED",
+      "funding_evidence": "USER_REPORTED_APPROXIMATE",
+      "funding_policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+      "funding_status": "ESTIMATED_BUDGET_FEASIBLE",
+      "mileage_buffer_risk": "NO_VERY_LOW_BUFFER_FLAG_IN_PHASE2C",
+      "planning_leave_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 5
+        },
+        "traveler_b": {
+          "2027": 5
+        }
+      },
+      "readiness_basis": {
+        "cabin": "OFFICIAL_PRODUCT_OR_AIRCRAFT_FAMILY_REFERENCE_NOT_INVENTORY",
+        "calendar": "ESTIMATED_ANCHORS_NOT_FINAL_MAKEUP_DAYS",
+        "funding": "APPROXIMATE_SELF_FUNDED_MATH_ONLY",
+        "pricing": "RULE_ESTIMATED; 2027 applicability unreviewed",
+        "schedule": "PUBLISHED_FUTURE_TIMETABLE_NOT_OPERATED_CONFIRMATION",
+        "seat": "NOT_CHECKED",
+        "tax": "UNKNOWN_NOT_ZERO"
+      },
+      "reason_codes": [
+        "PUBLISHED_CX_SCHEDULE",
+        "LOW_COST_PRIMARY_OPTION_NOT_BEST_DESTINATION"
+      ],
+      "required_query_ids": [
+        "Q08",
+        "Q03"
+      ],
+      "shortlist_number": 1,
+      "tax_amount": null,
+      "ticketability_status": "NOT_VERIFIED",
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_9bc5c8702a2c85c0f02c58a3",
+          "destination": "CTS",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-04-24"
+        }
+      ],
+      "verdict": "PROMOTE_TO_MONITOR"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:CTS:Y-Y",
+      "complete_price_comparison_eligible": false,
+      "cts_role": "LOW_COST_COMPLEMENT",
+      "decision_readiness": "FURTHER_VERIFICATION_REQUIRED",
+      "estimated_group_miles": 104000,
+      "estimated_miles_per_traveler": {
+        "traveler_a": 52000,
+        "traveler_b": 52000
+      },
+      "evidence_readiness": {
+        "cabin": "REFERENCE",
+        "calendar": "REFERENCE",
+        "funding": "REFERENCE",
+        "pricing": "REFERENCE",
+        "schedule": "REFERENCE",
+        "seat": "UNKNOWN",
+        "tax": "UNKNOWN"
+      },
+      "family_id": "family_960039388602e5479a63bd2f",
+      "funding_eligibility": "NOT_CHECKED",
+      "funding_evidence": "USER_REPORTED_APPROXIMATE",
+      "funding_policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+      "funding_status": "ESTIMATED_BUDGET_FEASIBLE",
+      "mileage_buffer_risk": "NO_VERY_LOW_BUFFER_FLAG_IN_PHASE2C",
+      "planning_leave_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 9
+        },
+        "traveler_b": {
+          "2027": 9
+        }
+      },
+      "readiness_basis": {
+        "cabin": "OFFICIAL_PRODUCT_OR_AIRCRAFT_FAMILY_REFERENCE_NOT_INVENTORY",
+        "calendar": "ESTIMATED_ANCHORS_NOT_FINAL_MAKEUP_DAYS",
+        "funding": "APPROXIMATE_SELF_FUNDED_MATH_ONLY",
+        "pricing": "RULE_ESTIMATED; 2027 applicability unreviewed",
+        "schedule": "PUBLISHED_FUTURE_TIMETABLE_NOT_OPERATED_CONFIRMATION",
+        "seat": "NOT_CHECKED",
+        "tax": "UNKNOWN_NOT_ZERO"
+      },
+      "reason_codes": [
+        "REPEATED_CTS_YEAR_OBJECTIVE_REQUIRES_USER_CONFIRMATION",
+        "LOW_COST_COMPLEMENT_NOT_AUTOMATIC_PRIMARY_PREFERENCE"
+      ],
+      "required_query_ids": [
+        "Q08",
+        "Q03",
+        "Q10",
+        "Q05"
+      ],
+      "shortlist_number": 2,
+      "tax_amount": null,
+      "ticketability_status": "NOT_VERIFIED",
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_9bc5c8702a2c85c0f02c58a3",
+          "destination": "CTS",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-04-24"
+        },
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_ab44d40c004ee514dc22e975",
+          "destination": "CTS",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "verdict": "KEEP_FOR_VERIFICATION"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "canonical_key": "2_TRIPS|MAY:AKL:J-J|OCT:CTS:J-J",
+      "complete_price_comparison_eligible": false,
+      "cts_role": "LOW_COST_COMPLEMENT",
+      "decision_readiness": "FURTHER_VERIFICATION_REQUIRED",
+      "estimated_group_miles": 496000,
+      "estimated_miles_per_traveler": {
+        "traveler_a": 248000,
+        "traveler_b": 248000
+      },
+      "evidence_readiness": {
+        "cabin": "REFERENCE",
+        "calendar": "REFERENCE",
+        "funding": "REFERENCE",
+        "pricing": "REFERENCE",
+        "schedule": "REFERENCE",
+        "seat": "UNKNOWN",
+        "tax": "UNKNOWN"
+      },
+      "family_id": "family_3447ce181b7cddb4d39fa2f8",
+      "funding_eligibility": "NOT_CHECKED",
+      "funding_evidence": "USER_REPORTED_APPROXIMATE",
+      "funding_policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+      "funding_status": "ESTIMATED_BUDGET_FEASIBLE",
+      "mileage_buffer_risk": "VERY_LOW_BUFFER",
+      "planning_leave_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 9
+        },
+        "traveler_b": {
+          "2027": 9
+        }
+      },
+      "readiness_basis": {
+        "cabin": "OFFICIAL_PRODUCT_OR_AIRCRAFT_FAMILY_REFERENCE_NOT_INVENTORY",
+        "calendar": "ESTIMATED_ANCHORS_NOT_FINAL_MAKEUP_DAYS",
+        "funding": "APPROXIMATE_SELF_FUNDED_MATH_ONLY",
+        "pricing": "RULE_ESTIMATED; 2027 applicability unreviewed",
+        "schedule": "PUBLISHED_FUTURE_TIMETABLE_NOT_OPERATED_CONFIRMATION",
+        "seat": "NOT_CHECKED",
+        "tax": "UNKNOWN_NOT_ZERO"
+      },
+      "reason_codes": [
+        "MILEAGE_BUFFER_RISK",
+        "VERY_LOW_BUFFER",
+        "APPROXIMATE_PRICE_AND_BALANCE_COULD_REVERSE_FEASIBILITY"
+      ],
+      "required_query_ids": [
+        "Q06",
+        "Q01",
+        "Q09",
+        "Q04"
+      ],
+      "shortlist_number": 3,
+      "tax_amount": null,
+      "ticketability_status": "NOT_VERIFIED",
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_e59bde765db767827ec70b0e",
+          "destination": "AKL",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-04-24"
+        },
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_3249385cc5c091c217ec678d",
+          "destination": "CTS",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "verdict": "DOWNGRADE"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "canonical_key": "1_TRIPS|OCT:AKL:J-J",
+      "complete_price_comparison_eligible": false,
+      "cts_role": null,
+      "decision_readiness": "FURTHER_VERIFICATION_REQUIRED",
+      "estimated_group_miles": 364000,
+      "estimated_miles_per_traveler": {
+        "traveler_a": 182000,
+        "traveler_b": 182000
+      },
+      "evidence_readiness": {
+        "cabin": "UNKNOWN",
+        "calendar": "REFERENCE",
+        "funding": "REFERENCE",
+        "pricing": "REFERENCE",
+        "schedule": "UNKNOWN",
+        "seat": "UNKNOWN",
+        "tax": "UNKNOWN"
+      },
+      "family_id": "family_04f5d2a699d0f5cfa1cbaba7",
+      "funding_eligibility": "NOT_CHECKED",
+      "funding_evidence": "USER_REPORTED_APPROXIMATE",
+      "funding_policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+      "funding_status": "ESTIMATED_BUDGET_FEASIBLE",
+      "mileage_buffer_risk": "NO_VERY_LOW_BUFFER_FLAG_IN_PHASE2C",
+      "planning_leave_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 4
+        },
+        "traveler_b": {
+          "2027": 4
+        }
+      },
+      "readiness_basis": {
+        "cabin": "OFFICIAL_PRODUCT_OR_AIRCRAFT_FAMILY_REFERENCE_NOT_INVENTORY",
+        "calendar": "ESTIMATED_ANCHORS_NOT_FINAL_MAKEUP_DAYS",
+        "funding": "APPROXIMATE_SELF_FUNDED_MATH_ONLY",
+        "pricing": "RULE_ESTIMATED; 2027 applicability unreviewed",
+        "schedule": "ONLY_NZ_CODESHARE_OBSERVED",
+        "seat": "NOT_CHECKED",
+        "tax": "UNKNOWN_NOT_ZERO"
+      },
+      "reason_codes": [
+        "CX_OPERATION_NOT_OBSERVED_ON_PRIMARY_DATES",
+        "NZ_CODESHARE_REQUIRES_PARTNER_ELIGIBILITY_AND_QUOTE",
+        "ABSENCE_FROM_TIMETABLE_IS_NOT_NO_AWARD"
+      ],
+      "required_query_ids": [
+        "Q07",
+        "Q02"
+      ],
+      "shortlist_number": 4,
+      "tax_amount": null,
+      "ticketability_status": "NOT_VERIFIED",
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_ccfedf50b2033d651b6b7c9c",
+          "destination": "AKL",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "verdict": "KEEP_FOR_VERIFICATION"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "canonical_key": "1_TRIPS|MAY:SYD:J-W",
+      "complete_price_comparison_eligible": false,
+      "cts_role": null,
+      "decision_readiness": "MONITORING_PRIORITY_ONLY_NOT_BOOKABLE",
+      "estimated_group_miles": 198000,
+      "estimated_miles_per_traveler": {
+        "traveler_a": 99000,
+        "traveler_b": 99000
+      },
+      "evidence_readiness": {
+        "cabin": "REFERENCE",
+        "calendar": "REFERENCE",
+        "funding": "REFERENCE",
+        "pricing": "REFERENCE",
+        "schedule": "REFERENCE",
+        "seat": "UNKNOWN",
+        "tax": "UNKNOWN"
+      },
+      "family_id": "family_a086117b2998b9cc49d84766",
+      "funding_eligibility": "NOT_CHECKED",
+      "funding_evidence": "USER_REPORTED_APPROXIMATE",
+      "funding_policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+      "funding_status": "ESTIMATED_BUDGET_FEASIBLE",
+      "mileage_buffer_risk": "NO_VERY_LOW_BUFFER_FLAG_IN_PHASE2C",
+      "planning_leave_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 5
+        },
+        "traveler_b": {
+          "2027": 5
+        }
+      },
+      "readiness_basis": {
+        "cabin": "OFFICIAL_PRODUCT_OR_AIRCRAFT_FAMILY_REFERENCE_NOT_INVENTORY",
+        "calendar": "ESTIMATED_ANCHORS_NOT_FINAL_MAKEUP_DAYS",
+        "funding": "APPROXIMATE_SELF_FUNDED_MATH_ONLY",
+        "pricing": "RULE_ESTIMATED; 2027 applicability unreviewed",
+        "schedule": "PUBLISHED_FUTURE_TIMETABLE_NOT_OPERATED_CONFIRMATION",
+        "seat": "NOT_CHECKED",
+        "tax": "UNKNOWN_NOT_ZERO"
+      },
+      "reason_codes": [
+        "PUBLISHED_CX_SCHEDULE",
+        "ASYMMETRIC_CABIN_SAVING_REFERENCE",
+        "DIRECTIONAL_J_PREFERENCE_UNRESOLVED"
+      ],
+      "required_query_ids": [
+        "Q11",
+        "Q15"
+      ],
+      "shortlist_number": 5,
+      "tax_amount": null,
+      "ticketability_status": "NOT_VERIFIED",
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_4837c2c859ebb491fd8f681d",
+          "destination": "SYD",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "W",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "J",
+          "start_date": "2027-04-24"
+        }
+      ],
+      "verdict": "PROMOTE_TO_MONITOR"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "canonical_key": "2_TRIPS|MAY:CTS:Y-Y|OCT:ZRH:W-W",
+      "complete_price_comparison_eligible": false,
+      "cts_role": "LOW_COST_COMPLEMENT",
+      "decision_readiness": "MONITORING_PRIORITY_ONLY_NOT_BOOKABLE",
+      "estimated_group_miles": 260000,
+      "estimated_miles_per_traveler": {
+        "traveler_a": 130000,
+        "traveler_b": 130000
+      },
+      "evidence_readiness": {
+        "cabin": "REFERENCE",
+        "calendar": "REFERENCE",
+        "funding": "REFERENCE",
+        "pricing": "REFERENCE",
+        "schedule": "REFERENCE",
+        "seat": "UNKNOWN",
+        "tax": "UNKNOWN"
+      },
+      "family_id": "family_197aef217c9eb11e650e90cc",
+      "funding_eligibility": "NOT_CHECKED",
+      "funding_evidence": "USER_REPORTED_APPROXIMATE",
+      "funding_policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+      "funding_status": "ESTIMATED_BUDGET_FEASIBLE",
+      "mileage_buffer_risk": "NO_VERY_LOW_BUFFER_FLAG_IN_PHASE2C",
+      "planning_leave_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 9
+        },
+        "traveler_b": {
+          "2027": 9
+        }
+      },
+      "readiness_basis": {
+        "cabin": "OFFICIAL_PRODUCT_OR_AIRCRAFT_FAMILY_REFERENCE_NOT_INVENTORY",
+        "calendar": "ESTIMATED_ANCHORS_NOT_FINAL_MAKEUP_DAYS",
+        "funding": "APPROXIMATE_SELF_FUNDED_MATH_ONLY",
+        "pricing": "RULE_ESTIMATED; 2027 applicability unreviewed",
+        "schedule": "PUBLISHED_FUTURE_TIMETABLE_NOT_OPERATED_CONFIRMATION",
+        "seat": "NOT_CHECKED",
+        "tax": "UNKNOWN_NOT_ZERO"
+      },
+      "reason_codes": [
+        "PUBLISHED_CX_SCHEDULE",
+        "W_PRODUCT_SUPPORTED_BY_A350_REFERENCE",
+        "RETURN_ARRIVES_NEXT_DAY_RECHECK_LEAVE_AND_POSITIONING"
+      ],
+      "required_query_ids": [
+        "Q08",
+        "Q03",
+        "Q13",
+        "Q16"
+      ],
+      "shortlist_number": 6,
+      "tax_amount": null,
+      "ticketability_status": "NOT_VERIFIED",
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_9bc5c8702a2c85c0f02c58a3",
+          "destination": "CTS",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "Y",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": false,
+          "origin": "HKG",
+          "outbound_cabin": "Y",
+          "start_date": "2027-04-24"
+        },
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_0315c74c61deea945db76746",
+          "destination": "ZRH",
+          "end_date": "2027-10-03",
+          "holiday": "national_day",
+          "inbound_cabin": "W",
+          "leave_days_by_traveler": {
+            "traveler_a": 4,
+            "traveler_b": 4
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "W",
+          "start_date": "2027-09-25"
+        }
+      ],
+      "verdict": "PROMOTE_TO_MONITOR"
+    },
+    {
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "canonical_key": "1_TRIPS|MAY:SYD:W-J",
+      "complete_price_comparison_eligible": false,
+      "cts_role": null,
+      "decision_readiness": "MONITORING_PRIORITY_ONLY_NOT_BOOKABLE",
+      "estimated_group_miles": 198000,
+      "estimated_miles_per_traveler": {
+        "traveler_a": 99000,
+        "traveler_b": 99000
+      },
+      "evidence_readiness": {
+        "cabin": "REFERENCE",
+        "calendar": "REFERENCE",
+        "funding": "REFERENCE",
+        "pricing": "REFERENCE",
+        "schedule": "REFERENCE",
+        "seat": "UNKNOWN",
+        "tax": "UNKNOWN"
+      },
+      "family_id": "family_dbbba0db8d90f13563e60479",
+      "funding_eligibility": "NOT_CHECKED",
+      "funding_evidence": "USER_REPORTED_APPROXIMATE",
+      "funding_policy": "OWN_ACCOUNT_PER_TRAVELER_NO_POOLING",
+      "funding_status": "ESTIMATED_BUDGET_FEASIBLE",
+      "mileage_buffer_risk": "NO_VERY_LOW_BUFFER_FLAG_IN_PHASE2C",
+      "planning_leave_by_traveler_by_year": {
+        "traveler_a": {
+          "2027": 5
+        },
+        "traveler_b": {
+          "2027": 5
+        }
+      },
+      "readiness_basis": {
+        "cabin": "OFFICIAL_PRODUCT_OR_AIRCRAFT_FAMILY_REFERENCE_NOT_INVENTORY",
+        "calendar": "ESTIMATED_ANCHORS_NOT_FINAL_MAKEUP_DAYS",
+        "funding": "APPROXIMATE_SELF_FUNDED_MATH_ONLY",
+        "pricing": "RULE_ESTIMATED; 2027 applicability unreviewed",
+        "schedule": "PUBLISHED_FUTURE_TIMETABLE_NOT_OPERATED_CONFIRMATION",
+        "seat": "NOT_CHECKED",
+        "tax": "UNKNOWN_NOT_ZERO"
+      },
+      "reason_codes": [
+        "PUBLISHED_CX_SCHEDULE",
+        "ASYMMETRIC_CABIN_SAVING_REFERENCE",
+        "DIRECTIONAL_J_PREFERENCE_UNRESOLVED"
+      ],
+      "required_query_ids": [
+        "Q12",
+        "Q14"
+      ],
+      "shortlist_number": 7,
+      "tax_amount": null,
+      "ticketability_status": "NOT_VERIFIED",
+      "trips": [
+        {
+          "calendar_days": 9,
+          "candidate_id": "candidate_bd42e9977d03cdf15a66aa6c",
+          "destination": "SYD",
+          "end_date": "2027-05-02",
+          "holiday": "labor_day",
+          "inbound_cabin": "J",
+          "leave_days_by_traveler": {
+            "traveler_a": 5,
+            "traveler_b": 5
+          },
+          "longhaul": true,
+          "origin": "HKG",
+          "outbound_cabin": "W",
+          "start_date": "2027-04-24"
+        }
+      ],
+      "verdict": "PROMOTE_TO_MONITOR"
+    }
+  ],
+  "manual_cathay_plan": {
+    "all_seven_directional_cabin_checks": 16,
+    "all_seven_lower_bound_roundtrip_single_cabin_searches": 8,
+    "decision_branches": 3,
+    "directional_cabin_checks_for_promoted": 8,
+    "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+    "limitations": "Lower bounds, not a promise about UI. One-way-only UI needs eight promoted or sixteen all-family searches; final mixed-ticket pricing, taxes, funding and ticketability can require additional steps. No future monitoring automation created.",
+    "minimum_login_sessions_if_valid_session": 1,
+    "minimum_roundtrip_single_cabin_searches_if_both_directions_returned": 4,
+    "performed_authenticated_queries": 0,
+    "promoted_families": 4,
+    "promoted_query_ids": [
+      "Q03",
+      "Q08",
+      "Q11",
+      "Q12",
+      "Q13",
+      "Q14",
+      "Q15",
+      "Q16"
+    ],
+    "searches": [
+      {
+        "adults": 2,
+        "cabin": "Y",
+        "departure_date": "2027-04-24",
+        "destination": "CTS",
+        "operator_required": "Cathay Pacific",
+        "return_date": "2027-05-02"
+      },
+      {
+        "adults": 2,
+        "cabin": "J",
+        "departure_date": "2027-04-24",
+        "destination": "SYD",
+        "operator_required": "Cathay Pacific",
+        "return_date": "2027-05-02"
+      },
+      {
+        "adults": 2,
+        "cabin": "W",
+        "departure_date": "2027-04-24",
+        "destination": "SYD",
+        "operator_required": "Cathay Pacific",
+        "return_date": "2027-05-02"
+      },
+      {
+        "adults": 2,
+        "cabin": "W",
+        "departure_date": "2027-09-25",
+        "destination": "ZRH",
+        "operator_required": "Cathay Pacific",
+        "return_date": "2027-10-03"
+      }
+    ]
+  },
+  "notice": [
+    "NOT BOOKABLE",
+    "NO AUTHENTICATED AWARD SEAT CHECK",
+    "NO AIRLINE QUOTE",
+    "TAXES UNKNOWN",
+    "CALENDAR ESTIMATED"
+  ],
+  "phase": "2D_SHORTLIST_EVIDENCE_TRIAGE",
+  "phase2e_recommendation": "PROCEED_WITH_BOUNDED_MANUAL_AWARD_AVAILABILITY_MONITORING_FOR_FOUR_FAMILIES_THREE_DECISION_BRANCHES; RECHECK_ZRH_ARRIVAL_DAY; RESOLVE_OCT_AKL_OPERATOR_BEFORE_CX_PRICE_USE",
+  "privacy": "Anonymous traveler IDs and estimated spend only. No balances, account/member identifiers, credentials, personal screenshots or PII.",
+  "public_observation_window_utc": {
+    "end": "2026-10-16T02:00:22Z",
+    "start": "2026-10-16T01:40:04Z"
+  },
+  "queries": [
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "J",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_A350_900",
+        "CX_A350_1000"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "HKG",
+      "family_ids": [
+        "family_3447ce181b7cddb4d39fa2f8"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "AKL",
+      "planning_date": "2027-05-02",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q01",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S01",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "J",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [],
+      "cabin_status": "UNKNOWN",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "HKG",
+      "family_ids": [
+        "family_04f5d2a699d0f5cfa1cbaba7"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "AKL",
+      "planning_date": "2027-10-03",
+      "pricing_caveat": "CX_ONLY_REFERENCE_NOT_APPLICABLE_TO_OBSERVED_NZ_CODESHARE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q02",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S02",
+      "schedule_status": "SCHEDULE_UNKNOWN",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "Y",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_777"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "HKG",
+      "family_ids": [
+        "family_197aef217c9eb11e650e90cc",
+        "family_960039388602e5479a63bd2f",
+        "family_d34fb6256a06af528e67ac70"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "CTS",
+      "planning_date": "2027-05-02",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q03",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S03",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "J",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_777"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "HKG",
+      "family_ids": [
+        "family_3447ce181b7cddb4d39fa2f8"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "CTS",
+      "planning_date": "2027-10-03",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q04",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S04",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "Y",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_777"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "HKG",
+      "family_ids": [
+        "family_960039388602e5479a63bd2f"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "CTS",
+      "planning_date": "2027-10-03",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q05",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S04",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "J",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_A350_900",
+        "CX_A350_1000"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "AKL",
+      "family_ids": [
+        "family_3447ce181b7cddb4d39fa2f8"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "HKG",
+      "planning_date": "2027-04-24",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q06",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S05",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "J",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [],
+      "cabin_status": "UNKNOWN",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "AKL",
+      "family_ids": [
+        "family_04f5d2a699d0f5cfa1cbaba7"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "HKG",
+      "planning_date": "2027-09-25",
+      "pricing_caveat": "CX_ONLY_REFERENCE_NOT_APPLICABLE_TO_OBSERVED_NZ_CODESHARE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q07",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S06",
+      "schedule_status": "SCHEDULE_UNKNOWN",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "Y",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_777"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "CTS",
+      "family_ids": [
+        "family_197aef217c9eb11e650e90cc",
+        "family_960039388602e5479a63bd2f",
+        "family_d34fb6256a06af528e67ac70"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "HKG",
+      "planning_date": "2027-04-24",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q08",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S07",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "J",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_777"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "CTS",
+      "family_ids": [
+        "family_3447ce181b7cddb4d39fa2f8"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "HKG",
+      "planning_date": "2027-09-25",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q09",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S08",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "Y",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_777"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "CTS",
+      "family_ids": [
+        "family_960039388602e5479a63bd2f"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "HKG",
+      "planning_date": "2027-09-25",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q10",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S08",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "J",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_A350_900",
+        "CX_A350_1000"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "SYD",
+      "family_ids": [
+        "family_a086117b2998b9cc49d84766"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "HKG",
+      "planning_date": "2027-04-24",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q11",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S09",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "W",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_A350_900",
+        "CX_A350_1000"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "SYD",
+      "family_ids": [
+        "family_dbbba0db8d90f13563e60479"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "HKG",
+      "planning_date": "2027-04-24",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q12",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S09",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "W",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_A350_900",
+        "CX_A350_1000"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "ZRH",
+      "family_ids": [
+        "family_197aef217c9eb11e650e90cc"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "HKG",
+      "planning_date": "2027-09-25",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q13",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S10",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "J",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_A350_900",
+        "CX_A350_1000"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "HKG",
+      "family_ids": [
+        "family_dbbba0db8d90f13563e60479"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "SYD",
+      "planning_date": "2027-05-02",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q14",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S11",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "W",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_A350_900",
+        "CX_A350_1000"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "HKG",
+      "family_ids": [
+        "family_a086117b2998b9cc49d84766"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "SYD",
+      "planning_date": "2027-05-02",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q15",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S11",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    },
+    {
+      "airline_quoted_miles": null,
+      "award_seat_checked_at": null,
+      "award_seat_status": "NOT_CHECKED",
+      "bookable": false,
+      "cabin": "W",
+      "cabin_scope": "AIRLINE_ROUTE_PRODUCT_OR_PUBLISHED_AIRCRAFT_FAMILY_NOT_AWARD_CLASS_OR_TAIL_BINDING",
+      "cabin_source_ids": [
+        "CX_A350_900",
+        "CX_A350_1000"
+      ],
+      "cabin_status": "REFERENCE",
+      "checked_on": "2026-10-16",
+      "complete_price_comparison_eligible": false,
+      "destination": "HKG",
+      "family_ids": [
+        "family_197aef217c9eb11e650e90cc"
+      ],
+      "inventory_access": "AUTHENTICATED_AWARD_INVENTORY_NOT_ACCESSIBLE",
+      "official_pricing_status": "RULE_VERSION_REVIEW_REQUIRED",
+      "origin": "ZRH",
+      "planning_date": "2027-10-03",
+      "pricing_caveat": "NO_TARGET_DATE_AIRLINE_QUOTE",
+      "pricing_status": "RULE_ESTIMATED",
+      "query_id": "Q16",
+      "schedule_evidence_ref": "CX_TIMETABLE",
+      "schedule_id": "S12",
+      "schedule_status": "SCHEDULE_PUBLISHED",
+      "tax_amount": null,
+      "tax_status": "UNKNOWN",
+      "ticketability_status": "NOT_VERIFIED",
+      "travelers": 2
+    }
+  ],
+  "schedule_impacts": [
+    {
+      "destination": "AKL",
+      "holiday": "national_day",
+      "issue": "ONLY_NZ_OPERATED_CODESHARE_OBSERVED; cannot substitute into CX-only estimated price"
+    },
+    {
+      "destination": "ZRH",
+      "holiday": "national_day",
+      "issue": "CX382 departing 2027-10-03 arrives HKG 2027-10-04 06:55; full arrival-day leave could add one day. No leave/budget input changed."
+    },
+    {
+      "destination": "SYD",
+      "holiday": "labor_day",
+      "issue": "Outbound daytime and overnight choices; return CX138 arrives HKG 2027-05-03 while daytime alternatives arrive 2027-05-02. Selection changes full-day/leave assumptions."
+    },
+    {
+      "destination": "ZRH",
+      "holiday": "national_day",
+      "issue": "00:25 HKG departure implies previous-evening airport positioning; ground transfer/work impact unknown."
+    }
+  ],
+  "schedules": [
+    {
+      "arrival_local_time": "21:05",
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": "13:25",
+      "destination": "HKG",
+      "observation_scope": "SELECTED_NONSTOP_CX_OPTIONS",
+      "observed_options": [
+        {
+          "aircraft_family_published": "Airbus A350",
+          "arrival_day_offset": 0,
+          "arrival_local_time": "21:05",
+          "departure_local_time": "13:25",
+          "duration_minutes": 700,
+          "flight_number": "CX198",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        }
+      ],
+      "operating_date": "2027-05-02",
+      "origin": "AKL",
+      "schedule_id": "S01",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_PUBLISHED",
+      "target_cx_option_observed": true,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": null,
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": null,
+      "destination": "HKG",
+      "observation_scope": "ONLY_NZ_OPERATED_CODESHARE_OBSERVED_NOT_PROOF_CX_ABSENT",
+      "observed_options": [
+        {
+          "aircraft_family_published": "Boeing 787",
+          "arrival_day_offset": 0,
+          "arrival_local_time": "17:45",
+          "departure_local_time": "11:15",
+          "duration_minutes": 690,
+          "flight_number": "CX7402",
+          "nonstop": true,
+          "operating_carrier": "Air New Zealand"
+        }
+      ],
+      "operating_date": "2027-10-03",
+      "origin": "AKL",
+      "schedule_id": "S02",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_UNKNOWN",
+      "target_cx_option_observed": false,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": "20:55",
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": "16:40",
+      "destination": "HKG",
+      "observation_scope": "SELECTED_NONSTOP_CX_OPTIONS",
+      "observed_options": [
+        {
+          "aircraft_family_published": null,
+          "arrival_day_offset": 0,
+          "arrival_local_time": "20:55",
+          "departure_local_time": "16:40",
+          "duration_minutes": 315,
+          "flight_number": "CX581",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        }
+      ],
+      "operating_date": "2027-05-02",
+      "origin": "CTS",
+      "schedule_id": "S03",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_PUBLISHED",
+      "target_cx_option_observed": true,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": "20:55",
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": "16:40",
+      "destination": "HKG",
+      "observation_scope": "SELECTED_NONSTOP_CX_OPTIONS",
+      "observed_options": [
+        {
+          "aircraft_family_published": "Boeing 777",
+          "arrival_day_offset": 0,
+          "arrival_local_time": "20:55",
+          "departure_local_time": "16:40",
+          "duration_minutes": 315,
+          "flight_number": "CX581",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        }
+      ],
+      "operating_date": "2027-10-03",
+      "origin": "CTS",
+      "schedule_id": "S04",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_PUBLISHED",
+      "target_cx_option_observed": true,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": "11:50",
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": "21:10",
+      "destination": "AKL",
+      "observation_scope": "SELECTED_NONSTOP_CX_OPTIONS",
+      "observed_options": [
+        {
+          "aircraft_family_published": "Airbus A350",
+          "arrival_day_offset": 1,
+          "arrival_local_time": "11:50",
+          "departure_local_time": "21:10",
+          "duration_minutes": 640,
+          "flight_number": "CX113",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        }
+      ],
+      "operating_date": "2027-04-24",
+      "origin": "HKG",
+      "schedule_id": "S05",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_PUBLISHED",
+      "target_cx_option_observed": true,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": null,
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": null,
+      "destination": "AKL",
+      "observation_scope": "ONLY_NZ_OPERATED_CODESHARE_OBSERVED_NOT_PROOF_CX_ABSENT",
+      "observed_options": [
+        {
+          "aircraft_family_published": "Boeing 787",
+          "arrival_day_offset": 1,
+          "arrival_local_time": "10:50",
+          "departure_local_time": "19:15",
+          "duration_minutes": 635,
+          "flight_number": "CX7401",
+          "nonstop": true,
+          "operating_carrier": "Air New Zealand"
+        }
+      ],
+      "operating_date": "2027-09-25",
+      "origin": "HKG",
+      "schedule_id": "S06",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_UNKNOWN",
+      "target_cx_option_observed": false,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": "15:20",
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": "09:15",
+      "destination": "CTS",
+      "observation_scope": "SELECTED_NONSTOP_CX_OPTIONS",
+      "observed_options": [
+        {
+          "aircraft_family_published": "Boeing 777",
+          "arrival_day_offset": 0,
+          "arrival_local_time": "15:20",
+          "departure_local_time": "09:15",
+          "duration_minutes": 305,
+          "flight_number": "CX580",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        }
+      ],
+      "operating_date": "2027-04-24",
+      "origin": "HKG",
+      "schedule_id": "S07",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_PUBLISHED",
+      "target_cx_option_observed": true,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": "15:20",
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": "09:15",
+      "destination": "CTS",
+      "observation_scope": "SELECTED_NONSTOP_CX_OPTIONS",
+      "observed_options": [
+        {
+          "aircraft_family_published": "Boeing 777",
+          "arrival_day_offset": 0,
+          "arrival_local_time": "15:20",
+          "departure_local_time": "09:15",
+          "duration_minutes": 305,
+          "flight_number": "CX580",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        }
+      ],
+      "operating_date": "2027-09-25",
+      "origin": "HKG",
+      "schedule_id": "S08",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_PUBLISHED",
+      "target_cx_option_observed": true,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": "11:45",
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": "00:45",
+      "destination": "SYD",
+      "observation_scope": "SELECTED_NONSTOP_CX_OPTIONS",
+      "observed_options": [
+        {
+          "aircraft_family_published": "Airbus A350",
+          "arrival_day_offset": 0,
+          "arrival_local_time": "11:45",
+          "departure_local_time": "00:45",
+          "duration_minutes": 540,
+          "flight_number": "CX181",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        },
+        {
+          "aircraft_family_published": "Airbus A350",
+          "arrival_day_offset": 0,
+          "arrival_local_time": "20:10",
+          "departure_local_time": "09:10",
+          "duration_minutes": 540,
+          "flight_number": "CX139",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        },
+        {
+          "aircraft_family_published": "Airbus A350",
+          "arrival_day_offset": 1,
+          "arrival_local_time": "06:10",
+          "departure_local_time": "19:05",
+          "duration_minutes": 545,
+          "flight_number": "CX111",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        },
+        {
+          "aircraft_family_published": "Airbus A350",
+          "arrival_day_offset": 1,
+          "arrival_local_time": "08:40",
+          "departure_local_time": "21:35",
+          "duration_minutes": 545,
+          "flight_number": "CX161",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        }
+      ],
+      "operating_date": "2027-04-24",
+      "origin": "HKG",
+      "schedule_id": "S09",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_PUBLISHED",
+      "target_cx_option_observed": true,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": "07:30",
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": "00:25",
+      "destination": "ZRH",
+      "observation_scope": "SELECTED_NONSTOP_CX_OPTIONS",
+      "observed_options": [
+        {
+          "aircraft_family_published": "Airbus A350",
+          "arrival_day_offset": 0,
+          "arrival_local_time": "07:30",
+          "departure_local_time": "00:25",
+          "duration_minutes": 785,
+          "flight_number": "CX383",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        }
+      ],
+      "operating_date": "2027-09-25",
+      "origin": "HKG",
+      "schedule_id": "S10",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_PUBLISHED",
+      "target_cx_option_observed": true,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": "15:10",
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": "07:40",
+      "destination": "HKG",
+      "observation_scope": "SELECTED_NONSTOP_CX_OPTIONS",
+      "observed_options": [
+        {
+          "aircraft_family_published": null,
+          "arrival_day_offset": 0,
+          "arrival_local_time": "15:10",
+          "departure_local_time": "07:40",
+          "duration_minutes": 570,
+          "flight_number": "CX110",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        },
+        {
+          "aircraft_family_published": null,
+          "arrival_day_offset": 0,
+          "arrival_local_time": "17:45",
+          "departure_local_time": "10:10",
+          "duration_minutes": 575,
+          "flight_number": "CX162",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        },
+        {
+          "aircraft_family_published": null,
+          "arrival_day_offset": 0,
+          "arrival_local_time": "21:30",
+          "departure_local_time": "14:05",
+          "duration_minutes": 565,
+          "flight_number": "CX100",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        },
+        {
+          "aircraft_family_published": null,
+          "arrival_day_offset": 1,
+          "arrival_local_time": "05:10",
+          "departure_local_time": "21:55",
+          "duration_minutes": 555,
+          "flight_number": "CX138",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        }
+      ],
+      "operating_date": "2027-05-02",
+      "origin": "SYD",
+      "schedule_id": "S11",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_PUBLISHED",
+      "target_cx_option_observed": true,
+      "target_operator": "Cathay Pacific"
+    },
+    {
+      "arrival_local_time": "06:55",
+      "available_label_meaning": "COMMERCIAL_TIMETABLE_DISPLAY_ONLY_NOT_AWARD_INVENTORY",
+      "checked_on": "2026-10-16",
+      "departure_local_time": "13:30",
+      "destination": "HKG",
+      "observation_scope": "SELECTED_NONSTOP_CX_OPTIONS",
+      "observed_options": [
+        {
+          "aircraft_family_published": "Airbus A350",
+          "arrival_day_offset": 1,
+          "arrival_local_time": "06:55",
+          "departure_local_time": "13:30",
+          "duration_minutes": 685,
+          "flight_number": "CX382",
+          "nonstop": true,
+          "operating_carrier": "Cathay Pacific"
+        }
+      ],
+      "operating_date": "2027-10-03",
+      "origin": "ZRH",
+      "schedule_id": "S12",
+      "source_id": "CX_TIMETABLE",
+      "status": "SCHEDULE_PUBLISHED",
+      "target_cx_option_observed": true,
+      "target_operator": "Cathay Pacific"
+    }
+  ],
+  "search_boundary": "NO_C100_C200_C408_RUN; optimizer, schemas, rules and prior evidence untouched.",
+  "source_precedence_policy": {
+    "order": [
+      "CANDIDATE_DATE_OPERATOR_BOUND_AIRLINE_QUOTE",
+      "RELEVANT_AIRLINE_PUBLISHED_DATA",
+      "AIRPORT_OFFICIAL",
+      "THIRD_PARTY_REFERENCE",
+      "REPOSITORY_RULE_ESTIMATED"
+    ],
+    "scope": "PRECEDENCE_WITHIN_SAME_EVIDENCE_DIMENSION_ONLY; date/operator/cabin applicability required. Schedule and aircraft never prove seats/prices/ticketability; no runtime precedence implementation added."
+  },
+  "source_registry": [
+    {
+      "checked_on": "2026-10-16",
+      "limitation": "Published commercial timetable; full flights may be omitted. UI available is NOT award-seat availability. CX flight number alone does not prove CX operation.",
+      "method": "Unauthenticated public browser UI; HKG; exact representative return dates. Each direction inspected; no private endpoint or login.",
+      "publisher": "Cathay Pacific",
+      "source_id": "CX_TIMETABLE",
+      "source_type": "AIRLINE_OFFICIAL",
+      "url": "https://www.cathaypacific.com/cx/en_HK/book-a-trip/timetable.html"
+    },
+    {
+      "checked_on": "2026-10-16",
+      "finding": "Published A350-900 configuration includes J, W and Y; no dated seat inventory.",
+      "publisher": "Cathay Pacific",
+      "source_id": "CX_A350_900",
+      "source_type": "AIRLINE_OFFICIAL",
+      "url": "https://www.cathaypacific.com/cx/en_HK/flying-with-us/aircraft-and-fleet/airbus-a350/900.html"
+    },
+    {
+      "checked_on": "2026-10-16",
+      "finding": "Published A350-1000 product page; aircraft-family configuration reference, not a tail assignment.",
+      "publisher": "Cathay Pacific",
+      "source_id": "CX_A350_1000",
+      "source_type": "AIRLINE_OFFICIAL",
+      "url": "https://www.cathaypacific.com/cx/en_HK/flying-with-us/aircraft-and-fleet/airbus-a350/1000.html"
+    },
+    {
+      "checked_on": "2026-10-16",
+      "finding": "Published 777-300 J/Y cabin configuration; timetable only identifies Boeing 777 family. No promise of a flat-bed or Aria product on CTS.",
+      "publisher": "Cathay Pacific",
+      "source_id": "CX_777",
+      "source_type": "AIRLINE_OFFICIAL",
+      "url": "https://www.cathaypacific.com/cx/en_HK/flying-with-us/aircraft-and-fleet/boeing-777/300.html"
+    },
+    {
+      "checked_on": "2026-10-16",
+      "finding": "Unauthenticated page displays Sign in to redeem; no authenticated inventory accessed.",
+      "publisher": "Cathay Pacific",
+      "source_id": "CX_REDEMPTION",
+      "source_type": "AIRLINE_OFFICIAL",
+      "url": "https://www.cathaypacific.com/cx/en_HK/book-a-trip/redeem-flights/redeem-flight-awards.html"
+    },
+    {
+      "checked_on": "2026-10-16",
+      "finding": "Public chart directs standard/partner/mixed-carrier searches to redemption. Upgrade/companion charts are not Standard quotes; no target-date Standard price obtained.",
+      "publisher": "Cathay Pacific",
+      "source_id": "CX_AWARD_CHART",
+      "source_type": "AIRLINE_OFFICIAL",
+      "url": "https://flights.cathaypacific.com/en_HK/redeem-flights/flight-award-chart.html"
+    },
+    {
+      "checked_on": "2026-10-16",
+      "finding": "Current per-sector surcharge notice is publicly available and periodically revised. It is not a complete 2027 award tax quote; no amount entered into candidate totals.",
+      "publication_update": "2026-10-15",
+      "publisher": "Cathay Pacific",
+      "source_id": "CX_SURCHARGE",
+      "source_type": "AIRLINE_OFFICIAL",
+      "url": "https://www.cathaypacific.com/cx/en_HK/latest-news/other-news/fuel-surcharge-updates.html"
+    },
+    {
+      "checked_on": "2026-10-16",
+      "finding": "J/W products published on selected Sydney flights historically. Does not bind a 2027 aircraft or guarantee Aria.",
+      "publisher": "Cathay Pacific",
+      "source_id": "CX_SYD_PRODUCT",
+      "source_type": "AIRLINE_OFFICIAL",
+      "url": "https://news.cathaypacific.com/cathay-pacific-s-highly-anticipated-aria-suite-takes-business-to-new-heights-in-australia-w2llcd"
+    },
+    {
+      "checked_on": "2026-10-16",
+      "finding": "Historical schedule, NOT used to backfill September/October 2027 CX operation.",
+      "publication_date": "2025-06-17",
+      "publisher": "Cathay Pacific",
+      "source_id": "CX_AKL_2025",
+      "source_type": "AIRLINE_OFFICIAL",
+      "url": "https://news.cathaypacific.com/cathay-pacific-increases-lift-off-from-auckland-qdb630"
+    },
+    {
+      "checked_on": "2026-10-16",
+      "finding": "Frozen planning prices, dates, independent approximate funding and leave; not airline evidence.",
+      "repository_path": "validation/2027_REAL_PREFERENCE_METRICS.json",
+      "sha256": "962f7647394e109226decd66d6b89ea21812fadfc224a4d01c5f8fbc903eec9b",
+      "source_id": "PHASE2C_REFERENCE",
+      "source_type": "REPOSITORY_RULE_ESTIMATED"
+    }
+  ],
+  "sydney_comparison": [
+    {
+      "inbound": "J",
+      "outbound": "J",
+      "pricing_status": "RULE_ESTIMATED",
+      "reference_miles_per_person": 120000,
+      "same_ticket_mixed_formula_used": false,
+      "saving_vs_jj": 0
+    },
+    {
+      "inbound": "W",
+      "outbound": "J",
+      "pricing_status": "RULE_ESTIMATED",
+      "reference_miles_per_person": 99000,
+      "same_ticket_mixed_formula_used": false,
+      "saving_vs_jj": 21000
+    },
+    {
+      "inbound": "J",
+      "outbound": "W",
+      "pricing_status": "RULE_ESTIMATED",
+      "reference_miles_per_person": 99000,
+      "same_ticket_mixed_formula_used": false,
+      "saving_vs_jj": 21000
+    },
+    {
+      "inbound": "W",
+      "outbound": "W",
+      "pricing_status": "RULE_ESTIMATED",
+      "reference_miles_per_person": 78000,
+      "same_ticket_mixed_formula_used": false,
+      "saving_vs_jj": 42000
+    }
+  ],
+  "sydney_directional_preference": "DIRECTIONAL_J_PREFERENCE_UNRESOLVED",
+  "tests": {
+    "baseline_passed": 327,
+    "errors": 0,
+    "failed": 0,
+    "final_passed": 327,
+    "new_production_code": false,
+    "new_unit_tests": 0
+  },
+  "verdict_counts": {
+    "DOWNGRADE": 1,
+    "KEEP_FOR_VERIFICATION": 2,
+    "PROMOTE_TO_MONITOR": 4
+  }
+}
